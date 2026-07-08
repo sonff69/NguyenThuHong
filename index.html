@@ -17,7 +17,7 @@
             font-family: 'Be Vietnam Pro', sans-serif !important;
         }
         body {
-            background: linear-gradient(135deg, #f2faf4 0%, #ffffff 50%, #e9f5eb 100%);
+            background-color: transparent; /* Để trong suốt giúp lớp nền động hiển thị hoàn hảo */
             overflow-x: hidden;
         }
         
@@ -55,7 +55,7 @@
             box-shadow: 0 25px 50px -15px rgba(27, 67, 50, 0.15);
         }
 
-        /* Hiệu ứng chuyển đổi nội dung mượt mờ */
+        /* Hiệu ứng chuyển đổi nội dung mượt mà */
         .fade-slide-in {
             animation: fadeSlideIn 0.3s ease-out forwards;
         }
@@ -70,16 +70,18 @@
             }
         }
 
-        /* CONTAINER NỀN ĐỘNG: BONG BÓNG & DOODLES LƠ LỬNG */
+        /* KHUNG NỀN ĐỘNG CHUYỂN ĐỘNG LƠ LỬNG (Gồm bong bóng & Doodles) */
         #dynamic-background {
             position: fixed;
             inset: 0;
             pointer-events: none;
-            z-index: -10;
+            z-index: -10; /* Luôn nằm dưới tất cả nội dung trang */
             overflow: hidden;
+            /* Đặt dải màu nền gradient trực tiếp tại đây để không che khuất doodles */
+            background: linear-gradient(135deg, #f2faf4 0%, #ffffff 50%, #e9f5eb 100%);
         }
         
-        /* Chuyển động lơ lửng hướng lên trên cho các phần tử nền */
+        /* Chuyển động lơ lửng tịnh tiến lên trên cho các phần tử nền */
         @keyframes float-upward {
             0% {
                 transform: translateY(110vh) rotate(0deg) scale(0.6);
@@ -107,7 +109,7 @@
 </head>
 <body class="relative min-h-screen text-slate-700 antialiased selection:bg-emerald-100 selection:text-emerald-950">
 
-    <!-- Hệ thống Nền động: Chứa bong bóng và doodles lơ lửng được sinh tự động bằng JS -->
+    <!-- Hệ thống Nền động: Chứa dải màu gradient + bong bóng và doodles lơ lửng được sinh tự động bằng JS -->
     <div id="dynamic-background"></div>
 
     <!-- Thanh điều hướng (Header Navigation) -->
