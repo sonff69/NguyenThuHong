@@ -6,7 +6,7 @@
     <title>Nguyễn Thu Hồng - Digital Portfolio</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Be Vietnam Pro (Đảm bảo kết xuất tiếng Việt hoàn hảo không lỗi dấu) -->
+    <!-- Google Fonts: Be Vietnam Pro (Đảm bảo hiển thị tiếng Việt chuẩn xác 100%, không lỗi phông) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
@@ -34,17 +34,17 @@
 
         /* Đổ bóng tối giản */
         .soft-shadow {
-            box-shadow: 0 15px 35px -10px rgba(40, 90, 50, 0.12);
+            box-shadow: 0 15px 35px -10px rgba(40, 90, 50, 0.1);
         }
         .soft-shadow-sm {
-            box-shadow: 0 8px 20px -8px rgba(40, 90, 50, 0.08);
+            box-shadow: 0 8px 20px -8px rgba(40, 90, 50, 0.06);
         }
 
-        /* Nét gạch chân vẽ tay gọn gàng và đậm nét */
+        /* Nét gạch chân vẽ tay gọn gàng */
         .doodle-underline {
             stroke-width: 3.5;
             stroke-linecap: round;
-            filter: drop-shadow(1px 1px 0px rgba(27, 67, 50, 0.15));
+            filter: drop-shadow(1px 1px 0px rgba(27, 67, 50, 0.1));
         }
 
         /* Khung làm việc thiết kế phẳng hiện đại */
@@ -52,7 +52,7 @@
             background-color: #ffffff;
             border: 4px solid #1b4332;
             border-radius: 2rem;
-            box-shadow: 0 25px 50px -15px rgba(27, 67, 50, 0.15);
+            box-shadow: 0 25px 50px -15px rgba(27, 67, 50, 0.12);
         }
 
         /* Hiệu ứng chuyển đổi nội dung mượt mà */
@@ -83,11 +83,6 @@
         <!-- Mũi tên hướng xuống phần nội dung -->
         <svg class="absolute top-[78vh] right-[8%] w-12 h-12 text-emerald-900/20" fill="none" stroke="currentColor" viewBox="0 0 100 100">
             <path stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" d="M20,30 Q80,25 60,65 M60,65 L45,55 M60,65 L72,55" />
-        </svg>
-
-        <!-- Sơ đồ kết nối vẽ tay ở phần bài tập -->
-        <svg class="absolute top-[145vh] left-[3%] w-20 h-20 text-emerald-900/10" fill="none" stroke="currentColor" viewBox="0 0 100 100">
-            <path stroke-width="2.5" stroke-linecap="round" d="M30,30 C50,10 80,30 80,50 C80,70 50,90 30,70 C10,50 30,10 50,30" />
         </svg>
     </div>
 
@@ -240,7 +235,7 @@
         <div class="max-w-6xl mx-auto">
             
             <div class="text-center mb-16 relative">
-                <span class="text-xs font-bold text-emerald-700 tracking-widest uppercase bg-emerald-100 px-3 py-1.5 rounded-full border border-emerald-200">Góc thực hành môn học</span>
+                <span class="text-xs font-bold text-emerald-700 tracking-widest uppercase bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200">Góc thực hành môn học</span>
                 <h2 class="text-2xl md:text-4xl font-bold text-emerald-950 mt-4">Không Gian Thực Hành Số</h2>
                 <p class="text-slate-500 text-xs font-light mt-2 max-w-lg mx-auto">Vui lòng chọn từng bài thực hành bên trái. Trang giấy hiển thị nội dung học tập thực tế và các module chức năng tương tác chi tiết sẽ hiện lên ở bên phải.</p>
                 
@@ -265,37 +260,37 @@
                         <!-- Danh sách Tabs lựa chọn bài tập -->
                         <ul class="space-y-1.5" id="workspace-tabs">
                             <li>
-                                <button onclick="switchWorkspace(1)" id="tab-1" class="w-full text-left px-3.5 py-3 rounded-xl flex items-center gap-3 font-medium text-xs md:text-sm transition-all duration-300 bg-emerald-800 text-white">
+                                <button onclick="switchWorkspace(1)" id="tab-1" class="w-full text-left px-3.5 py-3 rounded-xl flex items-center gap-3 font-semibold text-xs md:text-sm transition-all duration-300 bg-emerald-800 text-white">
                                     <span class="w-5 h-5 rounded bg-emerald-700/50 flex items-center justify-center font-bold text-xs">1</span>
                                     Quản lý tệp & thư mục
                                 </button>
                             </li>
                             <li>
-                                <button onclick="switchWorkspace(2)" id="tab-2" class="w-full text-left px-3.5 py-3 rounded-xl flex items-center gap-3 font-medium text-xs md:text-sm transition-all duration-300 hover:bg-emerald-800/50 text-emerald-200">
+                                <button onclick="switchWorkspace(2)" id="tab-2" class="w-full text-left px-3.5 py-3 rounded-xl flex items-center gap-3 font-semibold text-xs md:text-sm transition-all duration-300 hover:bg-emerald-800/50 text-emerald-200">
                                     <span class="w-5 h-5 rounded bg-emerald-700/30 flex items-center justify-center font-bold text-xs">2</span>
                                     Thẩm định nguồn tài liệu
                                 </button>
                             </li>
                             <li>
-                                <button onclick="switchWorkspace(3)" id="tab-3" class="w-full text-left px-3.5 py-3 rounded-xl flex items-center gap-3 font-medium text-xs md:text-sm transition-all duration-300 hover:bg-emerald-800/50 text-emerald-200">
+                                <button onclick="switchWorkspace(3)" id="tab-3" class="w-full text-left px-3.5 py-3 rounded-xl flex items-center gap-3 font-semibold text-xs md:text-sm transition-all duration-300 hover:bg-emerald-800/50 text-emerald-200">
                                     <span class="w-5 h-5 rounded bg-emerald-700/30 flex items-center justify-center font-bold text-xs">3</span>
                                     Kỹ thuật thiết lập Prompt
                                 </button>
                             </li>
                             <li>
-                                <button onclick="switchWorkspace(4)" id="tab-4" class="w-full text-left px-3.5 py-3 rounded-xl flex items-center gap-3 font-medium text-xs md:text-sm transition-all duration-300 hover:bg-emerald-800/50 text-emerald-200">
+                                <button onclick="switchWorkspace(4)" id="tab-4" class="w-full text-left px-3.5 py-3 rounded-xl flex items-center gap-3 font-semibold text-xs md:text-sm transition-all duration-300 hover:bg-emerald-800/50 text-emerald-200">
                                     <span class="w-5 h-5 rounded bg-emerald-700/30 flex items-center justify-center font-bold text-xs">4</span>
                                     Cộng tác làm việc nhóm
                                 </button>
                             </li>
                             <li>
-                                <button onclick="switchWorkspace(5)" id="tab-5" class="w-full text-left px-3.5 py-3 rounded-xl flex items-center gap-3 font-medium text-xs md:text-sm transition-all duration-300 hover:bg-emerald-800/50 text-emerald-200">
+                                <button onclick="switchWorkspace(5)" id="tab-5" class="w-full text-left px-3.5 py-3 rounded-xl flex items-center gap-3 font-semibold text-xs md:text-sm transition-all duration-300 hover:bg-emerald-800/50 text-emerald-200">
                                     <span class="w-5 h-5 rounded bg-emerald-700/30 flex items-center justify-center font-bold text-xs">5</span>
                                     Sáng tạo nội dung với AI
                                 </button>
                             </li>
                             <li>
-                                <button onclick="switchWorkspace(6)" id="tab-6" class="w-full text-left px-3.5 py-3 rounded-xl flex items-center gap-3 font-medium text-xs md:text-sm transition-all duration-300 hover:bg-emerald-800/50 text-emerald-200">
+                                <button onclick="switchWorkspace(6)" id="tab-6" class="w-full text-left px-3.5 py-3 rounded-xl flex items-center gap-3 font-semibold text-xs md:text-sm transition-all duration-300 hover:bg-emerald-800/50 text-emerald-200">
                                     <span class="w-5 h-5 rounded bg-emerald-700/30 flex items-center justify-center font-bold text-xs">6</span>
                                     Sử dụng AI có trách nhiệm
                                 </button>
@@ -473,7 +468,7 @@
                         <div class="p-4 bg-white rounded-xl border border-emerald-50 shadow-sm space-y-1">
                             <h4 class="font-bold text-emerald-950">🚀 Quy trình thực hiện:</h4>
                             <p class="text-slate-600 font-light leading-relaxed">
-                                Thiết lập thư mục mang tên <code class="bg-slate-50 text-emerald-800 px-1 py-0.5 rounded border font-mono">ThucHanh_NguyenThuHong</code>, đổi tên tệp từ GhiChu sang GhiChuQuanTrong, di chuyển tệp vào thư mục con và thực hành xóa/khôi phục tệp.
+                                Thiết lập thư mục làm việc <code class="bg-slate-50 text-emerald-800 px-1 py-0.5 rounded border font-mono">ThucHanh_NguyenThuHong</code>, đổi tên tệp từ GhiChu sang GhiChuQuanTrong, di chuyển tệp vào thư mục con và thực hành xóa/khôi phục tệp.
                             </p>
                         </div>
                     </div>
@@ -564,7 +559,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 mt-2 min-h-[60px] flex items-center justify-center text-center italic" id="source-review-box">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 mt-2 min-h-[60px] flex items-center justify-center text-center italic" id="source-review-box">
                             Nhấp chọn một dòng bất kỳ trên bảng để xem chi tiết phương pháp thẩm định khoa học của mình.
                         </div>
                     </div>
@@ -594,7 +589,7 @@
                         <p class="text-[11px] text-slate-500 font-light">Chọn tác vụ và nhấn các tab cấp độ bên dưới để xem sự khác biệt về câu lệnh của Hồng:</p>
                         
                         <div class="grid grid-cols-3 gap-2 border-b border-slate-200 pb-2">
-                            <button onclick="switchTaskPrompt('summary')" id="task-btn-summary" class="px-2 py-1.5 text-[10px] font-bold bg-emerald-50 text-emerald-800 rounded-lg">1. Tóm tắt</button>
+                            <button onclick="switchTaskPrompt('summary')" id="task-btn-summary" class="px-2 py-1.5 text-[10px] font-bold bg-emerald-700 text-white rounded-lg">1. Tóm tắt</button>
                             <button onclick="switchTaskPrompt('explain')" id="task-btn-explain" class="px-2 py-1.5 text-[10px] font-bold bg-slate-100 text-slate-600 rounded-lg">2. Giải thích</button>
                             <button onclick="switchTaskPrompt('quiz')" id="task-btn-quiz" class="px-2 py-1.5 text-[10px] font-bold bg-slate-100 text-slate-600 rounded-lg">3. Tạo đề thi</button>
                         </div>
@@ -779,6 +774,55 @@
             }
         };
 
+        // --- DINH NGHIA DAY DU CAC HAM HO TRO TUONG TAC CHO TUNG BAI TAP (CHUA KHAI BAO O BAN TRUOC) ---
+
+        // Hàm tương tác Thẩm định tài liệu (Bài tập 2)
+        const sourceReviews = {
+            1: `
+                <div class="text-left space-y-1 fade-slide-in">
+                    <p class="font-bold text-emerald-800">Esteva et al. (2017) - Tạp chí Nature</p>
+                    <p class="text-[11px] text-slate-500"><span class="font-semibold text-emerald-700">Chỉ số tin cậy:</span> Rất cao (★★★★★) | Năm cập nhật: 2017</p>
+                    <p class="text-xs font-light text-slate-600"><strong>Đánh giá khoa học:</strong> Nghiên cứu áp dụng Deep learning (CNN) để phân loại ung thư da tự động. Đây là bài viết có bình duyệt chuyên môn chặt chẽ, số lượng trích dẫn học thuật thuộc hàng cao nhất thế giới.</p>
+                </div>
+            `,
+            2: `
+                <div class="text-left space-y-1 fade-slide-in">
+                    <p class="font-bold text-emerald-800">Rajpurkar et al. (2017) - Đại học Stanford</p>
+                    <p class="text-[11px] text-slate-500"><span class="font-semibold text-emerald-700">Chỉ số tin cậy:</span> Rất cao (★★★★★) | Năm cập nhật: 2017</p>
+                    <p class="text-xs font-light text-slate-600"><strong>Đánh giá khoa học:</strong> Giới thiệu mô hình CheXNeXt chẩn đoán viêm phổi trên ảnh X-quang. Công trình xuất phát từ viện nghiên cứu y sinh Stanford danh giá, phương pháp rõ ràng, tin cậy cao.</p>
+                </div>
+            `,
+            3: `
+                <div class="text-left space-y-1 fade-slide-in">
+                    <p class="font-bold text-emerald-800">Obermeyer et al. (2019) - Tạp chí Science</p>
+                    <p class="text-[11px] text-slate-500"><span class="font-semibold text-emerald-700">Chỉ số tin cậy:</span> Rất cao (★★★★★) | Năm cập nhật: 2019</p>
+                    <p class="text-xs font-light text-slate-600"><strong>Đánh giá khoa học:</strong> Phân tích thuật toán y tế bị thiên lệch chủng tộc. Nghiên cứu bình duyệt uy tín xuất sắc của Science, cảnh báo lỗ hổng của dữ liệu huấn luyện thuật toán.</p>
+                </div>
+            `,
+            4: `
+                <div class="text-left space-y-1 fade-slide-in">
+                    <p class="font-bold text-emerald-800">WHO (2021) Báo cáo đạo đức AI Y tế</p>
+                    <p class="text-[11px] text-slate-500"><span class="font-semibold text-emerald-700">Chỉ số tin cậy:</span> Rất cao (★★★★☆) | Năm cập nhật: 2021</p>
+                    <p class="text-xs font-light text-slate-600"><strong>Đánh giá khoa học:</strong> Hướng dẫn đạo đức học toàn cầu của WHO. Cung cấp khuôn khổ pháp lý chính sách chuẩn chỉnh cho mọi thử nghiệm AI lâm sàng.</p>
+                </div>
+            `,
+            5: `
+                <div class="text-left space-y-1 fade-slide-in">
+                    <p class="font-bold text-emerald-800">IBM (2020) Watson Overview</p>
+                    <p class="text-[11px] text-slate-500"><span class="font-semibold text-emerald-700">Chỉ số tin cậy:</span> Trung bình (★★★☆☆) | Năm cập nhật: 2020</p>
+                    <p class="text-xs font-light text-slate-600"><strong>Đánh giá khoa học:</strong> Tài liệu tóm tắt công nghệ của doanh nghiệp. Hữu ích cho việc tham khảo công cụ ứng dụng thực tiễn, nhưng cần đối chiếu tính độc lập khoa học tránh thiên kiến thương mại.</p>
+                </div>
+            `
+        };
+        
+        function showSourceReview(index) {
+            const box = document.getElementById('source-review-box');
+            if (box && sourceReviews[index]) {
+                box.innerHTML = sourceReviews[index];
+                box.className = "bg-emerald-50/50 p-4 rounded-xl border border-emerald-200 mt-2 min-h-[60px] flex items-center justify-start text-left text-xs font-normal fade-slide-in";
+            }
+        }
+
         // Tab Switching logic for workspace dashboard
         function switchWorkspace(index) {
             const data = workspaceData[index];
@@ -800,13 +844,13 @@
                 `;
                 contentArea.classList.remove('opacity-0');
                 
-                // Initialize default dynamic content inside newly loaded tabs
+                // Tự động khởi chạy nội dung cho Bài tập 3 khi tab được tải lên
                 if (index === 3) {
                     switchTaskPrompt('summary');
                 }
             }, 250);
 
-            // Update state of dynamic buttons
+            // Cập nhật trạng thái hiển thị của các Tab bài tập
             for (let i = 1; i <= 6; i++) {
                 const tab = document.getElementById(`tab-${i}`);
                 if (i === index) {
@@ -844,42 +888,6 @@
         function exploreFolder(folderKey) {
             const display = document.getElementById('explorer-display');
             display.innerHTML = folderContents[folderKey];
-        }
-
-        // Task 2: Source Rater interactive logic
-        const sourceRatings = {
-            nature: `
-                <div class="text-xs space-y-1">
-                    <p class="font-bold text-emerald-800">Esteva et al. (2017) - Tạp chí Nature</p>
-                    <p><span class="font-semibold text-emerald-950">Chỉ số tin cậy:</span> Rất cao (5/5 Sao)</p>
-                    <p class="text-slate-500 font-light">Nature là một trong những tạp chí khoa học có quy trình bình duyệt nghiêm ngặt nhất thế giới. Nghiên cứu sử dụng mạng nơ-ron tích chập (deep neural networks) để chẩn đoán ung thư da đạt độ chính xác tương đương bác sĩ chuyên khoa.</p>
-                </div>
-            `,
-            stanford: `
-                <div class="text-xs space-y-1">
-                    <p class="font-bold text-emerald-800">Rajpurkar et al. (2017) - Stanford Univ</p>
-                    <p><span class="font-semibold text-emerald-950">Chỉ số tin cậy:</span> Rất cao (5/5 Sao)</p>
-                    <p class="text-slate-500 font-light">Công bố từ phòng thí nghiệm AI danh tiếng của Stanford, giới thiệu mô hình CheXNeXt để chẩn đoán viêm phổi qua ảnh X-quang ngực, độ tin cậy được kiểm chứng rộng rãi trong cộng đồng y tế quốc tế.</p>
-                </div>
-            `,
-            who: `
-                <div class="text-xs space-y-1">
-                    <p class="font-bold text-emerald-800">WHO Ethics (2021) Báo cáo chính sách</p>
-                    <p><span class="font-semibold text-emerald-950">Chỉ số tin cậy:</span> Rất cao (4.5/5 Sao)</p>
-                    <p class="text-slate-500 font-light">Tài liệu hướng dẫn chuẩn đạo đức chính thức của WHO. Cung cấp bộ khung nguyên tắc chặt chẽ cho việc quản trị công nghệ AI trong y khoa, hỗ trợ tốt cho phân tích vĩ mô.</p>
-                </div>
-            `,
-            ibm: `
-                <div class="text-xs space-y-1">
-                    <p class="font-bold text-emerald-800">IBM Watson (2020) Overview</p>
-                    <p><span class="font-semibold text-emerald-950">Chỉ số tin cậy:</span> Trung bình (3/5 Sao)</p>
-                    <p class="text-slate-500 font-light">Bản giới thiệu kỹ thuật của một tập đoàn công nghệ lớn. Tài liệu chứa nhiều yếu tố thương mại và quảng bá tính năng sản phẩm nên cần đối chiếu kỹ lưỡng trước khi trích dẫn.</p>
-                </div>
-            `
-        };
-        function rateSource(sourceKey) {
-            const display = document.getElementById('source-display');
-            display.innerHTML = sourceRatings[sourceKey];
         }
 
         // Task 3: Prompt Switcher logic
@@ -974,7 +982,9 @@
 
         function updatePromptDisplay() {
             const display = document.getElementById('prompt-display-box');
-            display.innerHTML = promptLevels[currentPromptTask][currentPromptLevel];
+            if (display) {
+                display.innerHTML = promptLevels[currentPromptTask][currentPromptLevel];
+            }
         }
 
         // Task 4: Interactive Kanban Card move
