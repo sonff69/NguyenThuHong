@@ -1,2072 +1,686 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nguyễn Thu Hồng - Digital Portfolio</title>
-    <!-- Google Fonts -->
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Quicksand & Playfair Display -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     
     <style>
-        /* Định nghĩa biến màu sắc Pastel Mộng Mơ */
-        :root {
-            --bg-pastel: #f4f9f4;
-            --primary-pastel: #9bc4a6;
-            --primary-hover: #7fae8c;
-            --accent-soft: #d3ecd7;
-            --accent-blue: #daf0ec;
-            --white-glass: rgba(255, 255, 255, 0.45);
-            --white-solid: #ffffff;
-            --text-main: #2d4a3e;
-            --text-muted: #5a7d6e;
-            --font-serif: 'Playfair Display', Georgia, serif;
-            --font-sans: 'Quicksand', sans-serif;
-            --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        /* Reset & Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            user-select: none;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            background-color: var(--bg-pastel);
-            color: var(--text-main);
-            font-family: var(--font-sans);
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #f3faf5 0%, #ffffff 50%, #ebf7ed 100%);
             overflow-x: hidden;
-            position: relative;
-            line-height: 1.6;
         }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
         }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-pastel);
+        /* Custom floating animation for dreamy background elements */
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            50% { transform: translateY(-20px) rotate(5deg) scale(1.05); }
         }
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-pastel);
-            border-radius: 10px;
+        @keyframes float-medium {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            50% { transform: translateY(-15px) rotate(-3deg) scale(0.95); }
         }
-
-        /* Background Gradient Mộng Mơ & Canvas Tương Tác */
-        #interactive-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
+        .animate-float-1 {
+            animation: float-slow 12s ease-in-out infinite;
         }
-
-        .dreamy-bg-blur {
-            position: fixed;
-            width: 100vw;
-            height: 100vh;
-            top: 0;
-            left: 0;
-            z-index: -2;
-            background: linear-gradient(135deg, #f7fcf8 0%, #eef7f0 50%, #e3f3e8 100%);
-            overflow: hidden;
+        .animate-float-2 {
+            animation: float-medium 8s ease-in-out infinite;
         }
-
-        .blur-blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.6;
-            animation: floatBlob 12s infinite ease-in-out alternate;
-        }
-
-        .blob-1 {
-            width: 400px;
-            height: 400px;
-            background-color: #d1ebd9;
-            top: 10%;
-            left: -10%;
-        }
-
-        .blob-2 {
-            width: 500px;
-            height: 500px;
-            background-color: #e9f5ed;
-            bottom: -10%;
-            right: -10%;
-            animation-delay: -3s;
-        }
-
-        .blob-3 {
-            width: 300px;
-            height: 300px;
-            background-color: #e3f0ec;
-            top: 40%;
-            left: 60%;
-            animation-delay: -6s;
-        }
-
-        @keyframes floatBlob {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(60px, 40px) scale(1.15); }
-        }
-
-        /* Navigation Bar */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 1.5rem 8%;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: var(--transition-smooth);
-        }
-
-        header.scrolled {
-            padding: 1rem 8%;
-            background: rgba(255, 255, 255, 0.7);
-            box-shadow: 0 4px 30px rgba(155, 196, 166, 0.1);
-        }
-
-        .logo {
-            font-family: var(--font-serif);
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--text-main);
-            text-decoration: none;
-            position: relative;
-            display: inline-block;
-        }
-
-        .logo::after {
-            content: '🌸';
-            position: absolute;
-            right: -25px;
-            top: -2px;
-            font-size: 1.2rem;
-            animation: petalWiggle 3s ease infinite;
-        }
-
-        @keyframes petalWiggle {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(20deg); }
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 2.5rem;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text-main);
-            font-weight: 600;
-            font-size: 1.05rem;
-            position: relative;
-            transition: var(--transition-smooth);
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--primary-pastel);
-            transition: var(--transition-smooth);
-        }
-
-        nav a:hover {
-            color: var(--primary-hover);
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        .btn-drive {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.7rem 1.4rem;
-            border-radius: 50px;
-            background: var(--primary-pastel);
-            color: var(--white-solid) !important;
-            font-weight: 600;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(155, 196, 166, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            transition: var(--transition-smooth);
-        }
-
-        .btn-drive:hover {
-            background: var(--primary-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(155, 196, 166, 0.45);
-        }
-
-        .btn-drive svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-        }
-
-        /* Mobile Menu Button */
-        .mobile-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            cursor: pointer;
-        }
-
-        .mobile-toggle span {
-            width: 28px;
-            height: 3px;
-            background-color: var(--text-main);
-            border-radius: 2px;
-            transition: var(--transition-smooth);
-        }
-
-        /* Hero Section */
-        #hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 8%;
-            position: relative;
-            padding-top: 100px;
-        }
-
-        .hero-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            gap: 4rem;
-        }
-
-        .hero-text {
-            flex: 1.2;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .hero-badge {
-            background-color: var(--accent-soft);
-            color: var(--text-main);
-            padding: 0.4rem 1.2rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            width: fit-content;
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 2px 10px rgba(155, 196, 166, 0.1);
-            animation: pulseSoft 2s infinite;
-        }
-
-        @keyframes pulseSoft {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-        }
-
-        .hero-text h1 {
-            font-family: var(--font-serif);
-            font-size: 5.5rem; /* Tên sinh viên to nổi bật nhất */
-            line-height: 1.1;
-            font-weight: 800;
-            color: var(--text-main);
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-
-        .hero-text h1 span {
-            display: block;
-            background: linear-gradient(to right, var(--text-main) 30%, var(--primary-hover) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-sub {
-            font-size: 1.4rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
-
-        .hero-desc {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            max-width: 550px;
-            margin-bottom: 2.5rem;
-        }
-
-        .hero-visual {
-            flex: 0.8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        /* Đĩa cầu mộng mơ tương tác 3D */
-        .dream-sphere {
-            width: 320px;
-            height: 320px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #e2f5e8, #c1ecd0, #a9dec1);
-            box-shadow: inset -10px -10px 40px rgba(135, 189, 151, 0.3),
-                        0 20px 50px rgba(155, 196, 166, 0.4);
-            position: relative;
-            animation: sphereFloat 8s ease-in-out infinite alternate;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .dream-sphere::before {
-            content: '';
-            position: absolute;
-            width: 110%;
-            height: 110%;
-            border-radius: 50%;
-            border: 2px dashed rgba(155, 196, 166, 0.4);
-            animation: rotateSphereRing 25s linear infinite;
-        }
-
-        .sphere-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            padding: 1.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            position: absolute;
-            width: 250px;
-            text-align: center;
-            transform: translate(0, 0);
-            animation: cardFloat 6s ease-in-out infinite alternate-reverse;
-        }
-
-        @keyframes sphereFloat {
-            0% { transform: translateY(0px) rotate(0deg); }
-            100% { transform: translateY(-25px) rotate(5deg); }
-        }
-
-        @keyframes rotateSphereRing {
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes cardFloat {
-            0% { transform: translate(40px, 80px) rotate(-3deg); }
-            100% { transform: translate(50px, 110px) rotate(3deg); }
-        }
-
-        /* Scroll Down Indicator */
-        .scroll-down {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .scroll-down span {
-            width: 24px;
-            height: 40px;
-            border: 2px solid var(--primary-pastel);
-            border-radius: 20px;
-            position: relative;
-        }
-
-        .scroll-down span::after {
-            content: '';
-            position: absolute;
-            top: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 6px;
-            height: 6px;
-            background-color: var(--primary-pastel);
-            border-radius: 50%;
-            animation: scrollWheel 1.5s infinite;
-        }
-
-        @keyframes scrollWheel {
-            0% { opacity: 1; top: 8px; }
-            100% { opacity: 0; top: 25px; }
-        }
-
-        /* About Me Section */
-        #about {
-            padding: 8rem 8% 6rem 8%;
-            position: relative;
-        }
-
-        .about-grid {
-            display: flex;
-            gap: 5rem;
-            align-items: center;
-        }
-
-        .about-image-wrapper {
-            flex: 0.9;
-            display: flex;
-            justify-content: center;
-            position: relative;
-        }
-
-        .about-img-box {
-            position: relative;
-            width: 340px;
-            height: 450px;
-            border-radius: 30px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(155, 196, 166, 0.25);
-            background: rgba(255, 255, 255, 0.5);
-            border: 8px solid rgba(255, 255, 255, 0.7);
-            transform: rotate(-2deg);
-            transition: var(--transition-smooth);
-        }
-
-        .about-img-box:hover {
-            transform: rotate(0deg) scale(1.03);
-        }
-
-        .about-img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .about-img-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to top, rgba(155, 196, 166, 0.2), transparent);
-            z-index: 1;
-        }
-
-        /* Trang trí khung ảnh mộng mơ */
-        .img-deco-ring {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background-color: var(--accent-soft);
-            opacity: 0.5;
-            z-index: -1;
-            top: -20px;
-            left: -20px;
-            animation: blobScale 5s infinite ease-in-out alternate;
-        }
-
-        @keyframes blobScale {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.15); }
-        }
-
-        .about-text {
-            flex: 1.1;
-        }
-
-        .section-title {
-            font-family: var(--font-serif);
-            font-size: 3rem;
-            color: var(--text-main);
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 70px;
-            height: 3px;
-            background: var(--primary-pastel);
-            margin-top: 10px;
-            border-radius: 10px;
-        }
-
-        .about-text p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            text-align: justify;
-        }
-
-        .profile-info {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .info-card {
-            background: var(--white-glass);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(10px);
-            padding: 1rem 1.5rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(155, 196, 166, 0.05);
-            transition: var(--transition-smooth);
-        }
-
-        .info-card:hover {
-            transform: translateY(-5px);
-            background: var(--white-solid);
-            box-shadow: 0 8px 25px rgba(155, 196, 166, 0.15);
-        }
-
-        .info-card h4 {
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-            margin-bottom: 5px;
-        }
-
-        .info-card p {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin: 0;
-        }
-
-        /* Banner CTA Google Drive trước phần bài tập */
-        .section-pre-cta {
-            padding: 2rem 8% 4rem 8%;
-            display: flex;
-            justify-content: center;
-        }
-
-        .drive-banner {
-            width: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(217,238,224,0.7) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px);
-            border-radius: 30px;
-            padding: 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 15px 35px rgba(155, 196, 166, 0.15);
-            gap: 2rem;
-            transition: var(--transition-smooth);
-        }
-
-        .drive-banner:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 45px rgba(155, 196, 166, 0.2);
-        }
-
-        .drive-banner-text h3 {
-            font-family: var(--font-serif);
-            font-size: 2.2rem;
-            color: var(--text-main);
-            margin-bottom: 0.5rem;
-        }
-
-        .drive-banner-text p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-        }
-
-        /* Project Section (Hành trình học tập) */
-        #projects {
-            padding: 4rem 8% 8rem 8%;
-            position: relative;
-        }
-
-        .projects-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .projects-header p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-top: 0.5rem;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2.5rem;
-        }
-
-        .project-card {
-            background: var(--white-glass);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 25px;
-            padding: 2.2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            box-shadow: 0 10px 30px rgba(155, 196, 166, 0.08);
-            transition: var(--transition-smooth);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.85);
-            box-shadow: 0 20px 40px rgba(155, 196, 166, 0.2);
-            border-color: rgba(155, 196, 166, 0.4);
-        }
-
-        .project-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 18px;
-            background-color: var(--accent-soft);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-main);
-            transition: var(--transition-smooth);
-        }
-
-        .project-card:hover .project-icon {
-            background-color: var(--primary-pastel);
-            color: var(--white-solid);
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .project-icon svg {
-            width: 28px;
-            height: 28px;
-            fill: currentColor;
-        }
-
-        .project-num {
-            font-weight: 700;
-            color: var(--primary-pastel);
-            font-size: 0.95rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .project-title {
-            font-family: var(--font-serif);
-            font-size: 1.55rem;
-            color: var(--text-main);
-            line-height: 1.3;
-        }
-
-        .project-desc {
-            font-size: 1rem;
-            color: var(--text-muted);
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: auto;
-        }
-
-        .project-tag {
-            background: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(155, 196, 166, 0.2);
-            padding: 0.3rem 0.8rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
-
-        .project-card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid rgba(155, 196, 166, 0.15);
-            padding-top: 1rem;
-        }
-
-        .project-link {
-            color: var(--primary-hover);
-            font-weight: 700;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 0.95rem;
-        }
-
-        .project-link span {
-            transition: transform 0.3s ease;
-        }
-
-        .project-card:hover .project-link span {
-            transform: translateX(5px);
-        }
-
-        /* Interactive Course Reflection Summary */
-        #reflection {
-            padding: 6rem 8% 8rem 8%;
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.5);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-            position: relative;
-        }
-
-        .reflection-container {
-            display: flex;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .reflection-text {
-            flex: 1.2;
-        }
-
-        .reflection-text h3 {
-            font-family: var(--font-serif);
-            font-size: 2.5rem;
-            color: var(--text-main);
-            margin-bottom: 1.5rem;
-        }
-
-        .reflection-text p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            text-align: justify;
-        }
-
-        .reflection-stats {
-            flex: 0.8;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-        }
-
-        .stat-box {
-            background: var(--white-solid);
-            padding: 2rem;
-            border-radius: 25px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(155, 196, 166, 0.08);
-            border: 1px solid rgba(155, 196, 166, 0.1);
-            transition: var(--transition-smooth);
-        }
-
-        .stat-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(155, 196, 166, 0.15);
-        }
-
-        .stat-num {
-            font-family: var(--font-serif);
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--primary-pastel);
-            margin-bottom: 5px;
-        }
-
-        .stat-box h5 {
-            font-size: 1rem;
-            color: var(--text-main);
-            margin-bottom: 5px;
-        }
-
-        .stat-box p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        /* Footer Section */
-        footer {
-            padding: 4rem 8% 3rem 8%;
-            background: #eaf3ed;
-            border-top: 1px solid rgba(155, 196, 166, 0.2);
-            text-align: center;
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .footer-logo {
-            font-family: var(--font-serif);
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-main);
-            text-decoration: none;
-        }
-
-        .footer-socials {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .social-icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background-color: var(--white-solid);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-main);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: var(--transition-smooth);
-            text-decoration: none;
-        }
-
-        .social-icon:hover {
-            background-color: var(--primary-pastel);
-            color: var(--white-solid);
-            transform: translateY(-3px);
-        }
-
-        .footer-socials svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
-
-        .footer-copyright {
-            margin-top: 2rem;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            border-top: 1px solid rgba(155, 196, 166, 0.15);
-            padding-top: 1.5rem;
-            width: 100%;
-        }
-
-        /* HIGH-END INTERACTIVE POPUP MODAL SYSTEM */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(45, 74, 62, 0.35);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Scroll reveal standard states */
+        .reveal {
             opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-            padding: 2rem;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
         }
-
-        .modal.open {
+        .reveal.active {
             opacity: 1;
-            pointer-events: all;
+            transform: translateY(0);
         }
-
-        .modal-container {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 25px 60px rgba(45, 74, 62, 0.2);
-            border-radius: 30px;
-            width: 100%;
-            max-width: 950px;
-            height: 85vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            position: relative;
-            transform: scale(0.9);
-            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        /* Dreamy soft shadow */
+        .dreamy-shadow {
+            box-shadow: 0 20px 40px -15px rgba(165, 214, 167, 0.25);
         }
-
-        .modal.open .modal-container {
-            transform: scale(1);
-        }
-
-        .modal-header {
-            padding: 2rem 2.5rem;
-            border-bottom: 1px solid rgba(155, 196, 166, 0.15);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.5);
-        }
-
-        .modal-title-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .modal-num {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--primary-pastel);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .modal-title-text {
-            font-family: var(--font-serif);
-            font-size: 1.8rem;
-            color: var(--text-main);
-        }
-
-        .modal-close {
-            background: var(--accent-soft);
-            border: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--text-main);
-            transition: var(--transition-smooth);
-        }
-
-        .modal-close:hover {
-            background: var(--primary-pastel);
-            color: var(--white-solid);
-            transform: rotate(90deg);
-        }
-
-        .modal-close svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-        }
-
-        .modal-body {
-            padding: 2.5rem;
-            overflow-y: auto;
-            flex-grow: 1;
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Modal Inner Interactive Elements CSS */
-        .modal-content-section {
-            margin-bottom: 2rem;
-        }
-
-        .modal-content-section h4 {
-            font-family: var(--font-serif);
-            font-size: 1.35rem;
-            color: var(--text-main);
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .modal-content-section h4::before {
-            content: '✦';
-            color: var(--primary-pastel);
-        }
-
-        .modal-content-section p {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-            text-align: justify;
-        }
-
-        /* Tab Tương Tác cho Prompt Engineering */
-        .prompt-tabs {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(155, 196, 166, 0.2);
-            padding-bottom: 0.8rem;
-        }
-
-        .prompt-tab {
-            padding: 0.5rem 1.2rem;
-            border-radius: 50px;
-            background: rgba(255,255,255,0.6);
-            border: 1px solid rgba(155, 196, 166, 0.3);
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--text-muted);
-            transition: var(--transition-smooth);
-        }
-
-        .prompt-tab.active {
-            background: var(--primary-pastel);
-            color: var(--white-solid);
-            border-color: var(--primary-pastel);
-        }
-
-        .prompt-box {
-            background: #f1f6f2;
-            border-left: 4px solid var(--primary-pastel);
-            padding: 1.2rem;
-            border-radius: 0 15px 15px 0;
-            font-family: monospace;
-            font-size: 0.95rem;
-            color: var(--text-main);
-            margin-bottom: 1rem;
-            white-space: pre-line;
-        }
-
-        .output-box {
-            background: #ffffff;
-            border: 1px dashed rgba(155, 196, 166, 0.5);
-            padding: 1.5rem;
-            border-radius: 15px;
-            font-size: 1rem;
-            color: var(--text-muted);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-        }
-
-        /* Interactive Bảng Nguồn Học Thuật */
-        .source-table-wrapper {
-            overflow-x: auto;
-            border-radius: 15px;
-            border: 1px solid rgba(155, 196, 166, 0.2);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.02);
-            background: white;
-            margin-top: 1rem;
-        }
-
-        .source-table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            font-size: 0.95rem;
-        }
-
-        .source-table th {
-            background-color: var(--accent-soft);
-            color: var(--text-main);
-            padding: 1rem;
-            font-weight: 700;
-        }
-
-        .source-table td {
-            padding: 1rem;
-            border-bottom: 1px solid rgba(155, 196, 166, 0.1);
-            color: var(--text-muted);
-        }
-
-        .source-table tr:hover {
-            background-color: rgba(217, 238, 224, 0.15);
-        }
-
-        .badge-star {
-            color: #f1c40f;
-            letter-spacing: 1px;
-            font-weight: bold;
-        }
-
-        /* Interactive Trello Board Mockup */
-        .trello-board {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .trello-col {
-            background: rgba(217, 238, 224, 0.3);
-            border-radius: 15px;
-            padding: 1rem;
-            border: 1px solid rgba(155,196,166,0.15);
-        }
-
-        .trello-col h5 {
-            font-size: 1rem;
-            color: var(--text-main);
-            margin-bottom: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .col-count {
-            background: var(--primary-pastel);
-            color: var(--white-solid);
-            border-radius: 50%;
-            width: 22px;
-            height: 22px;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-
-        .trello-card {
-            background: #ffffff;
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 0.8rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-            border: 1px solid rgba(0,0,0,0.02);
-            cursor: pointer;
-            transition: var(--transition-smooth);
-        }
-
-        .trello-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 15px rgba(155,196,166,0.15);
-        }
-
-        .trello-card h6 {
-            font-size: 0.95rem;
-            color: var(--text-main);
-            margin-bottom: 0.5rem;
-        }
-
-        .trello-card p {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-            text-align: left;
-        }
-
-        .card-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.75rem;
-            color: var(--primary-pastel);
-            font-weight: 700;
-        }
-
-        /* 7 Nguyên tắc Vàng Đạo Đức Grid */
-        .ethical-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .ethical-item {
-            background: #ffffff;
-            border-radius: 15px;
-            padding: 1.5rem;
-            border-left: 5px solid var(--primary-pastel);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-        }
-
-        .ethical-item h5 {
-            font-size: 1.1rem;
-            color: var(--text-main);
-            margin-bottom: 0.5rem;
-        }
-
-        .ethical-item p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin: 0;
-            text-align: left;
-        }
-
-        /* File Explorer Flowchart CSS */
-        .flow-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            background: #ffffff;
-            padding: 1.5rem;
-            border-radius: 15px;
-            border: 1px dashed rgba(155, 196, 166, 0.4);
-            margin-top: 1.5rem;
-        }
-
-        .flow-step {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .step-num-badge {
-            background: var(--accent-soft);
-            color: var(--text-main);
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-        }
-
-        .step-content {
-            background: #f8fbf9;
-            padding: 0.8rem 1.2rem;
-            border-radius: 10px;
-            flex-grow: 1;
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            text-align: left;
-        }
-
-        /* Responsive Design Media Queries */
-        @media (max-width: 1024px) {
-            .projects-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .hero-text h1 {
-                font-size: 4.2rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: rgba(255, 255, 255, 0.95);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                padding: 2rem;
-                gap: 1.5rem;
-                border-bottom: 1px solid rgba(155, 196, 166, 0.15);
-            }
-
-            nav.active {
-                display: flex;
-            }
-
-            .mobile-toggle {
-                display: flex;
-            }
-
-            .hero-container {
-                flex-direction: column-reverse;
-                text-align: center;
-                gap: 2rem;
-            }
-
-            .hero-text {
-                align-items: center;
-            }
-
-            .hero-text h1 {
-                font-size: 3.5rem;
-            }
-
-            .about-grid {
-                flex-direction: column-reverse;
-                gap: 3rem;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .drive-banner {
-                flex-direction: column;
-                text-align: center;
-                padding: 2rem;
-            }
-
-            .reflection-container {
-                flex-direction: column;
-            }
-
-            .reflection-stats {
-                width: 100%;
-            }
-
-            .ethical-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .trello-board {
-                grid-template-columns: 1fr;
-            }
+        .dreamy-shadow-sm {
+            box-shadow: 0 10px 25px -10px rgba(165, 214, 167, 0.15);
         }
     </style>
 </head>
-<body>
+<body class="relative min-h-screen text-slate-700 antialiased selection:bg-emerald-100 selection:text-emerald-900">
 
-    <!-- Canvas Tương Tác Hạt Sáng Theo Chuột -->
-    <canvas id="interactive-canvas"></canvas>
-
-    <!-- Background mờ ảo ảo diệu -->
-    <div class="dreamy-bg-blur">
-        <div class="blur-blob blob-1"></div>
-        <div class="blur-blob blob-2"></div>
-        <div class="blur-blob blob-3"></div>
+    <!-- Dreamy Background Elements -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div class="absolute top-1/4 left-10 w-96 h-96 bg-emerald-100/40 rounded-full blur-3xl animate-float-1"></div>
+        <div class="absolute top-1/2 right-10 w-80 h-80 bg-green-100/30 rounded-full blur-3xl animate-float-2"></div>
+        <div class="absolute bottom-1/4 left-1/3 w-[500px] h-[500px] bg-teal-50/40 rounded-full blur-3xl animate-float-1"></div>
     </div>
 
-    <!-- Navigation Header -->
-    <header id="header">
-        <a href="#hero" class="logo">Thu Hồng</a>
-        <div class="mobile-toggle" id="menu-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-white/70 backdrop-blur-md border-b border-emerald-50/50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2 group">
+                <span class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 font-serif font-bold text-lg group-hover:bg-emerald-200 transition-all duration-300">H</span>
+                <span class="font-serif font-semibold text-lg tracking-wide text-emerald-800">Thu Hồng.</span>
+            </a>
+            
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-emerald-900/80">
+                <a href="#about" class="hover:text-emerald-600 transition-colors">Giới thiệu</a>
+                <a href="#projects" class="hover:text-emerald-600 transition-colors">Bài tập dự án</a>
+                <a href="#summary" class="hover:text-emerald-600 transition-colors">Tổng kết môn học</a>
+                <a href="https://drive.google.com/drive/folders/19gMObue_mufNebN7Qls4UDkfgawCN0hx?usp=drive_link" target="_blank" class="flex items-center gap-1.5 px-4 py-2 bg-emerald-50 hover:bg-emerald-100/80 text-emerald-700 rounded-full transition-all duration-300 border border-emerald-100 dreamy-shadow-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    Xem bài tập trên GG drive
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-emerald-800 hover:text-emerald-600 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
         </div>
-        <nav id="navbar">
-            <a href="#hero">Trang chủ</a>
-            <a href="#about">Giới thiệu</a>
-            <a href="#projects">Sản phẩm số</a>
-            <a href="#reflection">Hành trình</a>
-            <a href="https://drive.google.com/drive/folders/19gMObue_mufNebN7Qls4UDkfgawCN0hx?usp=drive_link" target="_blank" class="btn-drive">
-                <svg viewBox="0 0 24 24">
-                    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3z"/>
-                </svg>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 border-b border-emerald-50 px-6 py-4 flex flex-col gap-4 text-sm font-semibold text-emerald-900/80">
+            <a href="#about" class="mobile-link hover:text-emerald-600 transition-colors">Giới thiệu</a>
+            <a href="#projects" class="mobile-link hover:text-emerald-600 transition-colors">Bài tập dự án</a>
+            <a href="#summary" class="mobile-link hover:text-emerald-600 transition-colors">Tổng kết môn học</a>
+            <a href="https://drive.google.com/drive/folders/19gMObue_mufNebN7Qls4UDkfgawCN0hx?usp=drive_link" target="_blank" class="mobile-link flex items-center justify-center gap-2 py-2.5 bg-emerald-50 text-emerald-700 rounded-xl border border-emerald-100">
                 Xem bài tập trên GG drive
             </a>
-        </nav>
+        </div>
     </header>
 
     <!-- Hero Section -->
-    <section id="hero">
-        <div class="hero-container">
-            <div class="hero-text">
-                <div class="hero-badge">DIGITAL PORTFOLIO</div>
-                <h1><span>NGUYỄN THU HỒNG</span></h1>
-                <div class="hero-sub">Sinh viên Ngôn ngữ & Văn hóa Anh • ULIS - ĐHQGHN</div>
-                <div class="hero-desc">Đây là không gian lưu trữ và trưng bày các sản phẩm dự án cá nhân thực hành công nghệ số và ứng dụng trí tuệ nhân tạo. Nơi giao thoa giữa ngôn ngữ, tư duy nghiên cứu học thuật và chuyển đổi số.</div>
-                <div style="display: flex; gap: 1rem; align-items: center;">
-                    <a href="#projects" class="btn-drive" style="background: var(--text-main); border: none;">Khám phá sản phẩm</a>
+    <section class="relative min-h-[85vh] flex items-center justify-center px-6 py-12 z-10">
+        <div class="max-w-4xl mx-auto text-center flex flex-col items-center">
+            
+            <!-- Avatar Container with soft animations -->
+            <div class="relative w-44 h-44 mb-8 group">
+                <div class="absolute inset-0 bg-gradient-to-tr from-emerald-200 to-green-100 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500 animate-pulse"></div>
+                <div class="relative w-44 h-44 rounded-full overflow-hidden border-4 border-white dreamy-shadow flex items-center justify-center bg-emerald-50">
+                    <img src="Hình 1.jpg" alt="Nguyễn Thu Hồng" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="dream-sphere">
-                    <div class="sphere-card">
-                        <p style="font-size: 0.8rem; font-weight: bold; color: var(--primary-hover); text-transform: uppercase;">Nhập môn Công nghệ số</p>
-                        <p style="font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin: 4px 0;">& Ứng dụng AI</p>
-                        <p style="font-size: 0.8rem; color: var(--text-muted);">Hành trình kiến tạo tri thức học tập cá nhân hóa</p>
-                    </div>
-                </div>
+
+            <!-- Major & Student Info Tag -->
+            <span class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-50/80 border border-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-wider mb-4 dreamy-shadow-sm backdrop-blur-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                Ngôn ngữ & Văn hóa Anh • ULIS - ĐHQGHN
+            </span>
+
+            <!-- Hero Headline -->
+            <h1 class="text-4xl md:text-7xl font-bold text-emerald-950 tracking-tight leading-tight mb-6">
+                Tôi là <span class="bg-gradient-to-r from-emerald-600 via-teal-600 to-green-500 bg-clip-text text-transparent">Nguyễn Thu Hồng</span>
+            </h1>
+
+            <p class="text-lg md:text-xl text-slate-600 max-w-2xl font-light leading-relaxed mb-10">
+                Nơi lưu trữ hành trình học tập, nghiên cứu và khai phá công nghệ trong khuôn khổ môn học <strong class="text-emerald-800 font-semibold">Nhập môn Công nghệ số & Ứng dụng AI</strong>.
+            </p>
+
+            <!-- Primary Actions -->
+            <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                <a href="#projects" class="px-8 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-bold rounded-full dreamy-shadow transition-all duration-300 transform hover:-translate-y-0.5 text-center">
+                    Khám phá dự án cá nhân
+                </a>
+                <a href="https://drive.google.com/drive/folders/19gMObue_mufNebN7Qls4UDkfgawCN0hx?usp=drive_link" target="_blank" class="px-8 py-3.5 bg-white/80 hover:bg-white text-emerald-700 border border-emerald-100 font-bold rounded-full dreamy-shadow-sm hover:dreamy-shadow transition-all duration-300 transform hover:-translate-y-0.5 text-center backdrop-blur-sm">
+                    Google Drive Thư mục
+                </a>
             </div>
         </div>
-        <a href="#about" class="scroll-down">
-            <span></span>
-            Hành trình học tập
-        </a>
     </section>
 
-    <!-- About Me Section -->
-    <section id="about">
-        <div class="about-grid">
-            <div class="about-image-wrapper">
-                <div class="img-deco-ring"></div>
-                <div class="about-img-box">
-                    <img src="Hình 1.jpg" alt="Nguyễn Thu Hồng">
-                </div>
-            </div>
-            <div class="about-text">
-                <h2 class="section-title">Về Bản Thân</h2>
-                <p>Tôi là Nguyễn Thu Hồng, hiện đang theo học chuyên ngành Ngôn ngữ và Văn hóa Anh tại Đại học Ngoại Ngữ - ĐHQGHN (ULIS). Nhờ học phần "Nhập môn Công nghệ số và Ứng dụng Trí tuệ nhân tạo", tôi đã có cơ hội tiếp xúc sâu hơn với chuyển đổi số và nâng tầm phương pháp tự học.</p>
-                <p>Digital Portfolio này không chỉ là nơi lưu giữ các sản phẩm bài tập thực hành, mà còn phản ánh sự nỗ lực làm chủ công nghệ, xây dựng tư duy prompt engineering có chiều sâu, rèn luyện cách phối hợp nhóm trực tuyến và khai thác AI một cách có trách nhiệm trong học thuật.</p>
+    <!-- Personal Overview Section -->
+    <section id="about" class="py-24 px-6 relative z-10 bg-white/40 backdrop-blur-md border-y border-emerald-50/50">
+        <div class="max-w-5xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-12 items-start">
                 
-                <div class="profile-info">
-                    <div class="info-card">
-                        <h4>Mã sinh viên</h4>
-                        <p>25040664</p>
-                    </div>
-                    <div class="info-card">
-                        <h4>Lớp học</h4>
-                        <p>25E15</p>
-                    </div>
-                    <div class="info-card">
-                        <h4>Chuyên ngành</h4>
-                        <p>Ngôn ngữ Anh</p>
-                    </div>
-                    <div class="info-card">
-                        <h4>Cơ sở đào tạo</h4>
-                        <p>ĐH Ngoại Ngữ - ĐHQGHN</p>
+                <!-- Left Column: Quick Profile Details -->
+                <div class="reveal md:col-span-1 bg-white border border-emerald-50 rounded-3xl p-8 dreamy-shadow">
+                    <h3 class="text-2xl font-serif font-bold text-emerald-950 mb-6 border-b border-emerald-50 pb-4">Thông tin cá nhân</h3>
+                    <div class="space-y-4 text-sm">
+                        <div>
+                            <p class="text-xs text-emerald-600 font-bold uppercase tracking-wider">Họ & Tên</p>
+                            <p class="text-base font-semibold text-emerald-950">Nguyễn Thu Hồng</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-emerald-600 font-bold uppercase tracking-wider">Mã sinh viên</p>
+                            <p class="text-base font-mono text-emerald-950">25040664</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-emerald-600 font-bold uppercase tracking-wider">Lớp hành chính</p>
+                            <p class="text-base font-semibold text-emerald-950">25E15</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-emerald-600 font-bold uppercase tracking-wider">Khoa đào tạo</p>
+                            <p class="text-base font-semibold text-emerald-950">Ngôn ngữ và Văn hóa Anh</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-emerald-600 font-bold uppercase tracking-wider">Cơ sở giáo dục</p>
+                            <p class="text-base font-semibold text-emerald-950">Đại học Ngoại ngữ - ĐHQGHN</p>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Right Column: Goals and Introduction -->
+                <div class="reveal md:col-span-2 space-y-8">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-emerald-950 mb-4">Mục tiêu của Portfolio</h2>
+                        <p class="text-slate-600 leading-relaxed">
+                            Portfolio này không đơn thuần là một bản tập hợp các bài tập bắt buộc, mà là minh chứng số ghi lại quá trình tiếp cận, thích ứng và sử dụng công nghệ một cách có tư duy của bản thân. Thông qua từng bài học thực hành, tôi đã rèn luyện được tư duy hệ thống và cách mượn lực từ AI tạo sinh để phục vụ hiệu quả cho các tác vụ nghiên cứu học thuật của một sinh viên ULIS trong kỷ nguyên số.
+                        </p>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div class="p-6 bg-emerald-50/50 border border-emerald-100 rounded-2xl">
+                            <h4 class="text-lg font-bold text-emerald-950 mb-2">Định hướng cá nhân</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Kết hợp nền tảng ngôn ngữ và văn hóa Anh với năng lực công nghệ số để xây dựng các phương pháp tự học thông minh, tăng tính chủ động trong học thuật.
+                            </p>
+                        </div>
+                        <div class="p-6 bg-emerald-50/50 border border-emerald-100 rounded-2xl">
+                            <h4 class="text-lg font-bold text-emerald-950 mb-2">Mục tiêu số hóa</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Thành thạo các quy trình quản lý thông tin, tối ưu hóa các dòng lệnh (prompt engineering) để biến AI thành người cộng sự lý tưởng có trách nhiệm.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Google Drive Banner trước phần bài tập -->
-    <div class="section-pre-cta">
-        <div class="drive-banner">
-            <div class="drive-banner-text">
-                <h3>Minh Bạch Kho Lưu Trữ Số</h3>
-                <p>Toàn bộ học liệu, hình ảnh, tài liệu báo cáo và các bước thực hành được đồng bộ trực tiếp tại Google Drive.</p>
-            </div>
-            <a href="https://drive.google.com/drive/folders/19gMObue_mufNebN7Qls4UDkfgawCN0hx?usp=drive_link" target="_blank" class="btn-drive" style="padding: 1rem 2rem; font-size: 1.1rem;">
-                <svg viewBox="0 0 24 24">
-                    <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3z"/>
-                </svg>
-                Xem thư mục Google Drive
-            </a>
-        </div>
-    </div>
-
-    <!-- Assignments Section -->
-    <section id="projects">
-        <div class="projects-header">
-            <h2 class="section-title" style="display: inline-block;">Sản Phẩm Dự Án Học Tập</h2>
-            <p>Trưng bày chi tiết 6 bài tập lớn trong chương trình Nhập môn Công nghệ số</p>
-        </div>
-
-        <div class="projects-grid">
-            <!-- Project 1 -->
-            <div class="project-card" onclick="openModal(0)">
-                <div class="project-icon">
-                    <svg viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
-                </div>
-                <div class="project-num">Bài tập 1</div>
-                <h3 class="project-title">Thao Tác Hệ Thống & Quản Lý Tệp Tin</h3>
-                <p class="project-desc">Làm quen với hệ sinh thái Windows File Explorer, tổ chức hệ thống thư mục học tập khoa học và tối ưu các thao tác sao chép, di chuyển, khôi phục tệp dữ liệu thực hành.</p>
-                <div class="project-tags">
-                    <span class="project-tag">Windows</span>
-                    <span class="project-tag">File Explorer</span>
-                    <span class="project-tag">Data Management</span>
-                </div>
-                <div class="project-card-footer">
-                    <span class="project-link">Xem chi tiết <span>&rarr;</span></span>
-                </div>
-            </div>
-
-            <!-- Project 2 -->
-            <div class="project-card" onclick="openModal(1)">
-                <div class="project-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                </div>
-                <div class="project-num">Bài tập 2</div>
-                <h3 class="project-title">Khai Thác Dữ Liệu & Đánh Giá Nguồn</h3>
-                <p class="project-desc">Báo cáo phân tích và đánh giá tính học thuật, độ uy tín của các nghiên cứu về "Ứng dụng AI trong Y học hiện đại". Tổng hợp và trình bày tài liệu theo chuẩn trích dẫn Harvard.</p>
-                <div class="project-tags">
-                    <span class="project-tag">Google Scholar</span>
-                    <span class="project-tag">Harvard Style</span>
-                    <span class="project-tag">Research</span>
-                </div>
-                <div class="project-card-footer">
-                    <span class="project-link">Xem chi tiết <span>&rarr;</span></span>
-                </div>
-            </div>
-
-            <!-- Project 3 -->
-            <div class="project-card" onclick="openModal(2)">
-                <div class="project-icon">
-                    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
-                </div>
-                <div class="project-num">Bài tập 3</div>
-                <h3 class="project-title">Tối Ưu Prompt Viết Câu Lệnh Cho Học Tập</h3>
-                <p class="project-desc">Nghiên cứu cấu trúc Prompt Engineering từ cơ bản, cải tiến đến nâng cao để hỗ trợ tối đa các tác vụ tóm tắt tài liệu, giải thích khái niệm (Blockchain, AI) và thiết kế đề ôn tập.</p>
-                <div class="project-tags">
-                    <span class="project-tag">Prompting</span>
-                    <span class="project-tag">AI Assistant</span>
-                    <span class="project-tag">Few-Shot</span>
-                </div>
-                <div class="project-card-footer">
-                    <span class="project-link">Xem chi tiết <span>&rarr;</span></span>
-                </div>
-            </div>
-
-            <!-- Project 4 -->
-            <div class="project-card" onclick="openModal(3)">
-                <div class="project-icon">
-                    <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-                </div>
-                <div class="project-num">Bài tập 4</div>
-                <h3 class="project-title">Công Cụ Hợp Tác Trực Tuyến & Nhóm</h3>
-                <p class="project-desc">Ứng dụng Trello, Google Docs (Version History), Discord và Google Drive để quản lý và triển khai dự án khảo sát "Mức độ quan tâm phương tiện giao thông xanh" của sinh viên.</p>
-                <div class="project-tags">
-                    <span class="project-tag">Trello</span>
-                    <span class="project-tag">Google Docs</span>
-                    <span class="project-tag">Discord</span>
-                </div>
-                <div class="project-card-footer">
-                    <span class="project-link">Xem chi tiết <span>&rarr;</span></span>
-                </div>
-            </div>
-
-            <!-- Project 5 -->
-            <div class="project-card" onclick="openModal(4)">
-                <div class="project-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.22 19.58 10.57 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
-                </div>
-                <div class="project-num">Bài tập 5</div>
-                <h3 class="project-title">Sáng Tạo Nội Dung Đa Phương Tiện AI</h3>
-                <p class="project-desc">Kết hợp chuỗi công cụ AI gồm ChatGPT (văn bản), DALL-E (hình ảnh học sinh trong lớp học thông minh) và Canva AI để thiết kế ấn bản giáo dục hiện đại, trực quan cao.</p>
-                <div class="project-tags">
-                    <span class="project-tag">ChatGPT</span>
-                    <span class="project-tag">DALL-E</span>
-                    <span class="project-tag">Canva AI</span>
-                </div>
-                <div class="project-card-footer">
-                    <span class="project-link">Xem chi tiết <span>&rarr;</span></span>
-                </div>
-            </div>
-
-            <!-- Project 6 -->
-            <div class="project-card" onclick="openModal(5)">
-                <div class="project-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
-                </div>
-                <div class="project-num">Bài tập 6</div>
-                <h3 class="project-title">Sử Dụng AI Có Trách Nhiệm Trong Học Thuật</h3>
-                <p class="project-desc">Xây dựng bộ quy tắc cá nhân gồm 7 nguyên tắc đạo đức cốt lõi nhằm định hướng sử dụng AI an toàn, liêm chính, bảo vệ tư duy độc lập và nâng cao năng lực tự học số.</p>
-                <div class="project-tags">
-                    <span class="project-tag">AI Ethics</span>
-                    <span class="project-tag">Academic Integrity</span>
-                    <span class="project-tag">Guidelines</span>
-                </div>
-                <div class="project-card-footer">
-                    <span class="project-link">Xem chi tiết <span>&rarr;</span></span>
-                </div>
+    <!-- Google Drive Call to Action Banner -->
+    <section class="py-16 px-6 relative z-10 max-w-5xl mx-auto">
+        <div class="reveal bg-gradient-to-r from-emerald-100/60 via-green-50/70 to-teal-100/60 border border-emerald-100/70 rounded-3xl p-8 md:p-12 text-center dreamy-shadow relative overflow-hidden">
+            <div class="absolute inset-0 bg-white/20 backdrop-blur-sm z-0"></div>
+            <div class="relative z-10 flex flex-col items-center">
+                <h3 class="text-2xl md:text-3xl font-bold text-emerald-950 mb-3">Tài liệu học tập toàn vẹn</h3>
+                <p class="text-slate-600 text-sm md:text-base max-w-xl mb-6 font-light">
+                    Để theo dõi trực tiếp các tệp báo cáo chi tiết, hình ảnh thực nghiệm cùng minh chứng lưu trữ cụ thể của từng bài tập, vui lòng truy cập thư mục lưu trữ đám mây của tôi.
+                </p>
+                <a href="https://drive.google.com/drive/folders/19gMObue_mufNebN7Qls4UDkfgawCN0hx?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 px-8 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-full transition-all duration-300 transform hover:-translate-y-0.5 dreamy-shadow">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                    Xem bài tập trên GG drive
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Reflection Summary Section -->
-    <section id="reflection">
-        <div class="reflection-container">
-            <div class="reflection-text">
-                <h3>Nhật Ký Hành Trình Học Tập</h3>
-                <p>Khóa học "Nhập môn Công nghệ số và Ứng dụng Trí tuệ nhân tạo" đã đem lại cho tôi một lăng kính hoàn toàn mới về phương pháp học tập hiện đại. Với xuất phát điểm là một sinh viên ngành Ngôn ngữ Anh, công nghệ từng là rào cản lớn đối với tôi.</p>
-                <p>Tuy nhiên, thông qua từng tuần thực hành, tự tay lập dàn thư mục, đánh giá nghiên cứu y khoa, tìm hiểu các tham số prompt hay quản trị công việc nhóm bằng bảng biểu trực quan, tôi nhận ra rằng: Công nghệ không thay thế con người, nhưng con người biết sử dụng công nghệ sẽ dẫn đầu.</p>
-                <p>Portfolio này là minh chứng rõ rệt cho sự chuyển mình từ một người tiếp nhận thụ động sang một người học số năng động, tự chủ, có năng lực tư duy phản biện và liêm chính học thuật sâu sắc.</p>
+    <!-- Projects Portfolio Grid Section -->
+    <section id="projects" class="py-24 px-6 relative z-10">
+        <div class="max-w-6xl mx-auto">
+            
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold text-emerald-950 mb-4">Các sản phẩm dự án cá nhân</h2>
+                <p class="text-slate-500 font-light max-w-2xl mx-auto">
+                    Chi tiết 6 bài tập thực hành được thực hiện bài bản, có sự lồng ghép giữa tư duy ngôn ngữ học và các giải pháp kỹ thuật số hiện đại.
+                </p>
             </div>
-            <div class="reflection-stats">
-                <div class="stat-box">
-                    <div class="stat-num">06</div>
-                    <h5>Bài thực hành lớn</h5>
-                    <p>Hoàn thiện toàn bộ nội dung</p>
+
+            <!-- Grid containing 6 cards -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card 1 -->
+                <div class="reveal bg-white rounded-3xl border border-emerald-50 p-6 flex flex-col justify-between dreamy-shadow-sm hover:dreamy-shadow transition-all duration-500 transform hover:-translate-y-1">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 mb-6 font-serif font-bold">1</div>
+                        <h3 class="text-xl font-serif font-bold text-emerald-950 mb-3">Thao tác tệp tin & Thư mục</h3>
+                        <p class="text-sm text-emerald-700/80 font-bold mb-4">Mục tiêu: Quản lý thông tin khoa học</p>
+                        <p class="text-sm text-slate-500 font-light leading-relaxed mb-6 line-clamp-3">
+                            Xây dựng thói quen lưu trữ ngăn nắp thông qua cấu trúc thư mục đa cấp và quy chuẩn hóa cách đặt tên tệp tin để tránh thất lạc dữ liệu.
+                        </p>
+                    </div>
+                    <button onclick="openModal(1)" class="w-full py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-sm rounded-xl transition-colors">Xem chi tiết bài tập</button>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-num">04+</div>
-                    <h5>Công cụ số thành thạo</h5>
-                    <p>Trello, Drive, Docs, AI</p>
+
+                <!-- Card 2 -->
+                <div class="reveal bg-white rounded-3xl border border-emerald-50 p-6 flex flex-col justify-between dreamy-shadow-sm hover:dreamy-shadow transition-all duration-500 transform hover:-translate-y-1">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 mb-6 font-serif font-bold">2</div>
+                        <h3 class="text-xl font-serif font-bold text-emerald-950 mb-3">Tìm kiếm & Đánh giá nguồn</h3>
+                        <p class="text-sm text-emerald-700/80 font-bold mb-4">Mục tiêu: Thẩm định thông tin y khoa</p>
+                        <p class="text-sm text-slate-500 font-light leading-relaxed mb-6 line-clamp-3">
+                            Khảo cứu chủ đề "AI trong y học hiện đại" qua Google Scholar, tiến hành thẩm định độ tin cậy của 10 nghiên cứu từ Nature, Science đến báo cáo của WHO.
+                        </p>
+                    </div>
+                    <button onclick="openModal(2)" class="w-full py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-sm rounded-xl transition-colors">Xem chi tiết bài tập</button>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-num">07</div>
-                    <h5>Quy tắc vàng</h5>
-                    <p>Định hướng liêm chính học thuật</p>
+
+                <!-- Card 3 -->
+                <div class="reveal bg-white rounded-3xl border border-emerald-50 p-6 flex flex-col justify-between dreamy-shadow-sm hover:dreamy-shadow transition-all duration-500 transform hover:-translate-y-1">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 mb-6 font-serif font-bold">3</div>
+                        <h3 class="text-xl font-serif font-bold text-emerald-950 mb-3">Viết Prompt học tập hiệu quả</h3>
+                        <p class="text-sm text-emerald-700/80 font-bold mb-4">Mục tiêu: Tối ưu hóa mượn lực AI</p>
+                        <p class="text-sm text-slate-500 font-light leading-relaxed mb-6 line-clamp-3">
+                            Xây dựng và so sánh 3 mức độ prompt (Cơ bản, Cải tiến, Nâng cao) để huấn luyện AI làm trợ lý tóm tắt tài liệu, giải thích khái niệm và soạn bài kiểm tra.
+                        </p>
+                    </div>
+                    <button onclick="openModal(3)" class="w-full py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-sm rounded-xl transition-colors">Xem chi tiết bài tập</button>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-num">10+</div>
-                    <h5>Nguồn học thuật</h5>
-                    <p>Được thẩm định chuẩn khoa học</p>
+
+                <!-- Card 4 -->
+                <div class="reveal bg-white rounded-3xl border border-emerald-50 p-6 flex flex-col justify-between dreamy-shadow-sm hover:dreamy-shadow transition-all duration-500 transform hover:-translate-y-1">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 mb-6 font-serif font-bold">4</div>
+                        <h3 class="text-xl font-serif font-bold text-emerald-950 mb-3">Công cụ hợp tác trực tuyến</h3>
+                        <p class="text-sm text-emerald-700/80 font-bold mb-4">Mục tiêu: Cộng tác làm việc nhóm</p>
+                        <p class="text-sm text-slate-500 font-light leading-relaxed mb-6 line-clamp-3">
+                            Phối hợp thực hiện dự án "Giao thông xanh" bằng cách tối ưu hóa Trello quản lý tiến độ, Google Docs đồng biên tập báo cáo và Discord kết nối nhóm.
+                        </p>
+                    </div>
+                    <button onclick="openModal(4)" class="w-full py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-sm rounded-xl transition-colors">Xem chi tiết bài tập</button>
                 </div>
+
+                <!-- Card 5 -->
+                <div class="reveal bg-white rounded-3xl border border-emerald-50 p-6 flex flex-col justify-between dreamy-shadow-sm hover:dreamy-shadow transition-all duration-500 transform hover:-translate-y-1">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 mb-6 font-serif font-bold">5</div>
+                        <h3 class="text-xl font-serif font-bold text-emerald-950 mb-3">Sáng tạo nội dung với AI</h3>
+                        <p class="text-sm text-emerald-700/80 font-bold mb-4">Mục tiêu: Thiết kế đa phương tiện</p>
+                        <p class="text-sm text-slate-500 font-light leading-relaxed mb-6 line-clamp-3">
+                            Xây dựng tài liệu trực quan về chủ đề "AI hỗ trợ học tập" bằng cách phối hợp ChatGPT tạo nội dung, DALL-E vẽ tranh minh họa và Canva thiết kế bố cục.
+                        </p>
+                    </div>
+                    <button onclick="openModal(5)" class="w-full py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-sm rounded-xl transition-colors">Xem chi tiết bài tập</button>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="reveal bg-white rounded-3xl border border-emerald-50 p-6 flex flex-col justify-between dreamy-shadow-sm hover:dreamy-shadow transition-all duration-500 transform hover:-translate-y-1">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 mb-6 font-serif font-bold">6</div>
+                        <h3 class="text-xl font-serif font-bold text-emerald-950 mb-3">Sử dụng AI có trách nhiệm</h3>
+                        <p class="text-sm text-emerald-700/80 font-bold mb-4">Mục tiêu: Đạo đức học thuật trong kỷ nguyên AI</p>
+                        <p class="text-sm text-slate-500 font-light leading-relaxed mb-6 line-clamp-3">
+                            Thiết lập hệ thống 7 nguyên tắc đạo đức sử dụng AI lành mạnh và xây dựng infographic chỉ rõ ranh giới giữa mượn lực hỗ trợ và vi phạm gian lận học thuật.
+                        </p>
+                    </div>
+                    <button onclick="openModal(6)" class="w-full py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-sm rounded-xl transition-colors">Xem chi tiết bài tập</button>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Footer Section -->
-    <footer>
-        <div class="footer-content">
-            <a href="#hero" class="footer-logo">Thu Hồng🌸</a>
-            <p style="font-size: 1.1rem; color: var(--text-muted); max-width: 500px;">"Hãy sử dụng AI một cách thông minh hôm nay để trở thành người học có năng lực và đạo đức ngày mai."</p>
-            <div class="footer-socials">
-                <a href="#" class="social-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/></svg>
-                </a>
-                <a href="mailto:hongnguyen@ulis.vnu.edu.vn" class="social-icon">
-                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                </a>
-                <a href="https://drive.google.com/drive/folders/19gMObue_mufNebN7Qls4UDkfgawCN0hx?usp=drive_link" target="_blank" class="social-icon">
-                    <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>
-                </a>
+    <!-- Reflections and Experience Summary Section -->
+    <section id="summary" class="py-24 px-6 relative z-10 bg-white/40 backdrop-blur-md border-t border-emerald-50/50">
+        <div class="max-w-4xl mx-auto">
+            
+            <div class="text-center mb-16">
+                <span class="text-xs font-bold text-emerald-600 tracking-widest uppercase bg-emerald-50 px-3.5 py-1.5 rounded-full border border-emerald-100">Suy ngẫm cá nhân</span>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-emerald-950 mt-4 mb-4">Tổng kết chặng đường học tập</h2>
+                <p class="text-slate-500 text-sm font-light max-w-lg mx-auto">Những kỹ năng tích lũy và cách vượt qua thách thức để hoàn thiện năng lực số bản thân.</p>
             </div>
-            <div class="footer-copyright">
-                &copy; 2026 Nguyễn Thu Hồng - Chuyên ngành Ngôn ngữ Anh ULIS. Thiết kế phong cách Modern Romantic.
+
+            <div class="space-y-6">
+                
+                <!-- Card item 1 -->
+                <div class="reveal bg-white rounded-3xl p-8 border border-emerald-50 dreamy-shadow-sm hover:dreamy-shadow transition-all duration-300">
+                    <h3 class="text-xl font-serif font-bold text-emerald-950 mb-3 flex items-center gap-3">
+                        <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold">✓</span>
+                        Kiến thức và kỹ năng đã tích lũy
+                    </h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Thông qua môn học, tôi đã có thể thực hiện quản lý tệp và cấu trúc thư mục học tập chuẩn hóa, khoa học trên nền tảng đám mây Google Drive. Đồng thời, tôi đã tự mình tìm kiếm và thẩm định thông tin khoa học chuyên sâu, biết cách áp dụng các nguyên lý Prompt Engineering để huấn luyện AI làm việc có cấu trúc. Tôi cũng đã thành thạo kỹ năng cộng tác làm việc nhóm thông qua hệ sinh thái công cụ Trello, Google Docs và Teams.
+                    </p>
+                </div>
+
+                <!-- Card item 2 -->
+                <div class="reveal bg-white rounded-3xl p-8 border border-emerald-50 dreamy-shadow-sm hover:dreamy-shadow transition-all duration-300">
+                    <h3 class="text-xl font-serif font-bold text-emerald-950 mb-3 flex items-center gap-3">
+                        <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold">✓</span>
+                        Khó khăn gặp phải & Cách giải quyết
+                    </h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Khó khăn lớn nhất là đồng bộ thời gian làm việc nhóm khi các thành viên lệch lịch học. Nhóm đã giải quyết bằng cách thống nhất dùng Discord làm kênh cập nhật thông tin và ghim các thông báo quan trọng. Bên cạnh đó, việc dữ liệu AI đưa ra đôi khi bị thiếu cập nhật hoặc "ảo giác" thông tin đã được khắc phục hoàn toàn bằng tinh thần phản biện học thuật cao, luôn kiểm chứng chéo với các tài liệu khoa học chính thống từ tạp chí Nature hay Science.
+                    </p>
+                </div>
+
+                <!-- Card item 3 -->
+                <div class="reveal bg-white rounded-3xl p-8 border border-emerald-50 dreamy-shadow-sm hover:dreamy-shadow transition-all duration-300">
+                    <h3 class="text-xl font-serif font-bold text-emerald-950 mb-3 flex items-center gap-3">
+                        <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold">✓</span>
+                        Lời kết & Triển vọng tương lai
+                    </h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Năng lực công nghệ số và kỹ năng làm việc với AI có trách nhiệm sẽ là hành trang thiết yếu của tôi trong thời đại số. Việc hoàn thành Portfolio này giúp tôi nhận ra bản thân hoàn toàn có khả năng học hỏi và ứng dụng công nghệ một cách tự chủ, làm chủ kiến thức và tiếp tục mở rộng tiềm năng của mình trong việc học tập và nghề nghiệp ngôn ngữ Anh trong tương lai.
+                    </p>
+                </div>
+
             </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-emerald-950 text-emerald-100/80 py-16 px-6 relative z-10">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 border-b border-emerald-900/50 pb-12 mb-12">
+            <div class="text-center md:text-left">
+                <h3 class="font-serif font-bold text-2xl text-white mb-2">Nguyễn Thu Hồng</h3>
+                <p class="text-sm text-emerald-200/60 font-light">Digital Portfolio • Nhập môn công nghệ số & AI</p>
+            </div>
+            
+            <div class="flex items-center gap-6 text-sm">
+                <a href="#about" class="hover:text-white transition-colors">Giới thiệu</a>
+                <a href="#projects" class="hover:text-white transition-colors">Bài tập</a>
+                <a href="#summary" class="hover:text-white transition-colors">Tổng kết</a>
+            </div>
+        </div>
+
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-emerald-300/40">
+            <p>&copy; 2026 Nguyễn Thu Hồng. Đại học Ngoại Ngữ - ĐHQGHN.</p>
+            <p class="italic">"Sử dụng AI một cách thông minh để trở thành người học có năng lực và đạo đức ngày mai."</p>
         </div>
     </footer>
 
-    <!-- LIGHTWEIGHT OVERLAY MODAL SYSTEM -->
-    <div class="modal" id="project-modal" onclick="closeModalOutside(event)">
-        <div class="modal-container">
-            <div class="modal-header">
-                <div class="modal-title-wrapper">
-                    <span class="modal-num" id="modal-project-num">Học phần</span>
-                    <h3 class="modal-title-text" id="modal-project-title">Tên sản phẩm bài tập</h3>
+    <!-- Interactive Detail Modals -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-emerald-950/40 backdrop-blur-md">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto dreamy-shadow border border-emerald-50 transform scale-95 opacity-0 transition-all duration-300 ease-out" id="modal-container">
+            
+            <!-- Modal Header -->
+            <div class="sticky top-0 bg-white/95 backdrop-blur-sm border-b border-emerald-50 px-6 py-5 flex items-center justify-between">
+                <div>
+                    <span id="modal-task-badge" class="text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100 uppercase tracking-wider">Bài tập 1</span>
+                    <h3 id="modal-title" class="text-xl md:text-2xl font-serif font-bold text-emerald-950 mt-2">Tiêu đề bài tập</h3>
                 </div>
-                <button class="modal-close" onclick="closeModal()">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                    </svg>
+                <button onclick="closeModal()" class="p-2 text-slate-400 hover:text-emerald-700 bg-slate-50 hover:bg-emerald-50 rounded-full transition-all duration-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
-            <div class="modal-body" id="modal-project-body">
-                <!-- Nội dung tương tác động sẽ được tải thông qua JS -->
+
+            <!-- Modal Content (Dynamically Injected) -->
+            <div id="modal-content" class="p-8 space-y-6 text-sm text-slate-600 leading-relaxed">
+                <!-- Data populated by javascript -->
             </div>
+
+            <!-- Modal Footer -->
+            <div class="bg-slate-50 border-t border-emerald-50 px-8 py-4 flex justify-end gap-3 rounded-b-3xl">
+                <a href="https://drive.google.com/drive/folders/19gMObue_mufNebN7Qls4UDkfgawCN0hx?usp=drive_link" target="_blank" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition-colors flex items-center gap-1.5">
+                    Xem minh chứng thực tế
+                </a>
+                <button onclick="closeModal()" class="px-5 py-2.5 bg-white border border-slate-200 text-slate-700 font-bold rounded-xl text-xs hover:bg-slate-50 transition-colors">Đóng lại</button>
+            </div>
+
         </div>
     </div>
 
-    <!-- JAVASCRIPT: HOẠT ẢNH HẠT SÁNG, MENU MOBILE VÀ QUẢN LÝ DỮ LIỆU MODAL -->
+    <!-- JavaScript logic -->
     <script>
-        // --- 1. Tạo hiệu ứng tương tác Canvas hạt mộng mơ ---
-        const canvas = document.getElementById('interactive-canvas');
-        const ctx = canvas.getContext('2d');
-        let particlesArray = [];
-        const colors = ['#9bc4a6', '#d3ecd7', '#daf0ec', '#ffffff'];
-
-        // Cập nhật kích thước canvas theo cửa sổ
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        // Tọa độ chuột
-        const mouse = {
-            x: null,
-            y: null,
-            radius: 120
-        }
-
-        window.addEventListener('mousemove', function(event) {
-            mouse.x = event.x;
-            mouse.y = event.y;
-        });
-
-        window.addEventListener('mouseout', function() {
-            mouse.x = null;
-            mouse.y = null;
-        });
-
-        // Đối tượng Hạt Sáng
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 5 + 1;
-                this.speedX = Math.random() * 0.8 - 0.4;
-                this.speedY = Math.random() * 0.8 - 0.4;
-                this.color = colors[Math.floor(Math.random() * colors.length)];
-                this.opacity = Math.random() * 0.5 + 0.2;
+        // Modal Data
+        const projectsData = {
+            1: {
+                badge: "Bài tập 1 • Mục 1.4",
+                title: "Thao tác cơ bản với tệp tin và thư mục",
+                content: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-emerald-950 text-base mb-1">Mục tiêu bài tập:</h4>
+                            <p>Hiểu nguyên lý tổ chức dữ liệu khoa học, rèn luyện kỹ năng lưu trữ, đổi tên, di chuyển tệp và quản lý dung lượng ổ đĩa một cách hợp lý.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-emerald-950 text-base mb-1">Quá trình thực hành:</h4>
+                            <p>Tạo lập một cấu trúc thư mục logic tại ổ đĩa D: (hoặc thư mục Documents của máy tính cá nhân). Thực hành đổi tên các tệp nháp từ <code class="bg-emerald-50 text-emerald-800 px-1 py-0.5 rounded">GhiChu.txt</code> thành <code class="bg-emerald-50 text-emerald-800 px-1 py-0.5 rounded">GhiChuQuanTrong.txt</code>, thực hiện sao chép và di chuyển chúng vào thư mục <code class="bg-emerald-50 text-emerald-800 px-1 py-0.5 rounded">TaiLieu</code>. Thực hành các thao tác phục hồi dữ liệu từ Recycle Bin một cách trôi chảy.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-emerald-950 text-base mb-1">Báo cáo tóm tắt thư mục của Nguyễn Thu Hồng:</h4>
+                            <ul class="list-disc list-inside space-y-1 pl-2">
+                                <li><strong>01_TaiLieu</strong>: Chứa tài liệu tham khảo nghiên cứu, tài liệu khoa học.</li>
+                                <li><strong>02_BangHoi</strong>: Lưu trữ các bảng khảo sát, biểu mẫu trực tuyến.</li>
+                                <li><strong>03_DuLieu</strong>: Lưu dữ liệu thô, tổng hợp kết quả phân tích số liệu.</li>
+                                <li><strong>04_BaoCao</strong>: Chứa các bản nháp báo cáo chung và bản hoàn thiện.</li>
+                                <li><strong>05_HinhAnh</strong>: Nơi lưu giữ ảnh minh chứng trực quan, sơ đồ dự án.</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            2: {
+                badge: "Bài tập 2 • Mục 2.4",
+                title: "Tìm kiếm và đánh giá độ tin cậy nguồn thông tin",
+                content: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-emerald-950 text-base mb-1">Mục tiêu bài tập:</h4>
+                            <p>Tìm hiểu các cơ sở dữ liệu học thuật chính thống, nắm vững bộ lọc tìm kiếm nâng cao (toán tử Booleans) và xây dựng tư duy thẩm định độ tin cậy của tài liệu nghiên cứu.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-emerald-950 text-base mb-1">Chủ đề thực hành nghiên cứu:</h4>
+                            <p class="italic text-emerald-800">"Vai trò của trí tuệ nhân tạo (AI) trong y học hiện đại."</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-emerald-950 text-base mb-2">Bảng tổng hợp & Đánh giá nguồn tài liệu tiêu biểu:</h4>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse text-xs">
+                                    <thead>
+                                        <tr class="bg-emerald-50/50 border-b border-emerald-100">
+                                            <th class="p-2 font-bold text-emerald-900">Tài liệu học thuật</th>
+                                            <th class="p-2 font-bold text-emerald-900">Cơ quan xuất bản</th>
+                                            <th class="p-2 font-bold text-emerald-900">Đánh giá độ tin cậy</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-emerald-50">
+                                        <tr>
+                                            <td class="p-2">Esteva et al. (2017) - Deep learning</td>
+                                            <td class="p-2">Nature (Tạp chí uy tín cao)</td>
+                                            <td class="p-2 text-emerald-600 font-bold">★★★★★ (Rất cao)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2">Rajpurkar et al. (2017) - AI model</td>
+                                            <td class="p-2">Stanford University</td>
+                                            <td class="p-2 text-emerald-600 font-bold">★★★★★ (Rất cao)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2">Obermeyer et al. (2019) - Data analysis</td>
+                                            <td class="p-2">Science (Tạp chí uy tín cao)</td>
+                                            <td class="p-2 text-emerald-600 font-bold">★★★★★ (Rất cao)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2">WHO (2021) - Policy analysis</td>
+                                            <td class="p-2">World Health Organization</td>
+                                            <td class="p-2 text-emerald-600 font-bold">★★★★☆ (Cao)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2">IBM (2020) - Watson Health Overview</td>
+                                            <td class="p-2">Doanh nghiệp công nghệ</td>
+                                            <td class="p-2 text-yellow-600 font-bold">★★★☆☆ (Trung bình)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-emerald-950 text-base mb-1">Kết luận thực nghiệm:</h4>
+                            <p>Các tài liệu xuất bản trên các tạp chí có quy trình bình duyệt ngang hàng nghiêm ngặt (Nature, Science) luôn có giá trị học thuật cao nhất. Đối với các nguồn thông tin thương mại hoặc doanh nghiệp (IBM), người học cần cân nhắc tính quảng bá trước khi tham khảo trực tiếp.</p>
+                        </div>
+                    </div>
+                `
+            },
+            3: {
+                badge: "Bài tập 3 • Mục 3.4",
+                title: "Viết Prompt hiệu quả cho các tác vụ học tập",
+                content: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-emerald-950 text-base mb-1">Mục tiêu bài tập:</h4>
+                            <p>Làm chủ kỹ thuật thiết lập câu lệnh (Prompt Engineering) để cải thiện chất lượng phản hồi từ các mô hình ngôn ngữ lớn như ChatGPT.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-emerald-950 text-base mb-1">Mô tả quy trình xây dựng prompt qua 3 tác vụ học thuật:</h4>
+                            <ol class="list-decimal list-inside space-y-3 pl-2">
+                                <li>
+                                    <strong>Tác vụ 1: Tóm tắt tài liệu học thuật</strong>
+                                    <p class="text-xs text-slate-500 pl-4">Prompt nâng cao sử dụng kỹ thuật gán vai trò: "Bạn là một trợ lý nghiên cứu học thuật... Hãy tóm tắt luận điểm, phương pháp, kết luận và chỉ ra 2 điểm hạn chế..." mang lại kết quả sâu sắc hơn nhiều so với câu lệnh cơ bản: "Hãy tóm tắt bài đọc này."</p>
+                                </li>
+                                <li>
+                                    <strong>Tác vụ 2: Giải thích khái niệm phức tạp</strong>
+                                    <p class="text-xs text-slate-500 pl-4">Cải tiến prompt bằng cách chỉ rõ đối tượng người nghe ("Giải thích cho học sinh trung học bằng ngôn ngữ dễ hiểu"), yêu cầu sử dụng phép so sánh thực tế và đặt một câu hỏi nhỏ ở cuối bài kiểm tra.</p>
+                                </li>
+                                <li>
+                                    <strong>Tác vụ 3: Tạo bộ câu hỏi ôn tập</strong>
+                                    <p class="text-xs text-slate-500 pl-4">Yêu cầu AI tạo bộ câu hỏi có phân loại mức độ tư duy (Nhận biết, Thông hiểu, Vận dụng, Vận dụng cao), kèm đáp án chi tiết và chỉ ra năng lực cốt lõi cần sử dụng.</p>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                `
+            },
+            4: {
+                badge: "Bài tập 4 • Mục 4.4",
+                title: "Sử dụng công cụ hợp tác trực tuyến trong dự án nhóm",
+                content: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-emerald-950 text-base mb-1">Mục tiêu bài tập:</h4>
+                            <p>Ứng dụng công nghệ để nâng cao tính linh hoạt, minh bạch và năng suất làm việc nhóm trong môi trường số.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-emerald-950 text-base mb-1">Thông tin dự án nhóm:</h4>
+                            <p class="italic">"Khảo sát mức độ quan tâm của sinh viên đối với phương tiện giao thông xanh."</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-emerald-950 text-base mb-1">Hệ sinh thái công cụ số được ứng dụng:</h4>
+                            <ul class="list-disc list-inside space-y-2 pl-2">
+                                <li><strong>Trello</strong>: Phân chia chi tiết nhiệm vụ và cập nhật trạng thái làm việc (Cần làm -> Đang làm -> Đã xong) giúp bám sát lộ trình.</li>
+                                <li><strong>Google Docs</strong>: Đồng biên soạn báo cáo, xử lý góp ý qua bình luận và tận dụng 'Version History' để theo dõi những thay đổi của các thành viên.</li>
+                                <li><strong>Discord / Teams</strong>: Kênh thảo luận chính, chia sẻ giải pháp khắc phục các khó khăn phát sinh trong quá trình nghiên cứu thực tế.</li>
+                                <li><strong>Google Drive</strong>: Phân loại và phân quyền truy cập thông tin rõ ràng cho tất cả các thư mục dự án nhóm.</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            5: {
+                badge: "Bài tập 5 • Mục 5.4",
+                title: "Sử dụng AI tạo sinh để hỗ trợ sáng tạo nội dung",
+                content: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-emerald-950 text-base mb-1">Mục tiêu bài tập:</h4>
+                            <p>Tối ưu hóa quy trình sản xuất nội dung đa phương tiện thông qua việc kết hợp có kiểm soát các công cụ AI tạo sinh thông minh.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-emerald-950 text-base mb-1">Chủ đề dự án thực hiện:</h4>
+                            <p class="italic text-emerald-800">"Ứng dụng AI trong học tập của sinh viên."</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-emerald-950 text-base mb-1">Quy trình mượn lực AI đồng bộ:</h4>
+                            <ul class="list-disc list-inside space-y-2 pl-2">
+                                <li><strong>Xây dựng nội dung (ChatGPT)</strong>: Tạo bản phác thảo bài luận khoảng 500 từ về lợi ích, hạn chế của AI. Tôi đã tiến hành biên tập lại để nâng cao tính học thuật và đưa phong cách viết cá nhân vào bài viết.</li>
+                                <li><strong>Minh họa hình ảnh (DALL-E)</strong>: Tạo hình ảnh trực quan mô tả một nhóm sinh viên học tập trong lớp học thông minh.</li>
+                                <li><strong>Thiết kế bố cục (Canva AI)</strong>: Lựa chọn bố cục hiện đại với gam màu xanh lá pastel - trắng dịu mát để tăng tính thẩm mỹ của bài thuyết trình.</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            6: {
+                badge: "Bài tập 6 • Mục 6.4",
+                title: "Sử dụng AI có trách nhiệm trong học tập và nghiên cứu",
+                content: `
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-emerald-950 text-base mb-1">Mục tiêu bài tập:</h4>
+                            <p>Hiểu sâu các nguyên tắc liêm chính học thuật và thiết lập bộ quy tắc ứng xử cá nhân lành mạnh đối với công nghệ AI.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-emerald-950 text-base mb-2">Bộ 7 nguyên tắc vàng sử dụng AI có trách nhiệm của tôi:</h4>
+                            <ol class="list-decimal list-inside space-y-1.5 pl-2 text-xs">
+                                <li><strong>Nguyên tắc 1</strong>: AI là công cụ hỗ trợ, con người luôn là chủ thể chịu trách nhiệm.</li>
+                                <li><strong>Nguyên tắc 2</strong>: Luôn kiểm chứng tính chính xác của các thông tin do AI cung cấp.</li>
+                                <li><strong>Nguyên tắc 3</strong>: Minh bạch về mức độ sử dụng AI khi có yêu cầu.</li>
+                                <li><strong>Nguyên tắc 4</strong>: Tôn trọng quyền sở hữu trí tuệ và trích dẫn chuẩn học thuật.</li>
+                                <li><strong>Nguyên tắc 5</strong>: Tuyệt đối không lạm dụng AI để gian lận thi cử hoặc đạo văn.</li>
+                                <li><strong>Nguyên tắc 6</strong>: Luôn duy trì tư duy phản biện và góc nhìn đa chiều.</li>
+                                <li><strong>Nguyên tắc 7</strong>: Chịu trách nhiệm 100% đối với chất lượng của sản phẩm cuối cùng.</li>
+                            </ol>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-emerald-950 text-base mb-1">Thiết kế truyền thông:</h4>
+                            <p>Xây dựng infographic trực quan hóa các hành vi "Nên dùng" (Tìm kiếm ý tưởng, gợi ý cấu trúc, sửa ngữ pháp) và hành vi "Không nên dùng" (Sao chép nguyên văn, nộp bài do AI làm hoàn toàn, bỏ qua bước kiểm chứng thông tin).</p>
+                        </div>
+                    </div>
+                `
             }
+        };
 
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
+        // Scroll reveal logic
+        window.addEventListener('scroll', revealElements);
+        window.addEventListener('load', revealElements);
 
-                // Va chạm viền canvas
-                if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
-                if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
-
-                // Đẩy hạt theo trỏ chuột (Tương tác vật lý)
-                if (mouse.x != null && mouse.y != null) {
-                    let dx = mouse.x - this.x;
-                    let dy = mouse.y - this.y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < mouse.radius) {
-                        let forceDirectionX = dx / distance;
-                        let forceDirectionY = dy / distance;
-                        let maxDistance = mouse.radius;
-                        let force = (maxDistance - distance) / maxDistance;
-                        let directionX = forceDirectionX * force * 3;
-                        let directionY = forceDirectionY * force * 3;
-
-                        this.x -= directionX;
-                        this.y -= directionY;
-                    }
+        function revealElements() {
+            const reveals = document.querySelectorAll('.reveal');
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
                 }
             }
-
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = this.opacity;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.shadowBlur = 10;
-                ctx.shadowColor = this.color;
-                ctx.fill();
-                ctx.restore();
-            }
         }
 
-        function initParticles() {
-            particlesArray = [];
-            const numberOfParticles = Math.floor((canvas.width * canvas.height) / 12000);
-            for (let i = 0; i < numberOfParticles; i++) {
-                particlesArray.push(new Particle());
-            }
-        }
+        // Mobile menu toggle logic
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
 
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-            }
-            requestAnimationFrame(animateParticles);
-        }
-
-        initParticles();
-        animateParticles();
-
-        // --- 2. Menu Mobile Responsive ---
-        const menuToggle = document.getElementById('menu-toggle');
-        const navbar = document.getElementById('navbar');
-
-        menuToggle.addEventListener('click', () => {
-            navbar.classList.toggle('active');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
         });
 
-        // Tự động đóng menu di động khi nhấn vào link điều hướng
-        document.querySelectorAll('nav a').forEach(link => {
+        mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
-                navbar.classList.remove('active');
+                mobileMenu.classList.add('hidden');
             });
         });
 
-        // Hiệu ứng đổi màu header khi cuộn chuột
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+        // Modal Interactive Logic
+        const modal = document.getElementById('project-modal');
+        const modalContainer = document.getElementById('modal-container');
+        const modalTitle = document.getElementById('modal-title');
+        const modalContent = document.getElementById('modal-content');
+        const modalBadge = document.getElementById('modal-task-badge');
+
+        function openModal(projectId) {
+            const data = projectsData[projectId];
+            if (data) {
+                modalBadge.innerHTML = data.badge;
+                modalTitle.innerHTML = data.title;
+                modalContent.innerHTML = data.content;
+                
+                modal.classList.remove('hidden');
+                // Force a repaint
+                modal.offsetHeight;
+                modalContainer.classList.remove('scale-95', 'opacity-0');
+                modalContainer.classList.add('scale-100', 'opacity-100');
+                document.body.style.overflow = 'hidden'; // prevent scrolling behind
             }
-        });
-
-        // --- 3. DỮ LIỆU & HỆ THỐNG MODAL BÀI TẬP (BÁM SÁT FILE BẠN ĐÃ LÀM) ---
-        const projectsData = [
-            // Bài 1
-            {
-                num: "Bài tập thực hành 1",
-                title: "Thao Tác Hệ Thống & Quản Lý Tệp Tin",
-                html: `
-                    <div class="modal-content-section">
-                        <h4>Mục tiêu thực hành</h4>
-                        <p>Làm quen với việc thao tác tệp tin trên ổ cứng và xây dựng cơ cấu cây thư mục học tập khoa học, tối ưu phím tắt nhằm nâng cao hiệu suất học tập trong hệ điều hành Windows.</p>
-                    </div>
-                    <div class="modal-content-section">
-                        <h4>Quy trình triển khai lưu trữ</h4>
-                        <p>Dưới đây là sơ đồ chuỗi hành động được thực thi trên môi trường máy tính thực tế:</p>
-                        <div class="flow-container">
-                            <div class="flow-step">
-                                <div class="step-num-badge">01</div>
-                                <div class="step-content"><strong>Mở File Explorer:</strong> Sử dụng tổ hợp phím tắt nhanh <code>Windows + E</code> để bắt đầu thao tác tệp tin.</div>
-                            </div>
-                            <div class="flow-step">
-                                <div class="step-num-badge">02</div>
-                                <div class="step-content"><strong>Tạo thư mục chính:</strong> Tạo thư mục gốc theo cú pháp chuẩn của học phần <code>ThucHanh_NguyenThuHong</code> tại phân vùng ổ đĩa <code>D:</code> hoặc <code>Documents</code>.</div>
-                            </div>
-                            <div class="flow-step">
-                                <div class="step-num-badge">03</div>
-                                <div class="step-content"><strong>Quản lý tệp nháp:</strong> Tạo tài liệu văn bản <code>GhiChu.txt</code>, đổi tên thành <code>GhiChuQuanTrong.txt</code> để lưu ý học thuật quan trọng.</div>
-                            </div>
-                            <div class="flow-step">
-                                <div class="step-num-badge">04</div>
-                                <div class="step-content"><strong>Tạo phân cấp con:</strong> Khởi tạo thư mục con <code>TaiLieu</code>, sử dụng cơ chế Copy & Paste (<code>Ctrl + C</code> và <code>Ctrl + V</code>) tệp ghi chú vào đây.</div>
-                            </div>
-                            <div class="flow-step">
-                                <div class="step-num-badge">05</div>
-                                <div class="step-content"><strong>Di chuyển & Xóa vĩnh viễn:</strong> Tạo tệp <code>DiChuyen.txt</code> thực hiện dọn dẹp bằng phím tắt <code>Shift + Delete</code> để dọn dẹp bộ nhớ máy tính mà không qua thùng rác.</div>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-            // Bài 2
-            {
-                num: "Bài tập thực hành 2",
-                title: "Khai Thác Dữ Liệu & Đánh Giá Nguồn",
-                html: `
-                    <div class="modal-content-section">
-                        <h4>Tổng quan nghiên cứu học thuật</h4>
-                        <p>Nghiên cứu đánh giá độ tin cậy của các nguồn học thuật và báo cáo liên quan đến chủ đề: <strong>"Vai trò của trí tuệ nhân tạo (AI) trong y học hiện đại"</strong>. Tập trung chẩn đoán hình ảnh y khoa, so sánh hiệu quả với truyền thống và xem xét khía cạnh đạo đức lâm sàng.</p>
-                    </div>
-                    <div class="modal-content-section">
-                        <h4>Bảng Tổng Hợp Đánh Giá 10 Nguồn Tiêu Biểu</h4>
-                        <div class="source-table-wrapper">
-                            <table class="source-table">
-                                <thead>
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>Tài liệu nghiên cứu</th>
-                                        <th>Loại nguồn</th>
-                                        <th>Tác giả / NXB</th>
-                                        <th>Độ tin cậy</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Esteva et al. (2017)</td>
-                                        <td>Tạp chí</td>
-                                        <td>Nature</td>
-                                        <td class="badge-star">★★★★★ Rất cao</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Rajpurkar et al. (2017)</td>
-                                        <td>Báo cáo khoa học</td>
-                                        <td>Stanford University</td>
-                                        <td class="badge-star">★★★★★ Rất cao</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Obermeyer et al. (2019)</td>
-                                        <td>Tạp chí</td>
-                                        <td>Science</td>
-                                        <td class="badge-star">★★★★★ Rất cao</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>WHO (2021) Báo cáo AI cho Y tế</td>
-                                        <td>Báo cáo chính sách</td>
-                                        <td>World Health Org.</td>
-                                        <td class="badge-star">★★★★☆ Cao</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>IBM (2020) Watson Health</td>
-                                        <td>Website doanh nghiệp</td>
-                                        <td>IBM Corp.</td>
-                                        <td class="badge-star">★★★☆☆ Trung bình</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="modal-content-section">
-                        <h4>Phương pháp trích dẫn chuẩn hóa (Harvard Style)</h4>
-                        <div style="background: #f8fbf9; padding: 1.2rem; border-radius:15px; border: 1px solid rgba(155, 196, 166, 0.2); font-family: monospace; font-size: 0.9rem;">
-                            Esteva, A. et al. (2017) 'Dermatologist-level classification of skin cancer with deep neural networks', Nature, 542(7639), pp. 115–118.<br><br>
-                            Obermeyer, Z. et al. (2019) 'Dissecting racial bias in an algorithm', Science, 366(6464), pp. 447–453.
-                        </div>
-                    </div>
-                `
-            },
-            // Bài 3
-            {
-                num: "Bài tập thực hành 3",
-                title: "Tối Ưu Prompt Viết Câu Lệnh Cho Học Tập",
-                html: `
-                    <div class="modal-content-section">
-                        <h4>Tư duy thiết kế Prompt học tập chuyên sâu</h4>
-                        <p>Nghiên cứu hiệu quả tương tác với LLMs (như ChatGPT) bằng cách cải tiến prompt qua 3 cấp độ: Cơ bản, Cải tiến, và Nâng cao để xử lý 3 tác vụ phổ biến: Tóm tắt văn bản, Giải thích thuật ngữ, Thiết kế câu hỏi thi cử.</p>
-                    </div>
-                    <div class="modal-content-section">
-                        <h4>Bản đồ chuyển đổi Prompt & Tương tác động</h4>
-                        <p>Nhấp vào các mức độ dưới đây để kiểm chứng mức độ logic trong thiết lập prompt:</p>
-                        <div class="prompt-tabs">
-                            <div class="prompt-tab active" onclick="switchPrompt(0)">Mức 1: Prompt Cơ Bản</div>
-                            <div class="prompt-tab" onclick="switchPrompt(1)">Mức 2: Prompt Cải Tiến</div>
-                            <div class="prompt-tab" onclick="switchPrompt(2)">Mức 3: Prompt Nâng Cao</div>
-                        </div>
-                        <div id="prompt-display-container">
-                            <div class="prompt-box" id="prompt-box-text">"Hãy tóm tắt bài đọc này."</div>
-                            <div class="output-box" id="output-box-text"><strong>Kết quả đầu ra của AI:</strong> Đoạn văn ngắn chỉ nêu thông tin chung chung, không nắm bắt cấu trúc học thuật của tài liệu nghiên cứu.</div>
-                        </div>
-                    </div>
-                `
-            },
-            // Bài 4
-            {
-                num: "Bài tập thực hành 4",
-                title: "Công Cụ Hợp Tác Trực Tuyến & Nhóm",
-                html: `
-                    <div class="modal-content-section">
-                        <h4>Phát triển dự án khảo sát chung</h4>
-                        <p>Chủ đề dự án: <strong>"Khảo sát mức độ quan tâm của sinh viên đối với phương tiện giao thông xanh"</strong>. Phối hợp nhịp nhàng giữa 5 thành viên thông qua Trello để phân nhiệm, Google Docs để soạn báo cáo trực tiếp, và Discord/Microsoft Teams để thảo luận nhanh.</p>
-                    </div>
-                    <div class="modal-content-section">
-                        <h4>Mô phỏng Bảng Phân Công Nhiệm Vụ Trên Trello</h4>
-                        <p>Các task cá nhân mà tôi đảm nhận và quản lý trạng thái công việc thời gian thực:</p>
-                        <div class="trello-board">
-                            <div class="trello-col">
-                                <h5>Cần làm <span class="col-count">1</span></h5>
-                                <div class="trello-card">
-                                    <h6>Lên kế hoạch khảo sát</h6>
-                                    <p>Tạo bảng Google Forms khảo sát học sinh.</p>
-                                    <div class="card-meta"><span>Hạn: 7/6/2026</span><span>⭐ Mới</span></div>
-                                </div>
-                            </div>
-                            <div class="trello-col">
-                                <h5>Đang làm <span class="col-count">2</span></h5>
-                                <div class="trello-card" style="border-left: 3px solid #f1c40f;">
-                                    <h6>Soạn câu hỏi khảo sát</h6>
-                                    <p>Soạn thảo 10 câu hỏi định lượng về phương tiện xanh.</p>
-                                    <div class="card-meta"><span>Hạn: 8/6/2026</span><span>⚡ Gấp</span></div>
-                                </div>
-                                <div class="trello-card" style="border-left: 3px solid #f1c40f;">
-                                    <h6>Hoàn thiện khung báo cáo</h6>
-                                    <p>Viết phần Mở đầu và Phương pháp luận.</p>
-                                    <div class="card-meta"><span>Hạn: 8/6/2026</span><span>🛠️ Tiến độ</span></div>
-                                </div>
-                            </div>
-                            <div class="trello-col">
-                                <h5>Đã xong <span class="col-count">2</span></h5>
-                                <div class="trello-card" style="border-left: 3px solid #2ecc71;">
-                                    <h6>Thu thập tài liệu nền</h6>
-                                    <p>Tổng hợp 5 nguồn tham khảo uy tín về xe điện.</p>
-                                    <div class="card-meta"><span>Đã nộp</span><span>✓ Hoàn tất</span></div>
-                                </div>
-                                <div class="trello-card" style="border-left: 3px solid #2ecc71;">
-                                    <h6>Thiết lập cấu trúc Drive</h6>
-                                    <p>Tạo các thư mục con 01_TaiLieu, 02_DuLieu, 03_BaoCao.</p>
-                                    <div class="card-meta"><span>Đã nộp</span><span>✓ Hoàn tất</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `
-            },
-            // Bài 5
-            {
-                num: "Bài tập thực hành 5",
-                title: "Sáng Tạo Nội Dung Đa Phương Tiện AI",
-                html: `
-                    <div class="modal-content-section">
-                        <h4>Quy trình sản xuất nội dung đồng sáng tạo với AI</h4>
-                        <p>Dự án thực hành kết hợp sức mạnh sáng tạo đa phương thức: Sử dụng <strong>ChatGPT</strong> để lên khung bài viết, <strong>DALL-E</strong> để sinh hình ảnh trực quan chất lượng cao, và <strong>Canva AI</strong> để thiết kế bố cục infographic hoàn chỉnh.</p>
-                    </div>
-                    <div class="modal-content-section" style="background:#fcfcfc; border-radius:20px; padding:2rem; border:1px solid rgba(155,196,166,0.15);">
-                        <h5 style="font-family: var(--font-serif); font-size:1.2rem; color:var(--text-main); margin-bottom:1rem;">Ví dụ luồng Prompt tạo ảnh thực hành DALL-E</h5>
-                        <p style="font-family: monospace; background:#f4f9f4; padding:1rem; border-radius:10px; font-size:0.9rem; border-left:4px solid var(--primary-pastel);">
-                            "Create an illustration of university students using artificial intelligence tools for learning, modern classroom, educational technology, digital style."
-                        </p>
-                        <p style="margin-top:1rem;"><strong>Kết quả đầu ra:</strong> Bức ảnh chân thực mô tả lớp học thông minh với trợ lý ảo hỗ trợ học tập cá nhân hóa, giúp giảm thiểu thời gian thiết kế và tìm kiếm tư liệu truyền thống một cách đáng kể.</p>
-                    </div>
-                `
-            },
-            // Bài 6
-            {
-                num: "Bài tập thực hành 6",
-                title: "Sử Dụng AI Có Trách Nhiệm Trong Học Thuật",
-                html: `
-                    <div class="modal-content-section">
-                        <h4>Tuyên ngôn liêm chính học thuật</h4>
-                        <p>Nghiên cứu chính sách AI của các trường Đại học trên thế giới để đề ra bản hiến chương cá nhân, nhằm mục tiêu tối đa hóa hiệu suất học tập nhưng không làm suy giảm tính trung thực của nghiên cứu khoa học.</p>
-                    </div>
-                    <div class="modal-content-section">
-                        <h4>7 Nguyên Tắc Vàng Sử Dụng AI Có Trách Nhiệm</h4>
-                        <div class="ethical-grid">
-                            <div class="ethical-item">
-                                <h5>1. AI chỉ hỗ trợ học tập</h5>
-                                <p>AI đóng vai trò trợ lý cá nhân, toàn bộ sản phẩm nộp cuối cùng phải thể hiện chính kiến và tư duy phân tích của bản thân.</p>
-                            </div>
-                            <div class="ethical-item">
-                                <h5>2. Kiểm chứng thông tin</h5>
-                                <p>Không tiếp nhận thụ động, luôn đối chiếu các luận điểm từ AI với nguồn tài liệu khoa học chính thống uy tín.</p>
-                            </div>
-                            <div class="ethical-item">
-                                <h5>3. Minh bạch sử dụng AI</h5>
-                                <p>Sẵn sàng công khai toàn bộ phần bài làm được hỗ trợ bởi ChatGPT, Gemini hay Claude khi có yêu cầu.</p>
-                            </div>
-                            <div class="ethical-item">
-                                <h5>4. Tôn trọng bản quyền</h5>
-                                <p>Cam kết thực hiện trích dẫn khoa học minh bạch khi mượn ý tưởng hoặc văn phong do AI kiến tạo.</p>
-                            </div>
-                            <div class="ethical-item">
-                                <h5>5. Nói không với gian lận</h5>
-                                <p>Tuyệt đối không dùng AI để thi cử trực tiếp hoặc sao chép nguyên văn nộp bài dưới danh nghĩa cá nhân.</p>
-                            </div>
-                            <div class="ethical-item">
-                                <h5>6. Duy trì tư duy phản biện</h5>
-                                <p>Liên tục đặt ra nghi vấn, đánh giá, phản biện lại thông tin và giải pháp từ mô hình ngôn ngữ lớn.</p>
-                            </div>
-                        </div>
-                    </div>
-                `
-            }
-        ];
-
-        const promptLevels = [
-            {
-                prompt: `"Hãy tóm tắt bài đọc này."`,
-                output: `<strong>Đầu ra của AI:</strong> Một đoạn văn ngắn khoảng vài câu, chỉ nêu thông tin chung chung mà chưa chỉ ra được luận điểm chính hoặc kết luận học thuật của tài liệu.`
-            },
-            {
-                prompt: `"Hãy tóm tắt bài đọc sau trong khoảng 200 từ. Tập trung vào: Chủ đề chính, Luận điểm quan trọng, Phương pháp nghiên cứu, Kết luận của tác giả. Trình bày bằng gạch đầu dòng."`,
-                output: `<strong>Đầu ra của AI:</strong> Bản tóm tắt có cấu trúc rõ ràng hơn, đầy đủ ý chính, phân tách các nguyên nhân - kết quả trực quan và rất dễ theo dõi học tập.`
-            },
-            {
-                prompt: `"Bạn là một trợ lý nghiên cứu học thuật hỗ trợ sinh viên đại học. Hãy đọc tài liệu dưới đây và thực hiện các yêu cầu: 1. Xác định chủ đề, 2. Tóm tắt luận điểm chính, 3. Trình bày phương pháp nghiên cứu, 4. Kết luận quan trọng nhất, 5. Chỉ ra 2 hạn chế. Yêu cầu: Viết theo phong cách học thuật, ngắn gọn, chính xác."`,
-                output: `<strong>Đầu ra của AI:</strong> Phản hồi có chiều sâu học thuật vượt trội, phân tích logic đa khía cạnh, gần đạt chuẩn chất lượng của một bài review tạp chí khoa học thực sự.`
-            }
-        ];
-
-        // Mở popup modal dự án
-        function openModal(index) {
-            const modal = document.getElementById('project-modal');
-            const data = projectsData[index];
-
-            document.getElementById('modal-project-num').innerText = data.num;
-            document.getElementById('modal-project-title').innerText = data.title;
-            document.getElementById('modal-project-body').innerHTML = data.html;
-
-            modal.classList.add('open');
-            document.body.style.overflow = 'hidden'; // Ngăn chặn cuộn trang phía dưới
         }
 
-        // Đóng popup modal
         function closeModal() {
-            const modal = document.getElementById('project-modal');
-            modal.classList.remove('open');
-            document.body.style.overflow = 'auto'; // Cho phép cuộn trang trở lại
+            modalContainer.classList.remove('scale-100', 'opacity-100');
+            modalContainer.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
         }
 
-        // Đóng modal khi click ra vùng ngoài hộp container
-        function closeModalOutside(event) {
-            if (event.target === document.getElementById('project-modal')) {
+        // Close modal on background click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
                 closeModal();
             }
-        }
-
-        // Tương tác chuyển đổi tab của prompt trong Modal 3
-        function switchPrompt(level) {
-            const tabs = document.querySelectorAll('.prompt-tab');
-            tabs.forEach((tab, index) => {
-                if (index === level) {
-                    tab.classList.add('active');
-                } else {
-                    tab.classList.remove('active');
-                }
-            });
-
-            document.getElementById('prompt-box-text').innerText = promptLevels[level].prompt;
-            document.getElementById('output-box-text').innerHTML = promptLevels[level].output;
-        }
+        });
     </script>
 </body>
 </html>
