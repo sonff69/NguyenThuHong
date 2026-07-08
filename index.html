@@ -3,71 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nguyễn Thu Hồng - Digital Portfolio</title>
+    <title>Nguyễn Thu Hồng - Góc Nhỏ Kỹ Thuật Số</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Quicksand & Playfair Display -->
+    <!-- Google Fonts: Be Vietnam Pro (Perfect Vietnamese Diacritics) & Quicksand -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght=0,400..900;1,400..900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         body {
             font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, #f2faf4 0%, #ffffff 50%, #e9f5eb 100%);
+            background: linear-gradient(135deg, #f1f8f3 0%, #ffffff 50%, #e6f3e8 100%);
             overflow-x: hidden;
         }
-        h1, h2, h3, .font-serif {
-            font-family: 'Playfair Display', serif;
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Be Vietnam Pro', sans-serif;
         }
         
-        /* Custom Keyframe Animations for Doodles */
+        /* Smooth Wiggle & Float animations for bold doodles */
         @keyframes float-slow {
             0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
-            50% { transform: translateY(-20px) rotate(6deg) scale(1.05); }
+            50% { transform: translateY(-15px) rotate(4deg) scale(1.03); }
         }
         @keyframes float-medium {
             0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
-            50% { transform: translateY(-15px) rotate(-4deg) scale(0.95); }
+            50% { transform: translateY(-12px) rotate(-3deg) scale(0.97); }
         }
         @keyframes spin-slow {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
         @keyframes pulse-subtle {
-            0%, 100% { opacity: 0.4; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.08); }
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
         }
 
-        .animate-float-1 { animation: float-slow 12s ease-in-out infinite; }
+        .animate-float-1 { animation: float-slow 10s ease-in-out infinite; }
         .animate-float-2 { animation: float-medium 8s ease-in-out infinite; }
-        .animate-spin-slow { animation: spin-slow 30s linear infinite; }
-        .animate-pulse-subtle { animation: pulse-subtle 3s ease-in-out infinite; }
+        .animate-spin-slow { animation: spin-slow 40s linear infinite; }
+        .animate-pulse-subtle { animation: pulse-subtle 4s ease-in-out infinite; }
 
-        /* Scroll reveal standard states */
+        /* Dynamic entry states */
         .reveal {
             opacity: 0;
-            transform: translateY(35px);
-            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(25px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Dreamy shadow styles */
+        /* Shadow states */
         .dreamy-shadow {
-            box-shadow: 0 20px 45px -12px rgba(139, 195, 74, 0.2);
+            box-shadow: 0 20px 45px -10px rgba(120, 180, 130, 0.22);
         }
         .dreamy-shadow-sm {
-            box-shadow: 0 10px 25px -10px rgba(139, 195, 74, 0.12);
+            box-shadow: 0 10px 25px -8px rgba(120, 180, 130, 0.12);
         }
 
-        /* Sparkle Particle Styling */
+        /* Sparkle Particle trail on mouse move */
         .sparkle-particle {
             position: absolute;
             pointer-events: none;
-            background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(165,214,167,0.8) 50%, rgba(255,255,255,0) 100%);
+            background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(139,195,74,0.8) 60%, rgba(255,255,255,0) 100%);
             border-radius: 50%;
             transform: translate(-50%, -50%);
             animation: fade-out 0.6s ease-out forwards;
@@ -75,274 +75,227 @@
         }
         @keyframes fade-out {
             0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); }
-        }
-
-        /* Hand-drawn underline styling */
-        .doodle-underline {
-            stroke-width: 3;
-            stroke-linecap: round;
-            filter: drop-shadow(1px 2px 0px rgba(35, 78, 50, 0.15));
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.1); }
         }
 
         /* Leaf Particle on Click */
         .leaf-particle {
             position: absolute;
             pointer-events: none;
-            animation: drift-up 1.2s ease-out forwards;
+            animation: drift-up 1s ease-out forwards;
             z-index: 9998;
         }
         @keyframes drift-up {
             0% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
-            100% { opacity: 0; transform: translateY(-80px) rotate(120deg) scale(0.4); }
+            100% { opacity: 0; transform: translateY(-70px) rotate(90deg) scale(0.3); }
         }
 
-        /* Visual timeline node pulse */
-        .node-pulse {
-            animation: node-glowing 2s infinite;
-        }
-        @keyframes node-glowing {
-            0%, 100% { box-shadow: 0 0 0 0px rgba(165, 214, 167, 0.7); }
-            50% { box-shadow: 0 0 0 8px rgba(165, 214, 167, 0); }
+        /* Hand-drawn Underlines */
+        .doodle-underline {
+            stroke-width: 3.5;
+            stroke-linecap: round;
+            filter: drop-shadow(1px 2px 0px rgba(27, 67, 50, 0.15));
         }
 
-        /* Card interactive 3D tilt */
-        .tilt-card {
-            transform-style: preserve-3d;
-            perspective: 1000px;
-            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s ease;
-        }
-
-        /* Cozy notebook grid paper style */
-        .notebook-paper {
-            background-color: #fdfbf7;
-            background-image: linear-gradient(#e2ebf0 1px, transparent 1px);
-            background-size: 100% 2rem;
-            position: relative;
-        }
-        .notebook-paper::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 2.5rem;
-            width: 2px;
-            background-color: #ff8a80;
+        /* Dashboard Tablet Screen simulated styling */
+        .tablet-screen {
+            background-color: #fcfdfc;
+            border: 8px solid #234e32; /* Bold Sage border */
+            border-radius: 2.5rem;
+            box-shadow: 0 30px 60px -15px rgba(27, 67, 50, 0.18), inset 0 2px 8px rgba(0,0,0,0.05);
         }
     </style>
 </head>
-<body class="relative min-h-screen text-slate-700 antialiased selection:bg-emerald-100 selection:text-emerald-900">
+<body class="relative min-h-screen text-slate-700 antialiased selection:bg-emerald-100 selection:text-emerald-950">
 
-    <!-- Sparkle Canvas Overlay -->
+    <!-- Active Particle Container -->
     <div id="particle-container" class="fixed inset-0 pointer-events-none z-50"></div>
 
-    <!-- Background Pastel Blobs -->
+    <!-- Soft Pastel Background Blobs -->
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-        <div class="absolute top-1/6 left-5 w-96 h-96 bg-emerald-100/40 rounded-full blur-3xl animate-float-1"></div>
-        <div class="absolute top-1/2 right-5 w-80 h-80 bg-green-100/30 rounded-full blur-3xl animate-float-2"></div>
-        <div class="absolute bottom-1/4 left-1/4 w-[550px] h-[550px] bg-teal-50/40 rounded-full blur-3xl animate-float-1"></div>
+        <div class="absolute top-1/12 left-5 w-96 h-96 bg-emerald-100/40 rounded-full blur-3xl animate-float-1"></div>
+        <div class="absolute top-1/3 right-10 w-96 h-96 bg-green-100/30 rounded-full blur-3xl animate-float-2"></div>
+        <div class="absolute bottom-1/5 left-1/4 w-[600px] h-[600px] bg-teal-50/40 rounded-full blur-3xl animate-float-1"></div>
     </div>
 
-    <!-- Solid, Bold Vector Doodles scattered across the page background -->
+    <!-- Bold, Clean Hand-drawn Doodles (Green & Ochre tones) -->
     <div class="absolute inset-0 pointer-events-none overflow-hidden z-10">
-        <!-- Bold Botanical Fern Left -->
-        <svg class="absolute top-[8%] left-[2%] w-24 h-24 text-emerald-800/20 animate-float-1" fill="none" stroke="currentColor" viewBox="0 0 100 100">
-            <path stroke-width="3" stroke-linecap="round" d="M30,90 C45,60 45,30 50,10 M50,10 C40,25 20,30 20,40 C20,50 35,45 42,42 M50,10 C60,25 80,30 80,40 C80,50 65,45 58,42 M46,55 C35,65 15,68 15,75 C15,82 32,78 40,70 M54,55 C65,65 85,68 85,75 C85,82 68,78 60,70" />
+        <!-- Botanical leaf sprig - Bold Style -->
+        <svg class="absolute top-[6%] left-[4%] w-24 h-24 text-emerald-800/25 animate-float-1" fill="none" stroke="currentColor" viewBox="0 0 100 100">
+            <path stroke-width="3.5" stroke-linecap="round" d="M25,85 C35,60 40,35 50,15 M50,15 C42,28 25,32 25,42 C25,52 38,48 44,45 M50,15 C58,28 75,32 75,42 C75,52 62,48 56,45 M48,52 C38,62 20,65 20,72 M52,52 C62,62 80,65 80,72" />
         </svg>
 
-        <!-- Bold Handwritten Arrow indicating down -->
-        <svg class="absolute top-[80vh] right-[10%] w-16 h-16 text-emerald-800/30 animate-float-2" fill="none" stroke="currentColor" viewBox="0 0 100 100">
-            <path stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" d="M30,20 Q70,25 50,60 M50,60 L35,50 M50,60 L65,52" />
+        <!-- Bold pointing loop arrow -->
+        <svg class="absolute top-[82vh] right-[8%] w-16 h-16 text-emerald-900/35 animate-float-2" fill="none" stroke="currentColor" viewBox="0 0 100 100">
+            <path stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" d="M20,30 Q80,25 60,65 M60,65 L45,55 M60,65 L72,55" />
         </svg>
 
-        <!-- Bold Crown/Flower doodle over bio section -->
-        <svg class="absolute top-[105vh] left-[4%] w-14 h-14 text-yellow-700/20 animate-wiggle" fill="none" stroke="currentColor" viewBox="0 0 100 100">
-            <path stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M15,80 L25,30 L45,60 L65,30 L75,80 Z M15,80 C30,85 50,85 75,80 M25,30 C25,25 35,25 35,30 M65,30 C65,25 75,25 75,30" />
+        <!-- Whimsical hand-drawn loop framing the introduction -->
+        <svg class="absolute top-[135vh] left-[2%] w-24 h-24 text-yellow-800/20 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 100 100">
+            <path stroke-width="3" stroke-linecap="round" d="M30,30 C50,10 80,30 80,50 C80,70 50,90 30,70 C10,50 30,10 50,30" />
         </svg>
 
-        <!-- Bold Loop/Swirl right page middle -->
-        <svg class="absolute top-[210vh] right-[3%] w-24 h-24 text-teal-800/20 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 120 120">
-            <path stroke-width="3" stroke-linecap="round" d="M20,60 C20,20 100,20 100,60 C100,100 20,100 20,60 C20,40 60,40 60,60 C60,80 80,80 80,60" />
+        <!-- Hand-drawn sparkle clusters -->
+        <svg class="absolute top-[215vh] right-[4%] w-12 h-12 text-yellow-600/35 animate-pulse-subtle" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0l3.5 8.5 8.5 3.5-8.5 3.5-3.5 8.5-3.5-8.5-8.5-3.5 8.5-3.5z" />
         </svg>
-
-        <!-- Bold Hand-drawn Lightbulb over prompting section -->
-        <svg class="absolute top-[310vh] left-[5%] w-16 h-16 text-yellow-600/25 animate-float-1" fill="none" stroke="currentColor" viewBox="0 0 100 100">
-            <path stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M35,65 C30,60 25,50 25,40 C25,23 38,15 50,15 C62,15 75,23 75,40 C75,50 70,60 65,65 M35,65 L35,80 C35,83 40,85 50,85 C60,85 65,83 65,80 L65,65 M35,65 L65,65 M40,72 L60,72 M45,78 L55,78" />
-        </svg>
-
-        <!-- Solid decorative starbursts near footer -->
-        <svg class="absolute bottom-[20vh] left-[15%] w-10 h-10 text-emerald-800/25 animate-pulse-subtle" fill="currentColor" viewBox="0 0 24 24">
+        <svg class="absolute top-[320vh] left-[6%] w-10 h-10 text-emerald-800/30 animate-pulse-subtle" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3z" />
         </svg>
     </div>
 
     <!-- Navigation Bar -->
-    <header class="sticky top-0 z-40 bg-white/75 backdrop-blur-md border-b border-emerald-50/50">
+    <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-emerald-100/50">
         <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
             <a href="#" class="flex items-center gap-2 group">
-                <span class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-serif font-bold text-lg group-hover:bg-emerald-200 transition-all duration-300 relative">
+                <span class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-800 font-bold text-lg group-hover:bg-emerald-200 transition-all duration-300 relative">
                     H
                     <span class="absolute -top-1 -right-1 text-xs text-emerald-500 animate-pulse">✿</span>
                 </span>
-                <span class="font-serif font-semibold text-lg tracking-wide text-emerald-800">Thu Hồng.</span>
+                <span class="font-semibold text-lg tracking-wide text-emerald-900">Thu Hồng.</span>
             </a>
             
-            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-emerald-900/80">
-                <a href="#about" class="hover:text-emerald-600 transition-colors relative group">
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-emerald-950/80">
+                <a href="#about" class="hover:text-emerald-700 transition-colors relative group">
                     Giới thiệu
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-500 group-hover:w-full transition-all duration-300"></span>
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-400 group-hover:w-full transition-all duration-300"></span>
                 </a>
-                <a href="#roadmap" class="hover:text-emerald-600 transition-colors relative group">
-                    Hành trình số
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-500 group-hover:w-full transition-all duration-300"></span>
+                <a href="#study-desk" class="hover:text-emerald-700 transition-colors relative group">
+                    Bài tập số hóa
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-400 group-hover:w-full transition-all duration-300"></span>
                 </a>
-                <a href="#projects" class="hover:text-emerald-600 transition-colors relative group">
-                    Bài tập dự án
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-500 group-hover:w-full transition-all duration-300"></span>
+                <a href="#summary" class="hover:text-emerald-700 transition-colors relative group">
+                    Góc tổng kết
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-400 group-hover:w-full transition-all duration-300"></span>
                 </a>
-                <a href="#summary" class="hover:text-emerald-600 transition-colors relative group">
-                    Tổng kết
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-500 group-hover:w-full transition-all duration-300"></span>
-                </a>
-                <a href="https://drive.google.com/drive/folders/19gMObue_mufNebN7Qls4UDkfgawCN0hx?usp=drive_link" target="_blank" class="flex items-center gap-1.5 px-4 py-2 bg-emerald-50 hover:bg-emerald-100/80 text-emerald-700 rounded-full transition-all duration-300 border border-emerald-100 dreamy-shadow-sm transform hover:scale-105 font-bold">
+                <a href="https://drive.google.com/drive/folders/19gMObue_mufNebN7Qls4UDkfgawCN0hx?usp=drive_link" target="_blank" class="flex items-center gap-1.5 px-4 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-full transition-all duration-300 border-2 border-emerald-600/30 dreamy-shadow-sm font-bold">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                     Xem bài tập trên GG drive
                 </a>
             </nav>
 
-            <!-- Mobile Menu Trigger -->
-            <button id="mobile-menu-btn" class="md:hidden p-2 text-emerald-800 hover:text-emerald-600 focus:outline-none">
+            <!-- Mobile Menu Btn -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-emerald-900 hover:text-emerald-600 focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white/95 border-b border-emerald-50 px-6 py-4 flex flex-col gap-4 text-sm font-semibold text-emerald-900/80">
-            <a href="#about" class="mobile-link hover:text-emerald-600 transition-colors">Giới thiệu</a>
-            <a href="#roadmap" class="mobile-link hover:text-emerald-600 transition-colors">Hành trình số</a>
-            <a href="#projects" class="mobile-link hover:text-emerald-600 transition-colors">Bài tập dự án</a>
-            <a href="#summary" class="mobile-link hover:text-emerald-600 transition-colors">Tổng kết</a>
-            <a href="https://drive.google.com/drive/folders/19gMObue_mufNebN7Qls4UDkfgawCN0hx?usp=drive_link" target="_blank" class="mobile-link flex items-center justify-center gap-2 py-2.5 bg-emerald-50 text-emerald-700 rounded-xl border border-emerald-100">
+        <!-- Mobile Menu Container -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 border-b border-emerald-50 px-6 py-4 flex flex-col gap-4 text-sm font-semibold text-emerald-950/80">
+            <a href="#about" class="mobile-link hover:text-emerald-700 transition-colors">Giới thiệu</a>
+            <a href="#study-desk" class="mobile-link hover:text-emerald-700 transition-colors">Bài tập số hóa</a>
+            <a href="#summary" class="mobile-link hover:text-emerald-700 transition-colors">Góc tổng kết</a>
+            <a href="https://drive.google.com/drive/folders/19gMObue_mufNebN7Qls4UDkfgawCN0hx?usp=drive_link" target="_blank" class="mobile-link flex items-center justify-center gap-2 py-2.5 bg-emerald-50 text-emerald-800 rounded-xl border-2 border-emerald-600/20">
                 Xem bài tập trên GG drive
             </a>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="relative min-h-[90vh] flex items-center justify-center px-6 py-12 z-10">
+    <section class="relative min-h-[85vh] flex items-center justify-center px-6 py-12 z-10">
         <div class="max-w-4xl mx-auto text-center flex flex-col items-center relative">
             
-            <!-- Floral Doodles Around Hero -->
-            <span class="absolute -top-12 -left-4 text-3xl text-emerald-400 select-none animate-float-1">✿</span>
-            <span class="absolute top-4 -right-12 text-4xl text-yellow-500/60 select-none animate-pulse-subtle">✦</span>
+            <!-- Whimsical Doodles around Hero Section -->
+            <span class="absolute -top-8 -left-4 text-3xl text-emerald-400 select-none animate-float-1">✿</span>
+            <span class="absolute top-2 -right-10 text-4xl text-yellow-500/50 select-none animate-pulse-subtle">✦</span>
 
-            <!-- Avatar Container with decorative custom hand-drawn rings -->
-            <div class="relative w-48 h-48 mb-8 group">
-                <div class="absolute inset-0 bg-gradient-to-tr from-emerald-200 to-green-100 rounded-full blur-2xl opacity-75 group-hover:opacity-100 transition-opacity duration-500 animate-pulse"></div>
-                <!-- Concentric rotating dashed rings (Doodles) -->
-                <div class="absolute -inset-2 rounded-full border-2 border-dashed border-emerald-700/40 animate-spin-slow"></div>
-                <div class="absolute -inset-4 rounded-full border border-dashed border-emerald-500/20 animate-float-2"></div>
-                
-                <div class="relative w-48 h-48 rounded-full overflow-hidden border-4 border-white dreamy-shadow flex items-center justify-center bg-emerald-50">
-                    <img src="Hình 1.jpg" alt="Nguyễn Thu Hồng" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+            <!-- Polaroid Style Photo Frame (Cute & Friendly) -->
+            <div class="relative mb-8 transform hover:rotate-3 transition-transform duration-500">
+                <div class="bg-white p-4 pb-10 rounded-xl border border-emerald-100 dreamy-shadow w-48 h-56 flex flex-col items-center relative">
+                    <div class="w-40 h-40 rounded-lg overflow-hidden bg-emerald-50">
+                        <img src="Hình 1.jpg" alt="Nguyễn Thu Hồng" class="w-full h-full object-cover">
+                    </div>
+                    <!-- Playful text at Polaroid bottom -->
+                    <span class="mt-3 font-semibold text-emerald-800 text-xs italic">Hồng's space ✨</span>
+                    <!-- Sticky note overlay -->
+                    <div class="absolute -top-3 -right-3 bg-yellow-100/90 border border-yellow-200 text-yellow-800 px-2 py-1 rounded text-[10px] uppercase tracking-wider font-bold shadow-sm transform rotate-12">ULISer 🎒</div>
                 </div>
             </div>
 
-            <!-- Major & Student Tag -->
+            <!-- Department badge -->
             <span class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-50 border-2 border-emerald-700/30 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-4 dreamy-shadow-sm backdrop-blur-sm">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
                 Ngôn ngữ & Văn hóa Anh • ULIS - ĐHQGHN
             </span>
 
-            <!-- Hero Headline -->
+            <!-- Hero Title -->
             <h1 class="text-4xl md:text-7xl font-bold text-emerald-950 tracking-tight leading-tight mb-6 relative">
-                Tôi là <span class="bg-gradient-to-r from-emerald-700 via-teal-700 to-green-600 bg-clip-text text-transparent">Nguyễn Thu Hồng</span>
-                <!-- Solid, Thick hand-drawn style underline doodle under Name -->
+                Chào cậu! Mình là <br><span class="bg-gradient-to-r from-emerald-700 via-teal-700 to-green-600 bg-clip-text text-transparent">Nguyễn Thu Hồng</span>
+                <!-- Hand-drawn solid underline doodle under the main title -->
                 <svg class="w-full h-4 text-emerald-800/80 mt-2" viewBox="0 0 100 10" preserveAspectRatio="none">
                     <path class="doodle-underline" d="M0,8 C30,3 70,3 100,8" fill="none" stroke="currentColor" />
-                    <path class="doodle-underline" d="M10,12 C40,7 80,7 90,12" fill="none" stroke="currentColor" opacity="0.5" />
                 </svg>
             </h1>
 
             <p class="text-lg md:text-xl text-slate-600 max-w-2xl font-light leading-relaxed mb-10">
-                Nơi lưu trữ hành trình học tập, nghiên cứu và khai phá công nghệ trong khuôn khổ môn học <strong class="text-emerald-800 font-semibold">Nhập môn Công nghệ số & Ứng dụng AI</strong>.
+                Đây là góc nhỏ mộng mơ ghi lại hành trình học tập, nghiên cứu và mượn lực từ công nghệ trong môn học <strong class="text-emerald-800 font-semibold">Nhập môn Công nghệ số & Ứng dụng AI</strong> của mình.
             </p>
 
-            <!-- Actions -->
+            <!-- CTA Buttons -->
             <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto z-20">
-                <a href="#roadmap" class="px-8 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold rounded-full dreamy-shadow transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 text-center">
-                    Hành trình thực hành
+                <a href="#study-desk" class="px-8 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold rounded-full dreamy-shadow transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 text-center">
+                    Ghé thăm bàn học của mình
                 </a>
                 <a href="https://drive.google.com/drive/folders/19gMObue_mufNebN7Qls4UDkfgawCN0hx?usp=drive_link" target="_blank" class="px-8 py-3.5 bg-white border-2 border-emerald-700/20 text-emerald-800 font-bold rounded-full dreamy-shadow-sm hover:dreamy-shadow transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 text-center backdrop-blur-sm">
-                    Google Drive Thư mục
+                    Ghé kho lưu trữ Drive
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Personal Overview Section -->
-    <section id="about" class="py-24 px-6 relative z-10 bg-white/40 backdrop-blur-md border-y border-emerald-50/50">
+    <!-- Brief Introduction Section -->
+    <section id="about" class="py-24 px-6 relative z-10 bg-white/40 backdrop-blur-md border-y border-emerald-100/30">
         <div class="max-w-5xl mx-auto relative">
-            
-            <!-- Floral doodle in corner -->
+            <!-- Leaf branch doodle -->
             <span class="absolute -top-12 right-6 text-3xl text-emerald-400 select-none animate-float-2">✿</span>
 
             <div class="grid md:grid-cols-3 gap-12 items-start">
                 
-                <!-- Profile Details -->
-                <div class="reveal md:col-span-1 bg-white border-2 border-emerald-50 rounded-3xl p-8 dreamy-shadow relative overflow-hidden">
-                    <!-- Swirly hand-drawn corner element -->
-                    <div class="absolute -bottom-4 -right-4 w-12 h-12 text-emerald-800/20">
-                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4"><path d="M10,90 Q90,90 90,10 Q50,50 10,90" /></svg>
+                <!-- Quick Info Panel -->
+                <div class="reveal md:col-span-1 bg-white border-2 border-emerald-100/60 rounded-3xl p-8 dreamy-shadow relative overflow-hidden">
+                    <div class="absolute -bottom-4 -right-4 w-12 h-12 text-emerald-800/10">
+                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4"><path d="M10,90 Q90,90 90,10" /></svg>
                     </div>
 
-                    <h3 class="text-2xl font-serif font-bold text-emerald-950 mb-6 border-b-2 border-emerald-50 pb-4">Thông tin cá nhân</h3>
+                    <h3 class="text-xl font-bold text-emerald-950 mb-6 border-b-2 border-emerald-50 pb-4">Đôi nét về mình</h3>
                     <div class="space-y-4 text-sm">
                         <div>
-                            <p class="text-xs text-emerald-700 font-bold uppercase tracking-wider">Họ & Tên</p>
-                            <p class="text-base font-semibold text-emerald-950">Nguyễn Thu Hồng</p>
+                            <p class="text-xs text-emerald-600 font-bold uppercase tracking-wider">Họ tên & Mã SV</p>
+                            <p class="text-base font-semibold text-emerald-950">Nguyễn Thu Hồng • 25040664</p>
                         </div>
                         <div>
-                            <p class="text-xs text-emerald-700 font-bold uppercase tracking-wider">Mã sinh viên</p>
-                            <p class="text-base font-mono text-emerald-950">25040664</p>
-                        </div>
-                        <div>
-                            <p class="text-xs text-emerald-700 font-bold uppercase tracking-wider">Lớp hành chính</p>
-                            <p class="text-base font-semibold text-emerald-950">25E15</p>
-                        </div>
-                        <div>
-                            <p class="text-xs text-emerald-700 font-bold uppercase tracking-wider">Khoa đào tạo</p>
-                            <p class="text-base font-semibold text-emerald-950">Ngôn ngữ và Văn hóa Anh</p>
+                            <p class="text-xs text-emerald-600 font-bold uppercase tracking-wider">Chuyên ngành học</p>
+                            <p class="text-base font-semibold text-emerald-950">Ngôn ngữ và Văn hóa Anh (25E15)</p>
                         </div>
                         <div>
                             <p class="text-xs text-emerald-700 font-bold uppercase tracking-wider">Cơ sở giáo dục</p>
-                            <p class="text-base font-semibold text-emerald-950">Đại học Ngoại ngữ - ĐHQGHN</p>
+                            <p class="text-base font-semibold text-emerald-950">ULIS - Đại học Ngoại ngữ - ĐHQGHN</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Goals and Intro -->
+                <!-- Bio & Goals column -->
                 <div class="reveal md:col-span-2 space-y-8">
                     <div>
-                        <h2 class="text-3xl md:text-4xl font-bold text-emerald-950 mb-4">Mục tiêu của Portfolio</h2>
+                        <h2 class="text-3xl md:text-4xl font-bold text-emerald-950 mb-4">Mục tiêu mộng mơ của mình</h2>
                         <p class="text-slate-600 leading-relaxed">
-                            Portfolio này không đơn thuần là một bản tập hợp các bài tập bắt buộc, mà là minh chứng số ghi lại quá trình tiếp cận, thích ứng và sử dụng công nghệ một cách có tư duy của bản thân. Thông qua từng bài học thực hành, tôi đã rèn luyện được tư duy hệ thống và cách mượn lực từ AI tạo sinh để phục vụ hiệu quả cho các tác vụ nghiên cứu học thuật của một sinh viên ULIS trong kỷ nguyên số.
+                            Chào cậu! Chào mừng cậu đã ghé thăm góc nhỏ của mình. Portfolio này là một góc nhỏ ghi lại hành trình học hỏi, tiến bộ và sáng tạo công nghệ trong môn học. Tại đây, mình đã kết hợp tư duy phân tích ngôn ngữ học của một sinh viên khoa Anh cùng sự hỗ trợ đắc lực từ trí tuệ nhân tạo để chinh phục các thử thách số hóa học thuật.
                         </p>
                     </div>
 
                     <div class="grid sm:grid-cols-2 gap-6">
-                        <div class="p-6 bg-white border border-emerald-100 rounded-2xl relative">
+                        <div class="p-6 bg-white/60 border border-emerald-100 rounded-2xl relative">
                             <span class="absolute top-2 right-2 text-sm text-yellow-500 animate-pulse-subtle">✦</span>
                             <h4 class="text-lg font-bold text-emerald-950 mb-2">Định hướng cá nhân</h4>
                             <p class="text-sm text-slate-600 leading-relaxed">
-                                Kết hợp nền tảng ngôn ngữ và văn hóa Anh với năng lực công nghệ số để xây dựng các phương pháp tự học thông minh, tăng tính chủ động trong học thuật.
+                                Ứng dụng các công cụ công nghệ thông minh để tối giản hóa quy trình nghiên cứu khoa học, cải thiện phương pháp ghi nhớ từ vựng tiếng Anh của mình.
                             </p>
                         </div>
-                        <div class="p-6 bg-white border border-emerald-100 rounded-2xl relative">
+                        <div class="p-6 bg-white/60 border border-emerald-100 rounded-2xl relative">
                             <span class="absolute top-2 right-2 text-sm text-yellow-500 animate-pulse-subtle">✦</span>
-                            <h4 class="text-lg font-bold text-emerald-950 mb-2">Mục tiêu số hóa</h4>
+                            <h4 class="text-lg font-bold text-emerald-950 mb-2">Học tập có đạo đức</h4>
                             <p class="text-sm text-slate-600 leading-relaxed">
-                                Thành thạo các quy trình quản lý thông tin, tối ưu hóa các dòng lệnh (prompt engineering) để biến AI thành người cộng sự lý tưởng có trách nhiệm.
+                                Luôn rèn luyện tư duy phản biện, đảm bảo minh bạch thông tin và không lạm dụng AI để thay thế khả năng sáng tạo độc lập của bản thân.
                             </p>
                         </div>
                     </div>
@@ -352,267 +305,182 @@
         </div>
     </section>
 
-    <!-- NEW SECTION: Interactive Map / Practice Roadmap (High Interactive Element) -->
-    <section id="roadmap" class="py-24 px-6 relative z-10 bg-emerald-50/30">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-16 relative">
-                <span class="text-xs font-bold text-emerald-700 tracking-widest uppercase bg-emerald-100 px-3.5 py-1.5 rounded-full border border-emerald-200">Bản đồ học tập</span>
-                <h2 class="text-3xl md:text-4xl font-serif font-bold text-emerald-950 mt-4">Hành trình năng lực số</h2>
-                <p class="text-slate-500 text-sm font-light mt-2 max-w-lg mx-auto">Rê chuột vào các nốt tròn vẽ tay dưới đây để phát sáng lộ trình và nhấn để định vị nhanh bài tập tương ứng.</p>
-                <!-- Double hand-drawn underline doodle -->
-                <svg class="w-48 h-3 text-emerald-800/80 mx-auto mt-2" viewBox="0 0 100 10" preserveAspectRatio="none">
-                    <path class="doodle-underline" d="M0,8 C30,3 70,3 100,8" fill="none" stroke="currentColor" />
-                </svg>
-            </div>
-
-            <!-- Horizontal / Vertical Interactive Path -->
-            <div class="relative flex flex-col md:flex-row justify-between items-center gap-8 md:gap-4 border-2 border-dashed border-emerald-300/60 rounded-3xl p-8 bg-white/70 backdrop-blur-sm dreamy-shadow">
-                <!-- Dotted Doodle Connection path backdrop -->
-                <div class="absolute inset-x-8 top-1/2 -translate-y-1/2 h-0.5 border-t border-dashed border-emerald-400 hidden md:block z-0"></div>
-                
-                <!-- Node 1 -->
-                <button onclick="scrollToCard(1)" class="group relative z-10 flex flex-col items-center focus:outline-none transition-transform duration-300 hover:scale-105">
-                    <div class="w-14 h-14 rounded-full bg-emerald-100 border-2 border-emerald-700 flex items-center justify-center text-emerald-900 font-bold text-lg node-pulse transition-all duration-300 group-hover:bg-emerald-700 group-hover:text-white">1</div>
-                    <span class="text-xs font-bold text-emerald-900 mt-3">Quản lý tệp</span>
-                    <span class="text-[10px] text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity">Task 1.4</span>
-                </button>
-
-                <!-- Node 2 -->
-                <button onclick="scrollToCard(2)" class="group relative z-10 flex flex-col items-center focus:outline-none transition-transform duration-300 hover:scale-105">
-                    <div class="w-14 h-14 rounded-full bg-emerald-100 border-2 border-emerald-700 flex items-center justify-center text-emerald-900 font-bold text-lg node-pulse transition-all duration-300 group-hover:bg-emerald-700 group-hover:text-white">2</div>
-                    <span class="text-xs font-bold text-emerald-900 mt-3">Tìm kiếm & Đánh giá</span>
-                    <span class="text-[10px] text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity">Task 2.4</span>
-                </button>
-
-                <!-- Node 3 -->
-                <button onclick="scrollToCard(3)" class="group relative z-10 flex flex-col items-center focus:outline-none transition-transform duration-300 hover:scale-105">
-                    <div class="w-14 h-14 rounded-full bg-emerald-100 border-2 border-emerald-700 flex items-center justify-center text-emerald-900 font-bold text-lg node-pulse transition-all duration-300 group-hover:bg-emerald-700 group-hover:text-white">3</div>
-                    <span class="text-xs font-bold text-emerald-900 mt-3">Prompting</span>
-                    <span class="text-[10px] text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity">Task 3.4</span>
-                </button>
-
-                <!-- Node 4 -->
-                <button onclick="scrollToCard(4)" class="group relative z-10 flex flex-col items-center focus:outline-none transition-transform duration-300 hover:scale-105">
-                    <div class="w-14 h-14 rounded-full bg-emerald-100 border-2 border-emerald-700 flex items-center justify-center text-emerald-900 font-bold text-lg node-pulse transition-all duration-300 group-hover:bg-emerald-700 group-hover:text-white">4</div>
-                    <span class="text-xs font-bold text-emerald-900 mt-3">Hợp tác số</span>
-                    <span class="text-[10px] text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity">Task 4.4</span>
-                </button>
-
-                <!-- Node 5 -->
-                <button onclick="scrollToCard(5)" class="group relative z-10 flex flex-col items-center focus:outline-none transition-transform duration-300 hover:scale-105">
-                    <div class="w-14 h-14 rounded-full bg-emerald-100 border-2 border-emerald-700 flex items-center justify-center text-emerald-900 font-bold text-lg node-pulse transition-all duration-300 group-hover:bg-emerald-700 group-hover:text-white">5</div>
-                    <span class="text-xs font-bold text-emerald-900 mt-3">AI tạo sinh</span>
-                    <span class="text-[10px] text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity">Task 5.4</span>
-                </button>
-
-                <!-- Node 6 -->
-                <button onclick="scrollToCard(6)" class="group relative z-10 flex flex-col items-center focus:outline-none transition-transform duration-300 hover:scale-105">
-                    <div class="w-14 h-14 rounded-full bg-emerald-100 border-2 border-emerald-700 flex items-center justify-center text-emerald-900 font-bold text-lg node-pulse transition-all duration-300 group-hover:bg-emerald-700 group-hover:text-white">6</div>
-                    <span class="text-xs font-bold text-emerald-900 mt-3">AI trách nhiệm</span>
-                    <span class="text-[10px] text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity">Task 6.4</span>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- NEW INTERACTIVE ELEMENT: Dynamic Inline Memo Pad (Vở ghi chép) -->
-    <section id="inline-memo-pad" class="py-12 px-6 relative z-20 max-w-5xl mx-auto hidden transition-all duration-500">
-        <div class="notebook-paper dreamy-shadow rounded-3xl p-8 md:p-12 border-2 border-emerald-800/40 relative">
-            <!-- Scribble Flower top-right of notebook -->
-            <span class="absolute top-4 right-6 text-3xl text-emerald-900/40 select-none">❀</span>
-            
-            <div class="pl-12">
-                <div class="flex items-center justify-between border-b border-dashed border-emerald-200 pb-4 mb-6">
-                    <h3 class="text-2xl font-serif font-bold text-emerald-950 flex items-center gap-2">
-                        <span class="text-emerald-700">✍</span>
-                        <span id="notebook-title" class="italic">Ghi chép nhanh Bài tập 1</span>
-                    </h3>
-                    <button onclick="closeInlinePad()" class="text-xs font-bold text-red-500 hover:text-red-700 border border-red-200 bg-red-50 px-3 py-1 rounded-full transition-all">Đóng vở</button>
-                </div>
-                
-                <div id="notebook-content" class="space-y-4 text-slate-700 leading-loose text-base">
-                    <!-- Loaded dynamically via JavaScript -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Portfolio Grid Section -->
-    <section id="projects" class="py-24 px-6 relative z-10">
+    <!-- NEW HIGH-END INTERACTIVE STUDY DESK DASHBOARD (THAY THẾ HIỆU ỨNG POP-UP) -->
+    <section id="study-desk" class="py-24 px-6 relative z-10 bg-emerald-50/20">
         <div class="max-w-6xl mx-auto">
             
             <div class="text-center mb-16 relative">
-                <span class="text-emerald-500 text-lg block animate-bounce mb-2">✿</span>
-                <h2 class="text-3xl md:text-5xl font-bold text-emerald-950 mb-4">Các sản phẩm dự án cá nhân</h2>
-                <p class="text-slate-500 font-light max-w-2xl mx-auto">
-                    Chi tiết 6 bài tập thực hành được thực hiện bài bản, có sự lồng ghép giữa tư duy ngôn ngữ học và các giải pháp kỹ thuật số hiện đại.
-                </p>
-                <!-- Hand-drawn curly double underline under projects header -->
-                <svg class="w-56 h-4 text-emerald-800/80 mx-auto mt-2" viewBox="0 0 100 10" preserveAspectRatio="none">
-                    <path class="doodle-underline" d="M0,8 C30,3 70,3 100,8" fill="none" stroke="currentColor" />
-                    <path class="doodle-underline" d="M10,12 C40,7 80,7 90,12" fill="none" stroke="currentColor" opacity="0.4" />
-                </svg>
+                <span class="text-xs font-bold text-emerald-700 tracking-widest uppercase bg-emerald-100 px-3.5 py-1.5 rounded-full border border-emerald-200">Góc Trải Nghiệm</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-emerald-950 mt-4">Bàn Học Số Hóa Của Hồng</h2>
+                <p class="text-slate-500 text-sm font-light mt-2 max-w-lg mx-auto">Nhấp chọn bài tập ở thanh menu gỗ bên trái để mở tài liệu nghiên cứu, ghi chép học tập hiển thị sinh động trên trang giấy bên phải nha!</p>
+                <div class="mt-4">
+                    <a href="https://drive.google.com/drive/folders/19gMObue_mufNebN7Qls4UDkfgawCN0hx?usp=drive_link" target="_blank" class="inline-flex items-center gap-1.5 text-xs text-emerald-700 font-bold bg-white px-4 py-2 rounded-full border border-emerald-100 hover:bg-emerald-50 transition-colors">
+                        📎 Xem thư mục bài tập trên GG drive
+                    </a>
+                </div>
             </div>
 
-            <!-- Grid containing 6 cards -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="cards-grid">
+            <!-- Simulated iPad / Tablet Canvas Dashboard (Extremely Elegant & Interactive) -->
+            <div class="tablet-screen bg-white flex flex-col md:flex-row min-h-[620px] overflow-hidden dreamy-shadow">
                 
-                <!-- Card 1 -->
-                <div id="card-1" class="reveal tilt-card bg-white rounded-3xl border-2 border-emerald-50 p-6 flex flex-col justify-between dreamy-shadow-sm hover:dreamy-shadow hover:border-emerald-700/50 transition-all duration-300 relative overflow-hidden group">
-                    <!-- Bold leaf doodle inside the card top corner -->
-                    <span class="absolute -top-1 -right-1 text-3xl text-emerald-800/20 group-hover:text-emerald-800/40 transition-colors select-none">❀</span>
+                <!-- Left Sidebar of Tablet: List of 6 Homework Folders -->
+                <div class="w-full md:w-80 bg-emerald-900 text-emerald-100 p-6 flex flex-col justify-between border-b md:border-b-0 md:border-r border-emerald-950">
                     <div>
-                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-700 border border-emerald-700/30 mb-6 font-serif font-bold">1</div>
-                        <h3 class="text-xl font-serif font-bold text-emerald-950 mb-3">Thao tác tệp tin & Thư mục</h3>
-                        <p class="text-sm text-emerald-800 font-bold mb-4">Mục tiêu: Quản lý thông tin khoa học</p>
-                        <p class="text-sm text-slate-500 font-light leading-relaxed mb-6 line-clamp-3">
-                            Xây dựng thói quen lưu trữ ngăn nắp thông qua cấu trúc thư mục đa cấp và quy chuẩn hóa cách đặt tên tệp tin để tránh thất lạc dữ liệu.
-                        </p>
+                        <!-- Sidebar header -->
+                        <div class="flex items-center gap-2 mb-8 pb-4 border-b border-emerald-800">
+                            <span class="text-xl">🌿</span>
+                            <h4 class="font-bold text-sm tracking-widest uppercase text-emerald-300">Nhật Ký Học Tập</h4>
+                        </div>
+                        
+                        <!-- List of Tabs -->
+                        <ul class="space-y-2">
+                            <li>
+                                <button onclick="selectStudyDesk(1)" id="desk-tab-1" class="w-full text-left px-4 py-3 rounded-2xl flex items-center gap-3 font-semibold text-xs md:text-sm transition-all duration-300 bg-emerald-800 text-white border border-emerald-700/50">
+                                    <span class="w-6 h-6 rounded-lg bg-emerald-700/50 flex items-center justify-center font-bold">1</span>
+                                    Quản Lý Tệp Tin
+                                </button>
+                            </li>
+                            <li>
+                                <button onclick="selectStudyDesk(2)" id="desk-tab-2" class="w-full text-left px-4 py-3 rounded-2xl flex items-center gap-3 font-semibold text-xs md:text-sm transition-all duration-300 hover:bg-emerald-800/50 text-emerald-200">
+                                    <span class="w-6 h-6 rounded-lg bg-emerald-700/30 flex items-center justify-center font-bold">2</span>
+                                    Tìm Kiếm & Đánh Giá
+                                </button>
+                            </li>
+                            <li>
+                                <button onclick="selectStudyDesk(3)" id="desk-tab-3" class="w-full text-left px-4 py-3 rounded-2xl flex items-center gap-3 font-semibold text-xs md:text-sm transition-all duration-300 hover:bg-emerald-800/50 text-emerald-200">
+                                    <span class="w-6 h-6 rounded-lg bg-emerald-700/30 flex items-center justify-center font-bold">3</span>
+                                    Nghệ Thuật Prompting
+                                </button>
+                            </li>
+                            <li>
+                                <button onclick="selectStudyDesk(4)" id="desk-tab-4" class="w-full text-left px-4 py-3 rounded-2xl flex items-center gap-3 font-semibold text-xs md:text-sm transition-all duration-300 hover:bg-emerald-800/50 text-emerald-200">
+                                    <span class="w-6 h-6 rounded-lg bg-emerald-700/30 flex items-center justify-center font-bold">4</span>
+                                    Hợp Tác Nhóm Trực Tuyến
+                                </button>
+                            </li>
+                            <li>
+                                <button onclick="selectStudyDesk(5)" id="desk-tab-5" class="w-full text-left px-4 py-3 rounded-2xl flex items-center gap-3 font-semibold text-xs md:text-sm transition-all duration-300 hover:bg-emerald-800/50 text-emerald-200">
+                                    <span class="w-6 h-6 rounded-lg bg-emerald-700/30 flex items-center justify-center font-bold">5</span>
+                                    AI Sáng Tạo Nội Dung
+                                </button>
+                            </li>
+                            <li>
+                                <button onclick="selectStudyDesk(6)" id="desk-tab-6" class="w-full text-left px-4 py-3 rounded-2xl flex items-center gap-3 font-semibold text-xs md:text-sm transition-all duration-300 hover:bg-emerald-800/50 text-emerald-200">
+                                    <span class="w-6 h-6 rounded-lg bg-emerald-700/30 flex items-center justify-center font-bold">6</span>
+                                    Sử Dụng AI Có Trách Nhiệm
+                                </button>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="flex gap-2">
-                        <button onclick="openInlinePad(1)" class="flex-1 py-2.5 bg-emerald-100/60 hover:bg-emerald-100 text-emerald-800 font-bold text-sm rounded-xl transition-all border border-emerald-200">Xem nhanh</button>
-                        <button onclick="openModal(1)" class="p-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-xl transition-all border border-emerald-100" title="Chi tiết học thuật">💬</button>
+                    
+                    <div class="mt-8 pt-4 border-t border-emerald-800 text-[10px] text-emerald-300/60 text-center font-light">
+                        Học tập thông minh cùng Hồng 🌸
                     </div>
                 </div>
 
-                <!-- Card 2 -->
-                <div id="card-2" class="reveal tilt-card bg-white rounded-3xl border-2 border-emerald-50 p-6 flex flex-col justify-between dreamy-shadow-sm hover:dreamy-shadow hover:border-emerald-700/50 transition-all duration-300 relative overflow-hidden group">
-                    <span class="absolute -top-1 -right-1 text-3xl text-emerald-800/20 group-hover:text-emerald-800/40 transition-colors select-none">❀</span>
-                    <div>
-                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-700 border border-emerald-700/30 mb-6 font-serif font-bold">2</div>
-                        <h3 class="text-xl font-serif font-bold text-emerald-950 mb-3">Tìm kiếm & Đánh giá nguồn</h3>
-                        <p class="text-sm text-emerald-800 font-bold mb-4">Mục tiêu: Thẩm định thông tin y khoa</p>
-                        <p class="text-sm text-slate-500 font-light leading-relaxed mb-6 line-clamp-3">
-                            Khảo cứu chủ đề "AI trong y học hiện đại" qua Google Scholar, tiến hành thẩm định độ tin cậy của 10 nghiên cứu từ Nature, Science đến báo cáo của WHO.
-                        </p>
-                    </div>
-                    <div class="flex gap-2">
-                        <button onclick="openInlinePad(2)" class="flex-1 py-2.5 bg-emerald-100/60 hover:bg-emerald-100 text-emerald-800 font-bold text-sm rounded-xl transition-all border border-emerald-200">Xem nhanh</button>
-                        <button onclick="openModal(2)" class="p-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-xl transition-all border border-emerald-100" title="Chi tiết học thuật">💬</button>
-                    </div>
-                </div>
+                <!-- Right Canvas Screen: Simulated Grid / Notepad Sheet (Transitions Fluid & Gorgeous) -->
+                <div class="flex-1 p-8 md:p-12 bg-[#fafbf9] relative flex flex-col justify-between overflow-y-auto">
+                    <!-- Elegant dynamic content wrapper -->
+                    <div id="desk-content-area" class="space-y-6 opacity-100 transition-opacity duration-300 ease-in-out">
+                        <!-- Default dynamic content (Exercise 1) -->
+                        <div class="flex items-center justify-between border-b border-dashed border-emerald-200 pb-4">
+                            <div>
+                                <span class="text-xs font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-3 py-1 rounded-full uppercase tracking-wide">Bài thực hành số 1 • Mục 1.4</span>
+                                <h3 class="text-2xl font-bold text-emerald-950 mt-1">Tổ chức & quản lý tệp tin khoa học</h3>
+                            </div>
+                            <span class="text-2xl select-none">📁</span>
+                        </div>
+                        
+                        <div class="grid sm:grid-cols-2 gap-6 text-sm">
+                            <div class="p-5 bg-white rounded-2xl border border-emerald-50 shadow-sm space-y-2">
+                                <h4 class="font-bold text-emerald-900 flex items-center gap-1.5">🎯 Mục tiêu thực tế:</h4>
+                                <p class="text-slate-600 leading-relaxed font-light">
+                                    Xây dựng thói quen phân loại tài liệu ngăn nắp để chuẩn hóa lưu trữ học tập, hạn chế tối đa việc thất lạc dữ liệu nghiên cứu sau này.
+                                </p>
+                            </div>
+                            <div class="p-5 bg-white rounded-2xl border border-emerald-50 shadow-sm space-y-2">
+                                <h4 class="font-bold text-emerald-900 flex items-center gap-1.5">🚀 Cách mình thực hiện:</h4>
+                                <p class="text-slate-600 leading-relaxed font-light">
+                                    Mình tạo thư mục chủ đề <code class="bg-emerald-50 text-emerald-800 px-1 py-0.5 rounded">ThucHanh_NguyenThuHong</code> tại ổ đĩa phụ, thực hành tạo tệp tin, đổi tên, sao chép tệp qua thư mục con <code class="bg-emerald-50 text-emerald-800 px-1 py-0.5 rounded">TaiLieu</code> và học cách khôi phục chuẩn xác từ Recycle Bin.
+                                </p>
+                            </div>
+                        </div>
 
-                <!-- Card 3 -->
-                <div id="card-3" class="reveal tilt-card bg-white rounded-3xl border-2 border-emerald-50 p-6 flex flex-col justify-between dreamy-shadow-sm hover:dreamy-shadow hover:border-emerald-700/50 transition-all duration-300 relative overflow-hidden group">
-                    <span class="absolute -top-1 -right-1 text-3xl text-emerald-800/20 group-hover:text-emerald-800/40 transition-colors select-none">❀</span>
-                    <div>
-                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-700 border border-emerald-700/30 mb-6 font-serif font-bold">3</div>
-                        <h3 class="text-xl font-serif font-bold text-emerald-950 mb-3">Viết Prompt học tập hiệu quả</h3>
-                        <p class="text-sm text-emerald-800 font-bold mb-4">Mục tiêu: Tối ưu hóa mượn lực AI</p>
-                        <p class="text-sm text-slate-500 font-light leading-relaxed mb-6 line-clamp-3">
-                            Xây dựng và so sánh 3 mức độ prompt (Cơ bản, Cải tiến, Nâng cao) để huấn luyện AI làm trợ lý tóm tắt tài liệu, giải thích khái niệm và soạn bài kiểm tra.
-                        </p>
+                        <div class="p-6 bg-emerald-50/50 rounded-2xl border-2 border-dashed border-emerald-200 space-y-3">
+                            <h4 class="font-bold text-emerald-950">📂 Cấu trúc cây thư mục tối ưu của mình trên Google Drive:</h4>
+                            <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 text-center">
+                                <div class="bg-white p-3 rounded-xl border border-emerald-100"><p class="font-bold text-sm text-emerald-800">01_TaiLieu</p><span class="text-xs text-slate-400 font-light">Tài liệu học</span></div>
+                                <div class="bg-white p-3 rounded-xl border border-emerald-100"><p class="font-bold text-sm text-emerald-800">02_BangHoi</p><span class="text-xs text-slate-400 font-light">Bảng khảo sát</span></div>
+                                <div class="bg-white p-3 rounded-xl border border-emerald-100"><p class="font-bold text-sm text-emerald-800">03_DuLieu</p><span class="text-xs text-slate-400 font-light">Số liệu khảo sát</span></div>
+                                <div class="bg-white p-3 rounded-xl border border-emerald-100"><p class="font-bold text-sm text-emerald-800">04_BaoCao</p><span class="text-xs text-slate-400 font-light">Bài báo cáo</span></div>
+                                <div class="bg-white p-3 rounded-xl border border-emerald-100"><p class="font-bold text-sm text-emerald-800">05_HinhAnh</p><span class="text-xs text-slate-400 font-light">Hình ảnh minh họa</span></div>
+                            </div>
+                            <p class="text-xs text-slate-500 font-light">Mình áp dụng quy tắc đặt tên thống nhất như <code class="bg-white px-1.5 py-0.5 rounded border">BaoCao_DuAn_V1.docx</code> để tăng tốc tìm kiếm tài liệu trong học tập.</p>
+                        </div>
                     </div>
-                    <div class="flex gap-2">
-                        <button onclick="openInlinePad(3)" class="flex-1 py-2.5 bg-emerald-100/60 hover:bg-emerald-100 text-emerald-800 font-bold text-sm rounded-xl transition-all border border-emerald-200">Xem nhanh</button>
-                        <button onclick="openModal(3)" class="p-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-xl transition-all border border-emerald-100" title="Chi tiết học thuật">💬</button>
-                    </div>
-                </div>
 
-                <!-- Card 4 -->
-                <div id="card-4" class="reveal tilt-card bg-white rounded-3xl border-2 border-emerald-50 p-6 flex flex-col justify-between dreamy-shadow-sm hover:dreamy-shadow hover:border-emerald-700/50 transition-all duration-300 relative overflow-hidden group">
-                    <span class="absolute -top-1 -right-1 text-3xl text-emerald-800/20 group-hover:text-emerald-800/40 transition-colors select-none">❀</span>
-                    <div>
-                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-700 border border-emerald-700/30 mb-6 font-serif font-bold">4</div>
-                        <h3 class="text-xl font-serif font-bold text-emerald-950 mb-3">Công cụ hợp tác trực tuyến</h3>
-                        <p class="text-sm text-emerald-800 font-bold mb-4">Mục tiêu: Cộng tác làm việc nhóm</p>
-                        <p class="text-sm text-slate-500 font-light leading-relaxed mb-6 line-clamp-3">
-                            Phối hợp thực hiện dự án "Giao thông xanh" bằng cách tối ưu hóa Trello quản lý tiến độ, Google Docs đồng biên tập báo cáo và Discord kết nối nhóm.
-                        </p>
-                    </div>
-                    <div class="flex gap-2">
-                        <button onclick="openInlinePad(4)" class="flex-1 py-2.5 bg-emerald-100/60 hover:bg-emerald-100 text-emerald-800 font-bold text-sm rounded-xl transition-all border border-emerald-200">Xem nhanh</button>
-                        <button onclick="openModal(4)" class="p-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-xl transition-all border border-emerald-100" title="Chi tiết học thuật">💬</button>
-                    </div>
-                </div>
-
-                <!-- Card 5 -->
-                <div id="card-5" class="reveal tilt-card bg-white rounded-3xl border-2 border-emerald-50 p-6 flex flex-col justify-between dreamy-shadow-sm hover:dreamy-shadow hover:border-emerald-700/50 transition-all duration-300 relative overflow-hidden group">
-                    <span class="absolute -top-1 -right-1 text-3xl text-emerald-800/20 group-hover:text-emerald-800/40 transition-colors select-none">❀</span>
-                    <div>
-                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-700 border border-emerald-700/30 mb-6 font-serif font-bold">5</div>
-                        <h3 class="text-xl font-serif font-bold text-emerald-950 mb-3">Sáng tạo nội dung với AI</h3>
-                        <p class="text-sm text-emerald-800 font-bold mb-4">Mục tiêu: Thiết kế đa phương tiện</p>
-                        <p class="text-sm text-slate-500 font-light leading-relaxed mb-6 line-clamp-3">
-                            Xây dựng tài liệu trực quan về chủ đề "AI hỗ trợ học tập" bằng cách phối hợp ChatGPT tạo nội dung, DALL-E vẽ tranh minh họa và Canva thiết kế bố cục.
-                        </p>
-                    </div>
-                    <div class="flex gap-2">
-                        <button onclick="openInlinePad(5)" class="flex-1 py-2.5 bg-emerald-100/60 hover:bg-emerald-100 text-emerald-800 font-bold text-sm rounded-xl transition-all border border-emerald-200">Xem nhanh</button>
-                        <button onclick="openModal(5)" class="p-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-xl transition-all border border-emerald-100" title="Chi tiết học thuật">💬</button>
-                    </div>
-                </div>
-
-                <!-- Card 6 -->
-                <div id="card-6" class="reveal tilt-card bg-white rounded-3xl border-2 border-emerald-50 p-6 flex flex-col justify-between dreamy-shadow-sm hover:dreamy-shadow hover:border-emerald-700/50 transition-all duration-300 relative overflow-hidden group">
-                    <span class="absolute -top-1 -right-1 text-3xl text-emerald-800/20 group-hover:text-emerald-800/40 transition-colors select-none">❀</span>
-                    <div>
-                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-700 border border-emerald-700/30 mb-6 font-serif font-bold">6</div>
-                        <h3 class="text-xl font-serif font-bold text-emerald-950 mb-3">Sử dụng AI có trách nhiệm</h3>
-                        <p class="text-sm text-emerald-800 font-bold mb-4">Mục tiêu: Đạo đức học thuật trong kỷ nguyên AI</p>
-                        <p class="text-sm text-slate-500 font-light leading-relaxed mb-6 line-clamp-3">
-                            Thiết lập hệ thống 7 nguyên tắc đạo đức sử dụng AI lành mạnh và xây dựng infographic chỉ rõ ranh giới giữa mượn lực hỗ trợ và vi phạm gian lận học thuật.
-                        </p>
-                    </div>
-                    <div class="flex gap-2">
-                        <button onclick="openInlinePad(6)" class="flex-1 py-2.5 bg-emerald-100/60 hover:bg-emerald-100 text-emerald-800 font-bold text-sm rounded-xl transition-all border border-emerald-200">Xem nhanh</button>
-                        <button onclick="openModal(6)" class="p-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-xl transition-all border border-emerald-100" title="Chi tiết học thuật">💬</button>
+                    <!-- Bottom Screen Bar (Action link with file and source verification) -->
+                    <div class="mt-8 pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <span class="text-xs text-slate-400 font-light">Cậu có muốn xem minh chứng thực tế trên Google Drive?</span>
+                        <a href="https://drive.google.com/drive/folders/19gMObue_mufNebN7Qls4UDkfgawCN0hx?usp=drive_link" target="_blank" class="px-5 py-2 bg-emerald-800 hover:bg-emerald-900 text-white rounded-xl text-xs font-bold transition-transform duration-300 hover:scale-105">
+                            Mở Google Drive tệp này ↗
+                        </a>
                     </div>
                 </div>
 
             </div>
+
         </div>
     </section>
 
-    <!-- Reflections and Experience Summary Section -->
-    <section id="summary" class="py-24 px-6 relative z-10 bg-white/40 backdrop-blur-md border-t border-emerald-50/50">
+    <!-- Reflections Section -->
+    <section id="summary" class="py-24 px-6 relative z-10 bg-white/40 backdrop-blur-md border-t border-emerald-100/30">
         <div class="max-w-4xl mx-auto">
             
             <div class="text-center mb-16 relative">
-                <span class="text-emerald-500 text-lg block animate-bounce mb-2">✿</span>
-                <h2 class="text-3xl md:text-4xl font-serif font-bold text-emerald-950 mt-4">Tổng kết chặng đường học tập</h2>
-                <p class="text-slate-500 text-sm font-light mt-2 max-w-lg mx-auto">Những kỹ năng tích lũy và cách vượt qua thách thức để hoàn thiện năng lực số bản thân.</p>
-                <!-- Dotted custom swirl doodle -->
+                <span class="text-xs font-bold text-emerald-700 tracking-widest uppercase bg-emerald-100 px-3.5 py-1.5 rounded-full border border-emerald-200">Góc tự sự</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-emerald-950 mt-4">Tổng kết chặng đường học tập</h2>
+                <p class="text-slate-500 text-sm font-light mt-2 max-w-lg mx-auto">Những kỹ năng tích lũy và cách mình vượt qua thách thức để hoàn thiện năng lực số bản thân.</p>
                 <svg class="w-48 h-3 text-emerald-800/80 mx-auto mt-2" viewBox="0 0 100 10" preserveAspectRatio="none">
                     <path class="doodle-underline" d="M0,8 C30,3 70,3 100,8" fill="none" stroke="currentColor" />
                 </svg>
             </div>
 
-            <div class="space-y-6">
+            <div class="grid gap-6">
                 
-                <!-- Card item 1 -->
+                <!-- Slide-up card 1 -->
                 <div class="reveal bg-white rounded-3xl p-8 border-2 border-emerald-50 dreamy-shadow-sm hover:dreamy-shadow transition-all duration-300 relative overflow-hidden">
                     <span class="absolute top-4 right-4 text-emerald-800/20 text-3xl">❀</span>
-                    <h3 class="text-xl font-serif font-bold text-emerald-950 mb-3 flex items-center gap-3">
+                    <h3 class="text-xl font-bold text-emerald-950 mb-3 flex items-center gap-3">
                         <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-700/30 flex items-center justify-center text-xs font-bold">✓</span>
-                        Kiến thức và kỹ năng đã tích lũy
+                        Kiến thức và kỹ năng mình tích lũy được
                     </h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Thông qua môn học, tôi đã có thể thực hiện quản lý tệp và cấu trúc thư mục học tập chuẩn hóa, khoa học trên nền tảng đám mây Google Drive. Đồng thời, tôi đã tự mình tìm kiếm và thẩm định thông tin khoa học chuyên sâu, biết cách áp dụng các nguyên lý Prompt Engineering để huấn luyện AI làm việc có cấu trúc. Tôi cũng đã thành thạo kỹ năng cộng tác làm việc nhóm thông qua hệ sinh thái công cụ Trello, Google Docs và Teams.
+                    <p class="text-slate-600 text-sm leading-relaxed font-light">
+                        Thông qua môn học, mình đã biết cách quản lý tệp tin một cách khoa học trên Google Drive của nhóm. Bên cạnh đó, mình học được cách áp dụng các nguyên lý Prompt Engineering để thiết kế các câu lệnh chất lượng cao (gán vai trò, cung cấp ví dụ mẫu, phân chia bước thực hiện). Giờ đây mình đã biết cách phối hợp nhịp nhàng các nền tảng Trello, Docs và Discord để quản trị và thúc đẩy tiến độ dự án nhóm mượt mà hơn.
                     </p>
                 </div>
 
-                <!-- Card item 2 -->
+                <!-- Slide-up card 2 -->
                 <div class="reveal bg-white rounded-3xl p-8 border-2 border-emerald-50 dreamy-shadow-sm hover:dreamy-shadow transition-all duration-300 relative overflow-hidden">
                     <span class="absolute top-4 right-4 text-emerald-800/20 text-3xl">❀</span>
-                    <h3 class="text-xl font-serif font-bold text-emerald-950 mb-3 flex items-center gap-3">
+                    <h3 class="text-xl font-bold text-emerald-950 mb-3 flex items-center gap-3">
                         <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-700/30 flex items-center justify-center text-xs font-bold">✓</span>
-                        Khó khăn gặp phải & Cách giải quyết
+                        Khó khăn gặp phải & Cách giải quyết của tụi mình
                     </h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Khó khăn lớn nhất là đồng bộ thời gian làm việc nhóm khi các thành viên lệch lịch học. Nhóm đã giải quyết bằng cách thống nhất dùng Discord làm kênh cập nhật thông tin và ghim các thông báo quan trọng. Bên cạnh đó, việc dữ liệu AI đưa ra đôi khi bị thiếu cập nhật hoặc "ảo giác" thông tin đã được khắc phục hoàn toàn bằng tinh thần phản biện học thuật cao, luôn kiểm chứng chéo với các tài liệu khoa học chính thống từ tạp chí Nature hay Science.
+                    <p class="text-slate-600 text-sm leading-relaxed font-light">
+                        Lúc đầu, tụi mình gặp khó khăn khi liên lạc nhóm trực tuyến vì lịch học khác nhau. Để giải quyết, nhóm thống nhất ghim các thông báo quan trọng lên Discord chung và phân chia nhiệm vụ rất rõ ràng trên Trello. Khi AI thỉnh thoảng đưa ra thông tin bị sai sót (ảo giác dữ liệu), mình đã giải quyết bằng cách nâng cao tính phản biện học thuật, luôn đối chiếu chéo thông tin với nguồn tài liệu uy tín chính thống (như Nature, Science, WHO) để đảm bảo chất lượng bài báo cáo học thuật tốt nhất.
                     </p>
                 </div>
 
-                <!-- Card item 3 -->
+                <!-- Slide-up card 3 -->
                 <div class="reveal bg-white rounded-3xl p-8 border-2 border-emerald-50 dreamy-shadow-sm hover:dreamy-shadow transition-all duration-300 relative overflow-hidden">
                     <span class="absolute top-4 right-4 text-emerald-800/20 text-3xl">❀</span>
-                    <h3 class="text-xl font-serif font-bold text-emerald-950 mb-3 flex items-center gap-3">
+                    <h3 class="text-xl font-bold text-emerald-950 mb-3 flex items-center gap-3">
                         <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-700/30 flex items-center justify-center text-xs font-bold">✓</span>
-                        Lời kết & Triển vọng tương lai
+                        Lời nhắn gửi tương lai
                     </h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Năng lực công nghệ số và kỹ năng làm việc với AI có trách nhiệm sẽ là hành trang thiết yếu của tôi trong thời đại số. Việc hoàn thành Portfolio này giúp tôi nhận ra bản thân hoàn toàn có khả năng học hỏi và ứng dụng công nghệ một cách tự chủ, làm chủ kiến thức và tiếp tục mở rộng tiềm năng của mình trong việc học tập và nghề nghiệp ngôn ngữ Anh trong tương lai.
+                    <p class="text-slate-600 text-sm leading-relaxed font-light">
+                        Môn học này đã đem lại cho mình sự tự tin to lớn trong việc ứng dụng công nghệ. Mình tin rằng việc làm chủ kỹ năng số và rèn luyện tư duy đồng hành lành mạnh, có trách nhiệm với trí tuệ nhân tạo sẽ là bước đệm đắc lực để mình tiến xa hơn trên con đường phát triển kỹ năng ngoại ngữ và làm việc chuyên nghiệp sau này.
                     </p>
                 </div>
 
@@ -625,14 +493,13 @@
     <footer class="bg-emerald-950 text-emerald-100/80 py-16 px-6 relative z-10">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 border-b border-emerald-900/50 pb-12 mb-12">
             <div class="text-center md:text-left">
-                <h3 class="font-serif font-bold text-2xl text-white mb-2">Nguyễn Thu Hồng</h3>
+                <h3 class="font-bold text-2xl text-white mb-2">Nguyễn Thu Hồng</h3>
                 <p class="text-sm text-emerald-200/60 font-light">Digital Portfolio • Nhập môn công nghệ số & AI</p>
             </div>
             
-            <div class="flex items-center gap-6 text-sm font-bold">
+            <div class="flex items-center gap-6 text-sm font-semibold">
                 <a href="#about" class="hover:text-white transition-colors">Giới thiệu</a>
-                <a href="#roadmap" class="hover:text-white transition-colors">Hành trình</a>
-                <a href="#projects" class="hover:text-white transition-colors">Bài tập</a>
+                <a href="#study-desk" class="hover:text-white transition-colors">Bàn học số</a>
                 <a href="#summary" class="hover:text-white transition-colors">Tổng kết</a>
             </div>
         </div>
@@ -643,264 +510,245 @@
         </div>
     </footer>
 
-    <!-- Interactive Pop-up Modals with Tabs -->
-    <div id="project-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-emerald-950/40 backdrop-blur-md">
-        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto dreamy-shadow border border-emerald-50 transform scale-95 opacity-0 transition-all duration-300 ease-out" id="modal-container">
-            
-            <!-- Modal Header -->
-            <div class="sticky top-0 bg-white/95 backdrop-blur-sm border-b border-emerald-50 px-6 py-5 flex items-center justify-between z-30">
-                <div>
-                    <span id="modal-task-badge" class="text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100 uppercase tracking-wider">Bài tập 1</span>
-                    <h3 id="modal-title" class="text-xl md:text-2xl font-serif font-bold text-emerald-950 mt-2">Tiêu đề bài tập</h3>
-                </div>
-                <button onclick="closeModal()" class="p-2 text-slate-400 hover:text-emerald-700 bg-slate-50 hover:bg-emerald-50 rounded-full transition-all duration-300">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
-
-            <!-- Tabs -->
-            <div class="flex border-b border-emerald-50 bg-slate-50/50 px-6">
-                <button id="tab-overview" class="tab-btn px-4 py-3 text-sm font-semibold text-emerald-700 border-b-2 border-emerald-500" onclick="switchTab('overview')">Tổng quan</button>
-                <button id="tab-process" class="tab-btn px-4 py-3 text-sm font-semibold text-slate-500 hover:text-emerald-600 border-b-2 border-transparent" onclick="switchTab('process')">Chi tiết học thuật</button>
-            </div>
-
-            <!-- Modal Content (Dynamically Injected) -->
-            <div id="modal-content" class="p-8 space-y-6 text-sm text-slate-600 leading-relaxed min-h-[250px]">
-                <!-- Data populated by javascript -->
-            </div>
-
-            <!-- Modal Footer -->
-            <div class="bg-slate-50 border-t border-emerald-50 px-8 py-4 flex justify-end gap-3 rounded-b-3xl">
-                <a href="https://drive.google.com/drive/folders/19gMObue_mufNebN7Qls4UDkfgawCN0hx?usp=drive_link" target="_blank" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition-colors flex items-center gap-1.5">
-                    Xem minh chứng thực tế
-                </a>
-                <button onclick="closeModal()" class="px-5 py-2.5 bg-white border border-slate-200 text-slate-700 font-bold rounded-xl text-xs hover:bg-slate-50 transition-colors">Đóng lại</button>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- JavaScript Interactive logic -->
+    <!-- Interactive JS logic -->
     <script>
-        // Modal & Notebook Data
-        const projectsData = {
+        // High fidelity interactive data representing actual homework
+        const deskData = {
             1: {
-                badge: "Bài tập 1 • Mục 1.4",
-                title: "Thao tác cơ bản với tệp tin và thư mục",
+                badge: "Bài thực hành số 1 • Mục 1.4",
+                title: "Tổ chức & quản lý tệp tin khoa học",
+                icon: "📁",
                 overview: `
-                    <div class="space-y-3">
-                        <p class="font-semibold text-emerald-950">Mục tiêu:</p>
-                        <p>Hiểu nguyên lý tổ chức dữ liệu khoa học, rèn luyện kỹ năng lưu trữ, đổi tên, di chuyển tệp và quản lý dung lượng ổ đĩa một cách hợp lý.</p>
-                        <br>
-                        <p class="font-semibold text-emerald-950">Cấu trúc cây thư mục tối ưu của tôi:</p>
-                        <ul class="list-disc list-inside space-y-1 pl-2">
-                            <li><strong>01_TaiLieu</strong>: Chứa tài liệu tham khảo nghiên cứu, tài liệu khoa học.</li>
-                            <li><strong>02_BangHoi</strong>: Lưu trữ các bảng khảo sát, biểu mẫu trực tuyến.</li>
-                            <li><strong>03_DuLieu</strong>: Lưu dữ liệu thô, tổng hợp kết quả phân tích số liệu.</li>
-                            <li><strong>04_BaoCao</strong>: Chứa các bản nháp báo cáo chung và bản hoàn thiện.</li>
-                            <li><strong>05_HinhAnh</strong>: Nơi lưu giữ ảnh minh chứng trực quan, sơ đồ dự án.</li>
-                        </ul>
+                    <div class="p-5 bg-white rounded-2xl border border-emerald-50 shadow-sm space-y-2">
+                        <h4 class="font-bold text-emerald-900 flex items-center gap-1.5">🎯 Mục tiêu của mình:</h4>
+                        <p class="text-slate-600 leading-relaxed font-light">
+                            Xây dựng thói quen quản lý và lưu trữ dữ liệu khoa học, quy chuẩn hóa thư mục để chuẩn bị học tập và quản lý tài liệu dự án nhóm lâu dài.
+                        </p>
+                    </div>
+                    <div class="p-5 bg-white rounded-2xl border border-emerald-50 shadow-sm space-y-2">
+                        <h4 class="font-bold text-emerald-900 flex items-center gap-1.5">🚀 Quy trình thực hiện:</h4>
+                        <p class="text-slate-600 leading-relaxed font-light">
+                            Tạo lập thư mục <code class="bg-emerald-50 text-emerald-800 px-1 py-0.5 rounded">ThucHanh_NguyenThuHong</code> trên ổ đĩa. Tiến hành các thao tác tạo tệp nháp <code class="bg-emerald-50 text-emerald-800 px-1 py-0.5 rounded">GhiChu.txt</code>, đổi tên thành <code class="bg-emerald-50 text-emerald-800 px-1 py-0.5 rounded">GhiChuQuanTrong.txt</code> và thực hành xóa, khôi phục từ Recycle Bin để kiểm nghiệm lưu trữ an toàn.
+                        </p>
                     </div>
                 `,
-                process: `
-                    <div class="space-y-3">
-                        <p class="font-semibold text-emerald-950">Quy trình thực hiện thực tế:</p>
-                        <p>Tạo lập một cấu trúc thư mục logic tại ổ đĩa D: (hoặc thư mục Documents của máy tính cá nhân). Thực hành đổi tên các tệp nháp từ <code class="bg-emerald-50 text-emerald-800 px-1 py-0.5 rounded">GhiChu.txt</code> thành <code class="bg-emerald-50 text-emerald-800 px-1 py-0.5 rounded">GhiChuQuanTrong.txt</code>, thực hiện sao chép và di chuyển chúng vào thư mục <code class="bg-emerald-50 text-emerald-800 px-1 py-0.5 rounded">TaiLieu</code>. Thực hành các thao tác phục hồi dữ liệu từ Recycle Bin một cách trôi chảy.</p>
-                        <br>
-                        <p class="font-semibold text-emerald-950">Bài học rút ra:</p>
-                        <p>Luôn sử dụng quy tắc đặt tên tệp thống nhất (Snake_case hoặc CamelCase) kèm phiên bản để tối ưu hóa việc tìm kiếm dữ liệu và bảo mật thông tin cá nhân trên nền tảng số.</p>
+                detail: `
+                    <div class="p-6 bg-emerald-50/50 rounded-2xl border-2 border-dashed border-emerald-200 space-y-3">
+                        <h4 class="font-bold text-emerald-950">📂 Cách sắp xếp cây thư mục khoa học của mình:</h4>
+                        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 text-center">
+                            <div class="bg-white p-3 rounded-xl border border-emerald-100"><p class="font-bold text-xs text-emerald-800">01_TaiLieu</p><span class="text-[10px] text-slate-400 font-light">Tài liệu học</span></div>
+                            <div class="bg-white p-3 rounded-xl border border-emerald-100"><p class="font-bold text-xs text-emerald-800">02_BangHoi</p><span class="text-[10px] text-slate-400 font-light">Mẫu khảo sát</span></div>
+                            <div class="bg-white p-3 rounded-xl border border-emerald-100"><p class="font-bold text-xs text-emerald-800">03_DuLieu</p><span class="text-[10px] text-slate-400 font-light">Dữ liệu thô</span></div>
+                            <div class="bg-white p-3 rounded-xl border border-emerald-100"><p class="font-bold text-xs text-emerald-800">04_BaoCao</p><span class="text-[10px] text-slate-400 font-light">Bài viết hoàn chỉnh</span></div>
+                            <div class="bg-white p-3 rounded-xl border border-emerald-100"><p class="font-bold text-xs text-emerald-800">05_HinhAnh</p><span class="text-[10px] text-slate-400 font-light">Hình ảnh thực tế</span></div>
+                        </div>
+                        <p class="text-xs text-slate-500 font-light">Mình luôn áp dụng chuẩn hóa tên tệp kèm phiên bản (như <code class="bg-white px-1.5 py-0.5 rounded border">BaoCao_DuAn_V1.docx</code>) để khi làm nhóm không bị chồng chéo dữ liệu.</p>
                     </div>
-                `,
-                notepad: `
-                    <p class="font-bold text-emerald-950 text-lg mb-2">📓 Sổ tay thực hành bài tập 1:</p>
-                    <p>Hôm nay, mình đã thực hành tạo lập thư mục mang tên <code class="text-emerald-800 font-mono font-bold">ThucHanh_NguyenThuHong</code>. Mình đã làm quen với việc cấu trúc lại thư mục và tệp tin hệ thống một cách có hệ thống, giúp ích rất nhiều trong việc lưu trữ tài liệu môn Anh văn sau này.</p>
-                    <ul class="list-disc list-inside space-y-1 pl-4 mt-2">
-                        <li>Đổi tên thành công tệp: <code class="bg-emerald-50 text-emerald-800 px-1 py-0.5 rounded">GhiChuQuanTrong.txt</code></li>
-                        <li>Tạo cây thư mục lưu trữ gồm 5 phân nhóm chính khoa học.</li>
-                        <li>Nắm vững phương pháp nén tệp zip để gửi bài hiệu quả.</li>
-                    </ul>
                 `
             },
             2: {
-                badge: "Bài tập 2 • Mục 2.4",
-                title: "Tìm kiếm và đánh giá độ tin cậy nguồn thông tin",
+                badge: "Bài thực hành số 2 • Mục 2.4",
+                title: "Tìm kiếm & Thẩm định thông tin y tế số",
+                icon: "🔍",
                 overview: `
-                    <div class="space-y-3">
-                        <p class="font-semibold text-emerald-950">Mục tiêu:</p>
-                        <p>Tìm hiểu các cơ sở dữ liệu học thuật chính thống, nắm vững bộ lọc tìm kiếm nâng cao (toán tử Booleans) và xây dựng tư duy thẩm định độ tin cậy của tài liệu nghiên cứu.</p>
-                        <br>
-                        <p class="font-semibold text-emerald-950">Chủ đề nghiên cứu:</p>
-                        <p class="italic text-emerald-800">"Vai trò của trí tuệ nhân tạo (AI) trong y học hiện đại."</p>
+                    <div class="p-5 bg-white rounded-2xl border border-emerald-50 shadow-sm space-y-2">
+                        <h4 class="font-bold text-emerald-900 flex items-center gap-1.5">🎯 Mục tiêu của mình:</h4>
+                        <p class="text-slate-600 leading-relaxed font-light">
+                            Học cách sử dụng bộ lọc tìm kiếm nâng cao (toán tử Booleans) và xây dựng tư duy phản biện để thẩm định độ tin cậy của tài liệu khoa học quốc tế.
+                        </p>
+                    </div>
+                    <div class="p-5 bg-white rounded-2xl border border-emerald-50 shadow-sm space-y-2">
+                        <h4 class="font-bold text-emerald-900 flex items-center gap-1.5">🚀 Chủ đề thực hành nghiên cứu:</h4>
+                        <p class="text-slate-600 leading-relaxed font-light italic">
+                            "Ứng dụng và tầm ảnh hưởng của Trí tuệ nhân tạo (AI) trong y học hiện đại."
+                        </p>
                     </div>
                 `,
-                process: `
-                    <div class="space-y-3">
-                        <p class="font-semibold text-emerald-950">Bảng tổng hợp & Đánh giá nguồn tài liệu tiêu biểu:</p>
-                        <div class="overflow-x-auto mb-4">
+                detail: `
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-emerald-950">📋 Bảng phân tích và đánh giá 10 nguồn tài liệu của mình:</h4>
+                        <div class="overflow-x-auto bg-white rounded-2xl border border-emerald-100 p-4 shadow-sm">
                             <table class="w-full text-left border-collapse text-xs">
                                 <thead>
                                     <tr class="bg-emerald-50/50 border-b border-emerald-100">
-                                        <th class="p-2 font-bold text-emerald-900">Tài liệu học thuật</th>
-                                        <th class="p-2 font-bold text-emerald-900">Cơ quan xuất bản</th>
+                                        <th class="p-2 font-bold text-emerald-900">Tài liệu học thuật tiêu biểu</th>
+                                        <th class="p-2 font-bold text-emerald-900">Nguồn xuất bản</th>
                                         <th class="p-2 font-bold text-emerald-900">Độ tin cậy</th>
                                     </tr>
                                 </thead>
-                                <tbody class="divide-y divide-emerald-50">
+                                <tbody class="divide-y divide-emerald-50 text-slate-600">
                                     <tr>
-                                        <td class="p-2">Esteva et al. (2017)</td>
-                                        <td class="p-2">Nature (Tạp chí phản biện uy tín)</td>
-                                        <td class="p-2 text-emerald-600 font-bold">★★★★★ (Rất cao)</td>
+                                        <td class="p-2 font-medium text-emerald-950">Esteva et al. (2017)</td>
+                                        <td class="p-2">Nature (Tạp chí danh tiếng thế giới)</td>
+                                        <td class="p-2 text-emerald-600 font-bold">★★★★★ (Tuyệt đối)</td>
                                     </tr>
                                     <tr>
-                                        <td class="p-2">Rajpurkar et al. (2017)</td>
-                                        <td class="p-2">Stanford University</td>
-                                        <td class="p-2 text-emerald-600 font-bold">★★★★★ (Rất cao)</td>
+                                        <td class="p-2 font-medium text-emerald-950">Rajpurkar et al. (2017)</td>
+                                        <td class="p-2">Stanford University (Nguồn đại học uy tín)</td>
+                                        <td class="p-2 text-emerald-600 font-bold">★★★★★ (Tuyệt đối)</td>
                                     </tr>
                                     <tr>
-                                        <td class="p-2">WHO (2021)</td>
+                                        <td class="p-2 font-medium text-emerald-950">WHO (2021) Báo cáo</td>
                                         <td class="p-2">World Health Organization</td>
-                                        <td class="p-2 text-emerald-600 font-bold">★★★★☆ (Cao)</td>
+                                        <td class="p-2 text-emerald-600 font-bold">★★★★☆ (Rất cao)</td>
                                     </tr>
                                     <tr>
-                                        <td class="p-2">IBM (2020)</td>
-                                        <td class="p-2">Doanh nghiệp công nghệ</td>
+                                        <td class="p-2 font-medium text-emerald-950">IBM (2020) Watson Report</td>
+                                        <td class="p-2">Doanh nghiệp công nghệ thương mại</td>
                                         <td class="p-2 text-yellow-600 font-bold">★★★☆☆ (Trung bình)</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <p>Các tài liệu xuất bản trên các tạp chí có quy trình bình duyệt nghiêm ngặt luôn có giá trị học thuật cao nhất. Nguồn thương mại cần được kiểm chứng chéo kỹ lưỡng trước khi trích dẫn.</p>
+                        <p class="text-xs text-slate-500 font-light leading-relaxed">
+                            <strong>Đúc kết bài học:</strong> Các tài liệu có bình duyệt nghiêm ngặt (peer-reviewed) của Nature hay Science luôn có chỉ số tin cậy vượt bậc. Các nguồn từ doanh nghiệp cần được đánh giá kỹ vì thường mang yếu tố quảng cáo sản phẩm.
+                        </p>
                     </div>
-                `,
-                notepad: `
-                    <p class="font-bold text-emerald-950 text-lg mb-2">📓 Sổ tay thực hành bài tập 2:</p>
-                    <p>Trong nghiên cứu này, mình đã học cách sử dụng các toán tử tìm kiếm như <code class="text-emerald-800 font-bold">"AND", "OR", "site:"</code> để chọn lọc tài liệu y tế. Phát hiện quan trọng nhất là các nghiên cứu của tạp chí <code class="text-emerald-800 font-bold">Nature và Science</code> luôn có chỉ số trích dẫn (citations) rất cao, thể hiện độ tin cậy vượt trội trong giới nghiên cứu khoa học.</p>
                 `
             },
             3: {
-                badge: "Bài tập 3 • Mục 3.4",
-                title: "Viết Prompt hiệu quả cho các tác vụ học tập",
+                badge: "Bài thực hành số 3 • Mục 3.4",
+                title: "Nghệ thuật thiết kế Prompt trong học tập",
+                icon: "✍",
                 overview: `
-                    <div class="space-y-3">
-                        <p class="font-semibold text-emerald-950">Mục tiêu:</p>
-                        <p>Làm chủ kỹ thuật thiết lập câu lệnh (Prompt Engineering) để cải thiện chất lượng phản hồi từ các mô hình ngôn ngữ lớn như ChatGPT.</p>
-                        <br>
-                        <p class="font-semibold text-emerald-950">Các tác vụ nghiên cứu chính:</p>
-                        <ul class="list-disc list-inside space-y-1.5 pl-2">
-                            <li>Tóm tắt tài liệu khoa học chuyên sâu.</li>
-                            <li>Giải thích khái niệm công nghệ trừu tượng (AI, Blockchain) bằng ngôn ngữ sư phạm.</li>
-                            <li>Xây dựng đề kiểm tra ôn tập có phân hóa mức độ tư duy.</li>
-                        </ul>
+                    <div class="p-5 bg-white rounded-2xl border border-emerald-50 shadow-sm space-y-2">
+                        <h4 class="font-bold text-emerald-900 flex items-center gap-1.5">🎯 Mục tiêu của mình:</h4>
+                        <p class="text-slate-600 leading-relaxed font-light">
+                            Làm chủ kỹ thuật thiết lập câu lệnh (Prompt Engineering) để huấn luyện AI cung cấp thông tin học thuật có chiều sâu và cấu trúc tốt.
+                        </p>
+                    </div>
+                    <div class="p-5 bg-white rounded-2xl border border-emerald-50 shadow-sm space-y-2">
+                        <h4 class="font-bold text-emerald-900 flex items-center gap-1.5">🚀 Các nhiệm vụ mình đã thử nghiệm:</h4>
+                        <p class="text-slate-600 leading-relaxed font-light">
+                            Tóm tắt luận điểm bài báo khoa học, Giải thích công nghệ trừu tượng (Blockchain) cho học sinh, và Thiết kế đề kiểm tra trắc nghiệm Sinh học lớp 10.
+                        </p>
                     </div>
                 `,
-                process: `
-                    <div class="space-y-3">
-                        <p class="font-semibold text-emerald-950">Quy trình cải tiến Prompt:</p>
-                        <ul class="list-disc list-inside space-y-3 pl-2">
-                            <li>
-                                <strong>Prompt cơ bản:</strong> "Hãy giải thích Blockchain là gì." -> <em>Kết quả chung chung, nhiều thuật ngữ gây khó hiểu.</em>
-                            </li>
-                            <li>
-                                <strong>Prompt nâng cao:</strong> "Bạn là giáo viên Công nghệ thông tin. Hãy giải thích Blockchain cho học sinh lớp 10 bằng cách so sánh với sổ ghi chép truyền thống, sử dụng ngôn ngữ dễ hiểu và đưa ra 1 câu hỏi kiểm tra." -> <em>Kết quả trực quan, có tính ứng dụng cao.</em>
-                            </li>
-                        </ul>
+                detail: `
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-emerald-950">💡 Cách mình cải tiến câu lệnh tương tác với AI:</h4>
+                        <div class="grid sm:grid-cols-2 gap-4 text-xs">
+                            <div class="p-4 bg-red-50/50 border border-red-100 rounded-xl">
+                                <p class="font-bold text-red-800">❌ Prompt Cơ Bản (Hiệu quả kém):</p>
+                                <p class="text-slate-600 mt-1">"Giải thích giúp mình Blockchain là gì."</p>
+                                <p class="text-slate-400 mt-2">↳ Kết quả: AI trả về định nghĩa quá khô khan, nhiều thuật ngữ chuyên môn khó tiếp cận.</p>
+                            </div>
+                            <div class="p-4 bg-emerald-50/50 border border-emerald-100 rounded-xl">
+                                <p class="font-bold text-emerald-800">✅ Prompt Nâng Cao của mình (Hiệu quả cao):</p>
+                                <p class="text-slate-700 mt-1">"Bạn là giáo viên CNTT. Hãy giải thích Blockchain cho học sinh lớp 10 bằng cách so sánh với một cuốn sổ cái dùng chung của cả lớp học, tránh dùng thuật ngữ khô khan, và cho thêm 1 câu hỏi kiểm tra bài học."</p>
+                                <p class="text-emerald-900 mt-2 font-medium">↳ Kết quả: AI trả lời cực kỳ sinh động, có tư duy sư phạm và dễ hiểu.</p>
+                            </div>
+                        </div>
                     </div>
-                `,
-                notepad: `
-                    <p class="font-bold text-emerald-950 text-lg mb-2">📓 Sổ tay thực hành bài tập 3:</p>
-                    <p>Mẹo hay nhất mà mình học được là sử dụng <code class="text-emerald-800 font-bold">Role Prompting</code> (gán vai trò cho AI) kết hợp với <code class="text-emerald-800 font-bold">Few-shot Prompting</code> (cung cấp ví dụ mẫu). Khi mình gán cho AI là một giáo viên sinh học, bộ câu hỏi quang hợp lớp 10 được thiết kế có chiều sâu sư phạm vượt bậc, phân hóa rõ rệt các mức độ từ nhận biết đến vận dụng cao!</p>
                 `
             },
             4: {
-                badge: "Bài tập 4 • Mục 4.4",
-                title: "Sử dụng công cụ hợp tác trực tuyến trong dự án nhóm",
+                badge: "Bài thực hành số 4 • Mục 4.4",
+                title: "Ứng dụng công cụ hợp tác số làm việc nhóm",
+                icon: "👥",
                 overview: `
-                    <div class="space-y-3">
-                        <p class="font-semibold text-emerald-950">Mục tiêu:</p>
-                        <p>Ứng dụng các giải pháp phần mềm để quản lý tiến độ, đồng soạn thảo tài liệu và liên lạc nhóm một cách minh bạch, hiệu quả.</p>
-                        <br>
-                        <p class="font-semibold text-emerald-950">Dự án nhóm đã triển khai:</p>
-                        <p class="italic text-emerald-800">"Khảo sát mức độ quan tâm của sinh viên đối với phương tiện giao thông xanh."</p>
+                    <div class="p-5 bg-white rounded-2xl border border-emerald-50 shadow-sm space-y-2">
+                        <h4 class="font-bold text-emerald-900 flex items-center gap-1.5">🎯 Mục tiêu của mình:</h4>
+                        <p class="text-slate-600 leading-relaxed font-light">
+                            Tích hợp công nghệ trực tuyến để lập kế hoạch, đồng soạn thảo nội dung và gỡ bỏ rào cản địa lý khi làm việc nhóm môn học.
+                        </p>
+                    </div>
+                    <div class="p-5 bg-white rounded-2xl border border-emerald-50 shadow-sm space-y-2">
+                        <h4 class="font-bold text-emerald-900 flex items-center gap-1.5">🚀 Dự án nhóm của tụi mình:</h4>
+                        <p class="text-slate-600 leading-relaxed font-light">
+                            Tiến hành dự án thực tế mang tên: <span class="italic font-medium">"Khảo sát mức độ quan tâm của sinh viên đối với phương tiện giao thông xanh."</span>
+                        </p>
                     </div>
                 `,
-                process: `
-                    <div class="space-y-3">
-                        <p class="font-semibold text-emerald-950">Cách thức cộng tác:</p>
-                        <ul class="list-disc list-inside space-y-2 pl-2">
-                            <li><strong>Trello:</strong> Thiết lập công việc theo tiến độ (Cần làm -> Đang làm -> Đã xong) giúp bám sát deadline dự án.</li>
-                            <li><strong>Google Docs:</strong> Đồng biên tập dữ liệu báo cáo trực tuyến, tối ưu hóa qua tính năng Comment và kiểm soát lịch sử chỉnh sửa (Version History).</li>
-                            <li><strong>Discord & Teams:</strong> Giải quyết vấn đề lệch lịch sinh hoạt của các thành viên bằng cách lập kênh chat lưu giữ thông tin quan trọng.</li>
+                detail: `
+                    <div class="p-6 bg-emerald-50/50 rounded-2xl border-2 border-dashed border-emerald-200 space-y-3 text-xs">
+                        <h4 class="font-bold text-emerald-950 text-sm">🛠 Hệ sinh thái số nhóm mình vận hành:</h4>
+                        <ul class="space-y-2 text-slate-700">
+                            <li><strong>1. Trello (Quản lý tiến độ):</strong> Tụi mình lập bảng kế hoạch số và di chuyển các đầu việc theo trạng thái (<code class="bg-white px-1">Cần làm</code> ➔ <code class="bg-white px-1">Đang làm</code> ➔ <code class="bg-white px-1">Đã xong</code>) để không thành viên nào bị lỡ thời hạn nộp bài.</li>
+                            <li><strong>2. Google Docs (Đồng biên soạn):</strong> Cả nhóm chỉnh sửa tài liệu chung theo thời gian thực. Tận dụng tuyệt đối tính năng Comment và lịch sử thay đổi để khôi phục nhanh nội dung bị xóa nhầm.</li>
+                            <li><strong>3. Discord / Teams (Giao tiếp tức thì):</strong> Trao đổi thảo luận thường xuyên, ghim thông báo học tập quan trọng để ai lệch lịch học vẫn theo kịp cả nhóm.</li>
                         </ul>
                     </div>
-                `,
-                notepad: `
-                    <p class="font-bold text-emerald-950 text-lg mb-2">📓 Sổ tay thực hành bài tập 4:</p>
-                    <p>Làm việc nhóm trực tuyến không hề dễ, đặc biệt là khi phối hợp chỉnh sửa tài liệu dễ bị chồng chéo. Tuy nhiên, nhờ tính năng <code class="text-emerald-800 font-bold">Version History</code> của Google Docs, nhóm mình đã dễ dàng theo dõi và khôi phục các nội dung khi có thành viên lỡ tay xóa nhầm, tăng độ an tâm khi cộng tác nhóm.</p>
                 `
             },
             5: {
-                badge: "Bài tập 5 • Mục 5.4",
-                title: "Sử dụng AI tạo sinh để hỗ trợ sáng tạo nội dung",
+                badge: "Bài thực hành số 5 • Mục 5.4",
+                title: "Sáng tạo nội dung số tích hợp Generative AI",
+                icon: "✨",
                 overview: `
-                    <div class="space-y-3">
-                        <p class="font-semibold text-emerald-950">Mục tiêu:</p>
-                        <p>Phối hợp nhiều công cụ AI tạo sinh khác nhau để hoàn thành một sản phẩm truyền thông học thuật hoàn chỉnh từ khâu nội dung đến thiết kế hình ảnh.</p>
-                        <br>
-                        <p class="font-semibold text-emerald-950">Chủ đề dự án:</p>
-                        <p class="italic text-emerald-800">"Ứng dụng AI trong học tập của sinh viên."</p>
+                    <div class="p-5 bg-white rounded-2xl border border-emerald-50 shadow-sm space-y-2">
+                        <h4 class="font-bold text-emerald-900 flex items-center gap-1.5">🎯 Mục tiêu của mình:</h4>
+                        <p class="text-slate-600 leading-relaxed font-light">
+                            Học cách kết hợp linh hoạt thế mạnh của nhiều mô hình trí tuệ nhân tạo khác nhau nhằm tăng tốc và nâng cao chất lượng sản phẩm thiết kế đa phương tiện.
+                        </p>
+                    </div>
+                    <div class="p-5 bg-white rounded-2xl border border-emerald-50 shadow-sm space-y-2">
+                        <h4 class="font-bold text-emerald-900 flex items-center gap-1.5">🚀 Chủ đề tụi mình thực hành:</h4>
+                        <p class="text-slate-600 leading-relaxed font-light italic">
+                            "Ứng dụng AI trong hoạt động học tập của sinh viên đại học ngày nay."
+                        </p>
                     </div>
                 `,
-                process: `
-                    <div class="space-y-3">
-                        <p class="font-semibold text-emerald-950">Quy trình mượn lực AI phối hợp:</p>
-                        <ul class="list-disc list-inside space-y-2 pl-2">
-                            <li><strong>Nội dung (ChatGPT):</strong> Lập dàn ý và viết bản thảo bài luận, sau đó tôi trực tiếp biên tập lại để cá nhân hóa và loại bỏ các lỗi lặp từ.</li>
-                            <li><strong>Hình ảnh (DALL-E):</strong> Tạo tranh minh họa kỹ thuật số mô tả sinh viên sử dụng trợ lý ảo một cách sáng tạo trong lớp học.</li>
-                            <li><strong>Thiết kế (Canva AI):</strong> Tối ưu bố cục trình bày theo tông màu xanh-trắng hiện đại, sạch sẽ.</li>
-                        </ul>
+                detail: `
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-emerald-950">🎨 Cách mình phối hợp bộ ba trợ lý AI đắc lực:</h4>
+                        <div class="grid sm:grid-cols-3 gap-4 text-xs text-center">
+                            <div class="p-4 bg-white rounded-xl border border-emerald-100 shadow-sm">
+                                <span class="text-xl">💬</span>
+                                <p class="font-bold text-emerald-800 mt-2">ChatGPT (Nội dung)</p>
+                                <p class="text-slate-500 mt-1 font-light">Hỗ trợ mình lên dàn ý, viết bản phác thảo thô nội dung bài viết khoảng 500 từ.</p>
+                            </div>
+                            <div class="p-4 bg-white rounded-xl border border-emerald-100 shadow-sm">
+                                <span class="text-xl">🖼</span>
+                                <p class="font-bold text-emerald-800 mt-2">DALL-E (Hình ảnh)</p>
+                                <p class="text-slate-500 mt-1 font-light">Giúp mình vẽ tranh minh họa sinh viên năng động học tập trong lớp học kỹ thuật số.</p>
+                            </div>
+                            <div class="p-4 bg-white rounded-xl border border-emerald-100 shadow-sm">
+                                <span class="text-xl">💻</span>
+                                <p class="font-bold text-emerald-800 mt-2">Canva AI (Thiết kế)</p>
+                                <p class="text-slate-500 mt-1 font-light">Gợi ý các bố cục trình bày theo gam màu xanh mint - trắng mộng mơ và hài hòa.</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-500 font-light"><strong>Ghi chú từ Hồng:</strong> AI chỉ giúp tụi mình tạo bản nháp ban đầu nhanh chóng. Toàn bộ quá trình kiểm chứng thông tin thực tế, biên tập và thổi hồn cảm xúc vào bài viết vẫn hoàn toàn là dấu ấn cá nhân của mình.</p>
                     </div>
-                `,
-                notepad: `
-                    <p class="font-bold text-emerald-950 text-lg mb-2">📓 Sổ tay thực hành bài tập 5:</p>
-                    <p>Sự kết hợp giữa <code class="text-emerald-800 font-bold">ChatGPT, DALL-E và Canva AI</code> tạo thành một quy trình sản xuất nội dung hoàn hảo. Trải nghiệm thú vị nhất là viết các dòng lệnh mô tả hình ảnh cho DALL-E để tạo ra bức vẽ lớp học tương lai đầy màu sắc công nghệ mộng mơ, giúp bài viết sinh động hơn rất nhiều.</p>
                 `
             },
             6: {
-                badge: "Bài tập 6 • Mục 6.4",
-                title: "Sử dụng AI có trách nhiệm trong học tập và nghiên cứu",
+                badge: "Bài thực hành số 6 • Mục 6.4",
+                title: "Sử dụng AI có trách nhiệm học thuật",
+                icon: "🛡",
                 overview: `
-                    <div class="space-y-3">
-                        <p class="font-semibold text-emerald-950">Mục tiêu:</p>
-                        <p>Nghiên cứu chính sách sử dụng trí tuệ nhân tạo của các trường Đại học lớn và tự thiết lập bộ quy tắc ứng xử học thuật của riêng mình.</p>
-                        <br>
-                        <p class="font-semibold text-emerald-950">Ý tưởng cốt lõi:</p>
-                        <p>AI là người trợ lý đồng hành đắc lực nâng cao hiệu quả tư duy phản biện, không phải công cụ thay thế hoàn toàn năng lực học tập độc lập của người học.</p>
+                    <div class="p-5 bg-white rounded-2xl border border-emerald-50 shadow-sm space-y-2">
+                        <h4 class="font-bold text-emerald-900 flex items-center gap-1.5">🎯 Mục tiêu của mình:</h4>
+                        <p class="text-slate-600 leading-relaxed font-light">
+                            Nghiên cứu chính sách học thuật về trí tuệ nhân tạo và thiết lập bộ nguyên tắc đạo đức cá nhân khi mượn lực từ AI để tự học.
+                        </p>
+                    </div>
+                    <div class="p-5 bg-white rounded-2xl border border-emerald-50 shadow-sm space-y-2">
+                        <h4 class="font-bold text-emerald-900 flex items-center gap-1.5">🚀 Ý tưởng của mình:</h4>
+                        <p class="text-slate-600 leading-relaxed font-light">
+                            Tận dụng AI làm trợ lý gợi ý kết cấu, chỉnh lỗi ngữ pháp và tăng tốc tổng hợp tài liệu, thay vì biến AI thành công cụ gian lận lười biếng.
+                        </p>
                     </div>
                 `,
-                process: `
-                    <div class="space-y-3">
-                        <p class="font-semibold text-emerald-950">Bộ 7 nguyên tắc vàng sử dụng AI có trách nhiệm của tôi:</p>
-                        <ol class="list-decimal list-inside space-y-1.5 pl-2 text-xs">
-                            <li>AI là công cụ hỗ trợ, con người luôn là chủ thể chịu trách nhiệm.</li>
-                            <li>Luôn kiểm chứng tính chính xác của các thông tin do AI cung cấp.</li>
-                            <li>Minh bạch về mức độ sử dụng AI khi thực hiện bài tập.</li>
-                            <li>Tôn trọng quyền sở hữu trí tuệ và trích dẫn chuẩn học thuật.</li>
-                            <li>Tuyệt đối không lạm dụng AI để gian lận thi cử hoặc đạo văn.</li>
-                            <li>Luôn duy trì tư duy phản biện và góc nhìn độc lập.</li>
-                            <li>Chịu trách nhiệm hoàn toàn đối với chất lượng của sản phẩm cuối cùng.</li>
+                detail: `
+                    <div class="p-6 bg-emerald-50/50 rounded-2xl border-2 border-dashed border-emerald-200 space-y-3">
+                        <h4 class="font-bold text-emerald-950 text-sm">📓 Bộ 7 nguyên tắc vàng sử dụng AI của mình:</h4>
+                        <ol class="list-decimal list-inside space-y-1.5 text-xs text-slate-700 font-light">
+                            <li>AI là công cụ hỗ trợ thông minh, không bao giờ là người thay thế vị trí sáng tạo của mình.</li>
+                            <li>Luôn kiểm chứng độ trung thực của mọi thông tin do AI cung cấp.</li>
+                            <li>Minh bạch trích dẫn về mức độ sử dụng AI khi gửi bài tập môn học.</li>
+                            <li>Tôn trọng luật sở hữu trí tuệ, tuyệt đối không chép nguyên văn bài viết của AI.</li>
+                            <li>Không sử dụng AI để thực hiện hành vi gian lận thi cử.</li>
+                            <li>Luôn duy trì tư duy phản biện cao độ khi đánh giá kết quả từ AI.</li>
+                            <li>Mình là người chịu trách nhiệm 100% về tính chính xác của sản phẩm cuối cùng.</li>
                         </ol>
                     </div>
-                `,
-                notepad: `
-                    <p class="font-bold text-emerald-950 text-lg mb-2">📓 Sổ tay thực hành bài tập 6:</p>
-                    <p>Học thuật cần sự trung thực. Mình đã tự tay thiết kế một Infographic tóm tắt 7 nguyên tắc vàng về tính liêm chính. Việc trích dẫn AI một cách rõ ràng không hề làm giảm giá trị bài viết, ngược lại thể hiện tinh thần khoa học minh bạch, có trách nhiệm của sinh viên ULIS.</p>
                 `
             }
         };
 
-        let currentActiveProjectId = 1;
-
-        // Custom mouse sparkles trail
+        // Custom mouse sparkles trail with dynamic soft bubbles
         const particleContainer = document.getElementById('particle-container');
         let sparkleTimeout = false;
 
@@ -908,11 +756,11 @@
             if (!sparkleTimeout) {
                 createSparkle(e.clientX, e.clientY);
                 sparkleTimeout = true;
-                setTimeout(() => sparkleTimeout = false, 50); // Throttle particle creation
+                setTimeout(() => sparkleTimeout = false, 50); // Control trace density
             }
         });
 
-        // Click to spawn decorative elements
+        // Click interaction (Creates beautiful floating leaf trails)
         window.addEventListener('click', (e) => {
             if (e.target.closest('button') || e.target.closest('a') || e.target.closest('.tilt-card')) return;
             for (let i = 0; i < 4; i++) {
@@ -943,40 +791,36 @@
             
             leaf.style.left = `${x + (Math.random() * 40 - 20)}px`;
             leaf.style.top = `${y + window.scrollY + (Math.random() * 40 - 20)}px`;
-            leaf.style.color = Math.random() > 0.5 ? '#234e32' : '#d69e2e';
+            leaf.style.color = Math.random() > 0.5 ? '#234e32' : '#b7791f';
             leaf.style.fontSize = `${Math.random() * 12 + 12}px`;
             
             particleContainer.appendChild(leaf);
             setTimeout(() => leaf.remove(), 1200);
         }
 
-        // Card 3D tilt interaction logic
+        // 3D Tilt interactivity logic
         const cards = document.querySelectorAll('.tilt-card');
         cards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
+                const tiltX = (centerY - y) / 10; 
+                const tiltY = (x - centerX) / 10;
                 
-                const tiltX = (centerY - y) / 8; 
-                const tiltY = (x - centerX) / 8;
-                
-                card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.03)`;
-                card.style.borderColor = 'rgba(35, 78, 50, 0.4)';
-                card.style.boxShadow = `0 25px 50px -12px rgba(35, 78, 50, 0.2)`;
+                card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
+                card.style.boxShadow = `0 20px 40px -10px rgba(35, 78, 50, 0.15)`;
             });
             
             card.addEventListener('mouseleave', () => {
                 card.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
-                card.style.borderColor = '';
                 card.style.boxShadow = ``;
             });
         });
 
-        // Scroll reveal logic
+        // Scroll reveal animation activation
         window.addEventListener('scroll', revealElements);
         window.addEventListener('load', revealElements);
 
@@ -992,7 +836,7 @@
             }
         }
 
-        // Mobile menu toggle logic
+        // Mobile Menu Toggling
         const mobileBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileLinks = document.querySelectorAll('.mobile-link');
@@ -1007,98 +851,46 @@
             });
         });
 
-        // Interactive Inline Notepad Widget (Memo Pad)
-        const inlinePadSection = document.getElementById('inline-memo-pad');
-        const notebookTitle = document.getElementById('notebook-title');
-        const notebookContent = document.getElementById('notebook-content');
-
-        function openInlinePad(projectId) {
-            const data = projectsData[projectId];
-            if (data) {
-                notebookTitle.innerHTML = `Sổ tay ghi chép thực tế - Bài tập ${projectId}`;
-                notebookContent.innerHTML = data.notepad;
-                
-                inlinePadSection.classList.remove('hidden');
-                // Smooth scroll to the notebook
-                inlinePadSection.scrollIntoView({ behavior: 'smooth' });
-                
-                // Highlight corresponding card by styling
-                document.querySelectorAll('.tilt-card').forEach(c => c.style.borderColor = '');
-                document.getElementById(`card-${projectId}`).style.borderColor = 'rgba(35, 78, 50, 0.6)';
-            }
-        }
-
-        function closeInlinePad() {
-            inlinePadSection.classList.add('hidden');
-            document.querySelectorAll('.tilt-card').forEach(c => c.style.borderColor = '');
-        }
-
-        // Roadmap node scroll & click linkage
-        function scrollToCard(projectId) {
-            const card = document.getElementById(`card-${projectId}`);
-            if (card) {
-                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                // Automatically open the cute notebook preview inline for this card
-                setTimeout(() => {
-                    openInlinePad(projectId);
-                }, 500);
-            }
-        }
-
-        // Modal Pop-up with Tab-switching
-        const modal = document.getElementById('project-modal');
-        const modalContainer = document.getElementById('modal-container');
-        const modalTitle = document.getElementById('modal-title');
-        const modalContent = document.getElementById('modal-content');
-        const modalBadge = document.getElementById('modal-task-badge');
-
-        function openModal(projectId) {
-            currentActiveProjectId = projectId;
-            const data = projectsData[projectId];
-            if (data) {
-                modalBadge.innerHTML = data.badge;
-                modalTitle.innerHTML = data.title;
-                
-                switchTab('overview');
-                
-                modal.classList.remove('hidden');
-                modal.offsetHeight; // force repaint
-                modalContainer.classList.remove('scale-95', 'opacity-0');
-                modalContainer.classList.add('scale-100', 'opacity-100');
-                document.body.style.overflow = 'hidden'; 
-            }
-        }
-
-        function switchTab(tabName) {
-            const data = projectsData[currentActiveProjectId];
-            const tabOverview = document.getElementById('tab-overview');
-            const tabProcess = document.getElementById('tab-process');
-
-            if (tabName === 'overview') {
-                modalContent.innerHTML = data.overview;
-                tabOverview.className = "tab-btn px-4 py-3 text-sm font-semibold text-emerald-800 border-b-2 border-emerald-700";
-                tabProcess.className = "tab-btn px-4 py-3 text-sm font-semibold text-slate-500 hover:text-emerald-600 border-b-2 border-transparent";
-            } else if (tabName === 'process') {
-                modalContent.innerHTML = data.process;
-                tabOverview.className = "tab-btn px-4 py-3 text-sm font-semibold text-slate-500 hover:text-emerald-600 border-b-2 border-transparent";
-                tabProcess.className = "tab-btn px-4 py-3 text-sm font-semibold text-emerald-800 border-b-2 border-emerald-700";
-            }
-        }
-
-        function closeModal() {
-            modalContainer.classList.remove('scale-100', 'opacity-100');
-            modalContainer.classList.add('scale-95', 'opacity-0');
+        // HIGH-END HIGH INTERACTIVE TABLET STUDY DESK FUNCTION (FLUID & SMOOTH TAB SWITCHING)
+        function selectStudyDesk(index) {
+            const data = deskData[index];
+            const contentArea = document.getElementById('desk-content-area');
+            
+            // Fade out animation
+            contentArea.classList.add('opacity-0');
+            
             setTimeout(() => {
-                modal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }, 300);
-        }
+                // Change Content inside with gorgeous formatting
+                contentArea.innerHTML = `
+                    <div class="flex items-center justify-between border-b border-dashed border-emerald-200 pb-4">
+                        <div>
+                            <span class="text-xs font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-3 py-1 rounded-full uppercase tracking-wide">${data.badge}</span>
+                            <h3 class="text-2xl font-bold text-emerald-950 mt-1">${data.title}</h3>
+                        </div>
+                        <span class="text-2xl select-none">${data.icon}</span>
+                    </div>
+                    
+                    <div class="grid sm:grid-cols-2 gap-6 text-sm">
+                        ${data.overview}
+                    </div>
 
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
+                    ${data.detail}
+                `;
+                
+                // Fade in animation
+                contentArea.classList.remove('opacity-0');
+            }, 300);
+
+            // Manage styling of active buttons
+            for (let i = 1; i <= 6; i++) {
+                const tab = document.getElementById(`desk-tab-${i}`);
+                if (i === index) {
+                    tab.className = "w-full text-left px-4 py-3 rounded-2xl flex items-center gap-3 font-semibold text-xs md:text-sm transition-all duration-300 bg-emerald-800 text-white border border-emerald-700/50";
+                } else {
+                    tab.className = "w-full text-left px-4 py-3 rounded-2xl flex items-center gap-3 font-semibold text-xs md:text-sm transition-all duration-300 hover:bg-emerald-800/50 text-emerald-200";
+                }
             }
-        });
+        }
     </script>
 </body>
 </html>
